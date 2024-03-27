@@ -1,4 +1,5 @@
 @extends('components.app-layout')
+@section('title', 'Desa Sirnagalih - Cisurupan')
 
 @section('content')
     <div class="container">
@@ -125,7 +126,7 @@
         <div class="row">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="fw-bold">Kabar Desa Terbaru</h3>
-                <a href="">Lihat Semua</a>
+                <a href="" class="btn btn-outline-primary">Lihat Semua&nbsp;<i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col">
                 <div class="card">

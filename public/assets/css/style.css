@@ -1,4 +1,12 @@
 
-.fw-bold {
+* {
     font-family: 'Inter', sans-serif;
+}
+
+.min-h-screen {
+    min-height: 90vh;
+}
+
+a {
+    text-decoration: none;
 }
