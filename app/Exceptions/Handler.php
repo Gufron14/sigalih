@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use Closure;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Handler extends ExceptionHandler
 {

@@ -2,18 +2,18 @@
 @section('title', 'Desa Sirnagalih - Cisurupan')
 
 @section('content')
+   
     <div class="container">
 
         {{-- Hero Section --}}
         <div class="row mt-5 row-sm-12">
             <div class="col">
-                <h1 class="fw-bold">Selamat Datang <br> di Website Desa Sirnagalih <br> Cisurupan - Garut</h1>
+                <h1 class="fw-bold">Wilujeung Sumping <br> di Sirnagalih</h1>
                 <div class="col-9 mt-3">
-                    <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, ad. Rem fugiat ex
-                        optio consequuntur. Necessitatibus nemo, doloribus voluptatum ullam assumenda, possimus odio aliquid
-                        facilis, natus minus quos praesentium sapiente temporibus. Quos sapiente iusto et laboriosam, ad
-                        voluptatem non quod aperiam voluptates explicabo eaque maxime exercitationem, quo voluptatum, saepe
-                        incidunt?</p>
+                    <p class="">ᮜᮧᮛᮨᮙ᮪ ᮄᮕ᮪ᮞᮥᮙ᮪ ᮓᮧᮜᮧᮁ ᮞᮤᮒ᮪ ᮃᮙᮨᮒ᮪ ᮎᮧᮔ᮪ᮞᮨᮎ᮪ᮒᮨᮒᮥᮁ ᮃᮓᮤᮕᮤᮞᮤᮎᮤᮀ ᮈᮜᮤᮒ᮪. ᮃᮎ᮪ᮎᮥᮞᮃᮙᮥᮞ᮪, ᮃᮓ᮪. ᮛᮨᮙ᮪
+                        ᮖᮥᮌᮤᮃᮒ᮪ ᮈᮟ᮪ ᮇᮕ᮪ᮒᮤᮇ ᮎᮧᮔ᮪ᮞᮨᮋᮥᮅᮔ᮪ᮒᮥᮁ.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatibus id, repellendus cum
+                        debitis maiores rerum quibusdam.</p>
                 </div>
                 <button class="btn btn-primary fw-bold mt-3 fs-5">Selengkapnya</button>
             </div>
@@ -66,10 +66,11 @@
                 </div>
             </div>
         </div>
+
         <hr class="m-5">
 
         {{-- Layanan --}}
-        <div class="container mb-5">
+        <div class="container mb-5 mt-5">
             <h3 class="text-center fw-bold mb-5">Layanan Administrasi</h3>
             <div class="d-flex justify-content-center align-items-center h-100 gap-5">
                 <div class="card w-50">
@@ -146,14 +147,17 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg" class="img-fluid rounded-start" alt="...">
+                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
+                                    class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in
                                         to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
+                                            ago</small>
                                     </p>
                                 </div>
                             </div>
@@ -162,14 +166,17 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg" class="img-fluid rounded-start" alt="...">
+                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
+                                    class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in
                                         to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
+                                            ago</small>
                                     </p>
                                 </div>
                             </div>
@@ -178,14 +185,17 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg" class="img-fluid rounded-start" alt="...">
+                                <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
+                                    class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in
                                         to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
+                                            ago</small>
                                     </p>
                                 </div>
                             </div>
@@ -194,7 +204,7 @@
                     <!-- Include other cards similarly -->
                 </div>
             </div>
-            
+
         </div>
 
         <hr class="m-5">
@@ -277,7 +287,8 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Alamat Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                            placeholder="name@example.com">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Kritik dan Saran</label>

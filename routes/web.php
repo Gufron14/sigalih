@@ -1,32 +1,31 @@
 <?php
 
+use App\Http\Controllers\BankSampahController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Post
+Route::prefix('admin/posts')->group(function(){
+    Route::get('index', [PostController::class, 'index'])->name('posts'); // Show List Post Page
+    Route::get('create', [PostController::class, 'create']); // Show Create Post Page
+    Route::post('create', [PostController::class, 'store'])->name('posts.store'); // Do Create Post
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('edit/{post}', [PostController::class, 'edit'])->name('posts.edit'); // Show Edit Post Page
+    Route::put('edit/{post}', [PostController::class, 'update'])->name('posts.update'); // Do Update Post
+
+    Route::delete('list/{post}', [PostController::class, 'destroy'])->name('posts.delete'); // Do Delete Post
 });
-Route::get('/berita', function () {
-    return view('berita');
-});
-Route::get('/tentang', function () {
-    return view('tentang');
-});
-Route::get('/sejarah', function () {
-    return view('sejarah');
-});
-  
-Route::get('/viewberita', function () {
-    return view('viewberita');
-});
-  
+
+// ------------------------------------------------- USER ROUTE -------------------------------------------------
+// WEBSITE
+Route::get('/', [ViewController::class, 'index'])->name('index');
+
+// LAYANAN
+Route::get('layanan/index', [LayananController::class, 'index']);
+
+// BANK SAMPAH
+Route::get('banksampah/index', [BankSampahController::class, 'index']);
+
+// ------------------------------------------------- USER ROUTE -------------------------------------------------
