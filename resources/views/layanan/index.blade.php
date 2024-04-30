@@ -16,48 +16,25 @@
             </div>
         </div>
 
-        <label for="" class="form-label">Pilih Surat Permohonan</label>
-        <select class="form-select form-select-lg" id="pilihSurat" onchange="tampilkanForm()">
-            <option value="" class="text-muted">Pilih Surat Permohonan</option>
-            <option value="keteranganDomisili">Surat Permohonan Keterangan Domisili</option>
-            <option value="SKCK">Surat Permohonan SKCK</option>
-            <option value="aktaKelahiran">Surat Permohonan Akta Kelahiran</option>
-        </select>
-
-
-        <div id="formKeteranganDomisili" class="mt-5" style="display: none;">
-            @include('layanan._ket-domisili')
-        </div>
-
-        <div id="formSKCK" class="mt-5" style="display: none;">
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <div class="card-title fw-bold text-white">Surat Permohonan SKCK</div>
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                   Pilih Surat
                 </div>
-                <div class="card-body">
-                    <label for="" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="d-flex justify-content-end mb-3 gap-3 me-3">
-                    <a href="" class="btn btn-success fw-bold">Buat Surat</a>
-                    <a href="" class="btn btn-danger fw-bold">Batal</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="formAktaKelahiran" class="mt-5" style="display: none;">
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <div class="card-title fw-bold text-white">Surat Permohonan Akta Kelahiran</div>
-                </div>
-                <div class="card-body">
-                    <label for="" class="form-label">Nama Lengkap</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="d-flex justify-content-end mb-3 gap-3 me-3">
-                    <a href="" class="btn btn-success fw-bold">Buat Surat</a>
-                    <a href="" class="btn btn-danger fw-bold">Batal</a>
-                </div>
+                <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <select name="id_jenisSurat" id="id_jenisSurat" class="form-select mb-3">
+                        @foreach ($jenisSurat as $jenis_surat)
+                            <option value="{{ $jenis_surat->id_jenisSurat }}">{{ $jenis_surat->nama_surat }}</option>
+                        @endforeach
+                    </select>
+                    <div class="mb-3">
+                        <label for="nik" class="form-label">Masukan NIK</label>
+                        <input type="text" name="nik" id="nik" placeholder="Masukan NIK untuk membuat Permohonan" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buat</button>
+                </form>
+                
             </div>
         </div>
 

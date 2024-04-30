@@ -18,49 +18,32 @@ class WargaSeeder extends Seeder
     public function run()
     {
         Warga::create([
-            "id_warga" => "1",
-            "nik" => "325201403010002",
+            "nik" => "3205201403010002",
             "nama" => "Gupron Nurjalil",
             "ttl" => "Garut, 14 Maret 2001",
-            "jk" => 1,
+            "jk" => "Laki - Laki",
             "alamat" => "Kp. Dungus Maung",
             "rt" => "02",
             "rw" => "06",
             "desa" => "Sirnagalih",
             "agama" => "Islam",
-            "stts_perkawinan" => 0,
-            "pekerjaan" => "Pelajar",
-            "kewarganegaraan" => "Indonesia"
+            "stts_perkawinan" => "Belum Kawin",
+            "pekerjaan" => "Mahasiswa",
+            "kewarganegaraan" =>  "Indonesia",
         ]);
         Warga::create([
-            "id_warga" => "2",
-            "nik" => "325201403010003",
-            "nama" => "Arip Ramdhani",
-            "ttl" => "Garut, 14 Maret 2005",
-            "jk" => 1,
-            "alamat" => "Kp. Dungus Maung",
-            "rt" => "02",
-            "rw" => "06",
-            "desa" => "Sirnagalih",
-            "agama" => "Islam",
-            "stts_perkawinan" => 0,
-            "pekerjaan" => "Pelajar",
-            "kewarganegaraan" => "Indonesia"
-        ]);
-        Warga::create([
-            "id_warga" => "3",
-            "nik" => "325201403010014",
+            "nik" => "3205201403010003",
             "nama" => "Gunawan",
-            "ttl" => "Garut, 14 Maret 2005",
-            "jk" => 1,
+            "ttl" => "Garut, 14 Maret 2003",
+            "jk" => "Laki - Laki",
             "alamat" => "Kp. Dungus Maung",
             "rt" => "02",
             "rw" => "06",
             "desa" => "Sirnagalih",
             "agama" => "Islam",
-            "stts_perkawinan" => 0,
-            "pekerjaan" => "Pelajar",
-            "kewarganegaraan" => "Indonesia"
+            "stts_perkawinan" => "Belum Kawin",
+            "pekerjaan" => "Mahasiswa",
+            "kewarganegaraan" =>  "Indonesia",
         ]);
     }
 }

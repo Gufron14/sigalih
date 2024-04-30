@@ -13,17 +13,17 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('wargas', function (Blueprint $table) {
-            $table->id('id_warga');
+            $table->id();
             $table->bigInteger('nik')->unique();
             $table->string('nama');
             $table->string('ttl');
-            $table->boolean('jk');
+            $table->string('jk');
             $table->string('alamat');
-            $table->integer('rt');
-            $table->integer('rw');
+            $table->string('rt');
+            $table->string('rw');
             $table->string('desa');
             $table->string('agama');
-            $table->boolean('stts_perkawinan');
+            $table->string('stts_perkawinan');
             $table->string('pekerjaan');
             $table->string('kewarganegaraan')->default('Indonesia');
             $table->timestamps();

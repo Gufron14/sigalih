@@ -23,13 +23,13 @@ return new class extends Migration
         //     $table->timestamps();
         // });
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->foreignId('nik')->unique()->constrained('wargas', 'nik');
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
-            $table->text('remember_token')->nullable()->unique();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

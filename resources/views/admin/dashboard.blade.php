@@ -1,5 +1,7 @@
 @extends('admin.layout.master')
 
+@section('title', 'Dashboard')
+
 @section('content')
     <!-- Small boxes (Stat box) -->
     <div class="row">

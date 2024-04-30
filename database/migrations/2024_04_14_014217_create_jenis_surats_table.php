@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id_jenisSurat');
             $table->string('nama_surat');
             $table->text('deskripsi');
+            $table->string('template');
             $table->timestamps();
         });
     }

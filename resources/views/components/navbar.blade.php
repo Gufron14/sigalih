@@ -40,7 +40,7 @@
                     <a class="nav-link active text-uppercase fw-bold" aria-current="page" href="/">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="/berita">Kabar Desa</a>
+                    <a class="nav-link text-uppercase" href="warga/index">Warga</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-uppercase" href="" role="button"
