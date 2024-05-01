@@ -21,10 +21,11 @@ class Warga extends Model
         'rt',
         'rw',
         'desa',
+        'kec',
+        'kab',
         'agama',
-        'stts_perkawinan',
-        'pekerjaan',
-        'kewarganegaraan'
+        'status',
+        'pekerjaan'
     ];
 
     public function user(): BelongsTo

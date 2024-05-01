@@ -47,13 +47,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function warga_id(): HasOne
+    public function warga(): HasOne
     {
-        return $this->hasOne(Warga::class, 'nik');
+        return $this->hasOne(Warga::class, 'nik', 'nik');
     }
 
     public function surat()
     {
-        return $this->hasMany(Surat::class);
+        return $this->hasMany(Layanan::class);
     }
 }

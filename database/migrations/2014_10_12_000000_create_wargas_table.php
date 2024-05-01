@@ -21,11 +21,13 @@ return new class extends Migration {
             $table->string('alamat');
             $table->string('rt');
             $table->string('rw');
-            $table->string('desa');
+            $table->string('desa')->default('sirnagalih');
+            $table->string('kec')->default('cisurupan');
+            $table->string('kab')->default('garut');
             $table->string('agama');
-            $table->string('stts_perkawinan');
+            $table->string('status');
             $table->string('pekerjaan');
-            $table->string('kewarganegaraan')->default('Indonesia');
+            $table->enum('user_status', ['verified', 'unverified']);
             $table->timestamps();
         });
     }

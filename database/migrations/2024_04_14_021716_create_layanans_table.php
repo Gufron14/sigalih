@@ -15,14 +15,14 @@ return new class extends Migration
     {
         
 
-        Schema::create('surats', function (Blueprint $table) {
-            $table->id('id_surat');
+        Schema::create('layanans', function (Blueprint $table) {
+            $table->id('id');
             $table->foreignId('nik')->unique()->constrained('wargas', 'nik');
             $table->foreignId('id_jenisSurat')
                 ->constrained('jenis_surats', 'id_jenisSurat')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->enum('status', ['0', '1', '2', '3'])->default('2');
+            $table->enum('status', ['tunggu', 'tinjau', 'proses', 'selesai', 'tolak'])->default('tunggu');
             $table->timestamps();
         });
     }

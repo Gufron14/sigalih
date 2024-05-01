@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Layanan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class JenisSurat extends Model
 {
@@ -15,8 +16,8 @@ class JenisSurat extends Model
         'template'
     ];
 
-    public function surats()
+    public function layanan()
     {
-        return $this->hasMany(Surat::class);
+        return $this->hasMany(Layanan::class);
     }
 }
