@@ -21,11 +21,11 @@
                 <div class="mb-3">
                    Pilih Surat
                 </div>
-                <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
+                {{-- <form action="{{ route('pengajuan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <select name="id_jenisSurat" id="id_jenisSurat" class="form-select mb-3">
-                        @foreach ($jenisSurat as $jenis_surat)
-                            <option value="{{ $jenis_surat->id_jenisSurat }}">{{ $jenis_surat->nama_surat }}</option>
+                    <select name="id_surat" id="id_surat" class="form-select mb-3">
+                        @foreach ($surats as $surat)
+                            <option value="{{ $surat->id_surat}}">{{ $surat->nama_surat }}</option>
                         @endforeach
                     </select>
                     <div class="mb-3">
@@ -33,8 +33,7 @@
                         <input type="text" name="nik" id="nik" placeholder="Masukan NIK untuk membuat Permohonan" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Buat</button>
-                </form>
-                
+                </form> --}}
             </div>
         </div>
 

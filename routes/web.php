@@ -8,10 +8,11 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\BankSampahController;
 use App\Http\Controllers\Admin\SuratController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\JenisSuratController;
+use App\Http\Controllers\Admin\PengajuanController;
+use App\Http\Controllers\UserAuthController;
 
 // Post
-Route::prefix('admin/posts')->group(function(){
+Route::prefix('admin/posts')->group(function () {
     Route::get('index', [PostController::class, 'index'])->name('posts'); // Show List Post Page
     Route::get('create', [PostController::class, 'create']); // Show Create Post Page
     Route::post('create', [PostController::class, 'store'])->name('posts.store'); // Do Create Post
@@ -22,43 +23,38 @@ Route::prefix('admin/posts')->group(function(){
     Route::delete('list/{post}', [PostController::class, 'destroy'])->name('posts.delete'); // Do Delete Post
 });
 
-// ------------------------------------------------- USER ROUTE -------------------------------------------------
 // WEBSITE
 Route::get('/', [ViewController::class, 'index'])->name('index');
 
 // LAYANAN
 Route::get('layanan', [LayananController::class, 'index']);
 
-// BANK SAMPAH
-Route::get('banksampah/index', [BankSampahController::class, 'index']);
+// Auth
+Route::get('login', [ViewController::class, 'viewLogin'])->name('view-login');
+Route::get('register', [ViewController::class, 'viewRegister'])->name('registerPage');
 
-// ------------------------------------------------- USER ROUTE -------------------------------------------------
 
 
-// ------------------------------------------------- ADMIN ROUTE -------------------------------------------------
-// CMS
-Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+Route::prefix('admin/')->group(function () {
 
-// SURAT
-Route::prefix('admin/')->group(function(){
-    Route::get('surat/jenis-surat', [JenisSuratController::class, 'index'])->name('jenis-surat');
-    Route::post('surat/jenis-surat', [JenisSuratController::class, 'store'])->name('jenisSurat.store');
-    
-    Route::get('surat/surat', [SuratController::class, 'index'])->name('surat');
-    Route::post('layanan/index', [SuratController::class, 'store'])->name('surat.store');
-    Route::get('surat/surat/{id}', [SuratController::class, 'show'])->name('view-surat');
-    
-    Route::get('warga/index', [WargaController::class, 'index'])->name('warga');
-    Route::get('warga/show/{id}', [WargaController::class, 'show']);
+    Route::get('dashboard', [DashboardController::class, 'dashboard']);
+
+    // LAYANAN SURAT
+    // Surat
+    Route::get('surat', [SuratController::class, 'index'])->name('surat');
+    Route::post('surat/add', [SuratController::class, 'store'])->name('surat.store');
+    Route::get('surat/{id}', [SuratController::class, 'show']);
+    Route::put('surat/update/{id}', [SuratController::class, 'update']);
+    Route::delete('surat/delete/{id}', [SuratController::class, 'destroy']);
+
+    // Pengajuan
+    Route::get('pengajuan', [PengajuanController::class, 'index'])->name('pengajuan');
 });
 
-Route::get('surat/wordExport/{id}', [SuratController::class, 'wordExport']);
-
-// Kependudukan
-
-// ------------------------------------------------- ADMIN ROUTE -------------------------------------------------
-
-
+Route::get('layanan', [LayananController::class, 'show'])->name('layanan');
+Route::post('layanan/pengajuan', [PengajuanController::class, 'store']);
+Route::get('surat/surat', [PengajuanController::class, 'index'])->name('surat');
+Route::post('layanan/index', [PengajuanController::class, 'store'])->name('pengajuan.store');
+Route::get('surat/surat/{id}', [PengajuanController::class, 'show'])->name('view-surat');
 
 Route::get('warga/wordExport/{id}', [WargaController::class, 'wordExport']);
-

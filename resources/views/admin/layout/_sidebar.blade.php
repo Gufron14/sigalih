@@ -48,13 +48,13 @@
                 {{-- SURAT  --}}
                 <li class="nav-header">LAYANAN SURAT</li>
                 <li class="nav-item">
-                    <a href="{{ route('jenis-surat') }}" class="nav-link">
+                    <a href="{{ route('surat') }}" class="nav-link">
                         <i class="nav-icon fas fa-envelope-open-text"></i>
-                        <p>Jenis Surat</p>
+                        <p>Surat</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('surat') }}" class="nav-link">
+                    <a href="{{ route('pengajuan') }}" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Pengajuan Surat
                         </p>
@@ -65,13 +65,13 @@
                 {{--  --}}
                 <li class="nav-header">KEPENDUDUKAN</li>
                 <li class="nav-item">
-                    <a href="{{ route('warga') }}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Data Warga</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('surat') }}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>Data User</p>
                     </a>

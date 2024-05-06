@@ -1,166 +1,136 @@
 @extends('admin.layout.master')
 
+@section('title', 'Surat')
+
 @section('content')
-    <div class="col-md-9">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">Inbox</h3>
-
-                <div class="card-tools">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control" placeholder="Search Mail">
-                        <div class="input-group-append">
-                            <div class="btn btn-primary">
-                                <i class="fas fa-search"></i>
+    <div class="container">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-primary collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title fw-bold">Tambah Surat</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                                    </button>
+                                    </div>
                             </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="nama_surat" class="form-label">Nama Surat</label>
+                                        <input type="nama_surat" class="form-control" id="nama_surat" name="nama_surat"
+                                            placeholder="masukan nama surat">
+                                        @error('nama_surat')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="deskripsi" class="form-label">Deskripsi (Opsional)</label>
+                                        <input class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="deskripsi surat opsional"></input>
+                                        @error('deskripsi')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Tambahkan File Template Surat (.doc/.docx)</label>
+                                        <input class="form-control" type="file" name="template" id="formFile">
+                                        @error('template')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                    </div>
-                </div>
-                <!-- /.card-tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-                <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-                    </button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="fas fa-reply"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="fas fa-share"></i>
-                        </button>
-                    </div>
-                    <!-- /.btn-group -->
-                    <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                    <div class="float-right">
-                        1-50/200
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title fw-bold">Daftar Surat</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Surat</th>
+                                            <th>Deskripsi</th>
+                                            <th>Template</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($surats as $surat)
+                                            <tr>
+                                                <td>{{ $surat->nama_surat }}</td>
+                                                <td>{{ $surat->deskripsi }}</td>
+                                                <td><a href=""><i class="fas fa-file-word"></i> &nbsp; {{ $surat->template }}</a></td>
+                                                <td>
+                                                    <a href="" class="text-warning me-3"> <small class="fas fa-edit"></small> Edit </a>
+                                                    <a href="" class="text-danger"> <small class="fas fa-trash"></small> Hapus </a>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <td colspan="4" class="text-center p-5">
+                                                <i class="far fa-times-circle text-danger" style="font-size: 58px"></i>
+                                                <div class="text-danger mt-3">
+                                                    Post Empty.
+                                                </div>
+                                            </td>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.btn-group -->
+                        <!-- /.card -->
                     </div>
-                    <!-- /.float-right -->
+                    <!-- /.col -->
                 </div>
-                <div class="table-responsive mailbox-messages">
-                    <table class="table table-hover">
-                        <tbody>
-                            @forelse ($surats as $surat)
-                                <tr class="suratRow" data-url="{{ route('view-surat', ['id' => $surat->id]) }}">
-                                    <td>
-                                        <div class="icheck-primary">
-                                            <input type="checkbox" value="" id="check1">
-                                            <label for="check1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="mailbox-name">
-                                        {{ $surat->warga->nama }}
-                                    </td>
-                                    <td class="mailbox-subject">mengirim Permohonan {{ $surat->jenisSurat->nama_surat }}
-                                    </td>
-                                    <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">{{ $timeFormat }}</td>
-                                    <td>
-                                        @if ($surat->status == '0')
-                                            <div class="badge badge-danger">Ditolak</div>
-                                        @elseif($surat->status == '1')
-                                            <div class="badge badge-secondary">Menunggu</div>
-                                        @elseif($surat->status == '2')
-                                            <div class="badge badge-warning">Diproses</div>
-                                        @elseif($surat->status == '3')
-                                            <div class="badge badge-success">Selesai</div>
-                                        @endif
-                                    </td>
-                                @empty
-                                    <td colspan="5">
-                                        <div class="text-center text-danger">
-                                            Belum ada Permintaan Surat
-                                        </div>
-                                    </td>
-                            @endforelse
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- /.table -->
-                </div>
-                <!-- /.mail-box-messages -->
+                <!-- /.row -->
             </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+        </section>
     </div>
-    {{-- <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
-                Pengajuan Surat Permohonan
-            </h3>
-        </div>
-        <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>Nama Pengaju</th>
-                        <th>Nama Surat</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($surats as $surat)
-                        <tr>
-                            <td>{{ $surat->created_at->timezone('Asia/Jakarta')->format('d F Y - H:i:s') }} WIB</td>
-                            <td>{{ $surat->warga->nama }}</td>
-                            <td>{{ $surat->jenisSurat->nama_surat }}</td>
-                            <td>
-                                @if ($surat->status == '0')
-                                    <div class="badge badge-secondary">Ditolak</div>
-                                @elseif($surat->status == '1')
-                                    <div class="badge badge-success">Menunggu</div>
-                                @elseif($surat->status == '2')
-                                    <div class="badge badge-warning">Diproses</div>
-                                @elseif($surat->status == '3')
-                                    <div class="badge badge-success">Selesai</div>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="">Proses &nbsp; <i class="fas fa-external-link-alt"></i></a>
-                            </td>
-                        </tr>
-                    @empty
-                        <td colspan="5">
-                            <div class="text-center text-danger">
-                                Belum ada Permintaan Surat
-                            </div>
-                        </td>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div> --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        var rows = document.querySelectorAll(".suratRow");
 
-        rows.forEach(function(row) {
-            row.addEventListener("click", function() {
-                var url = this.dataset.url;
-                window.location.href = url;
+    {{-- <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-            row.style.cursor = "pointer";
         });
-    });
-    </script>
-    
+    </script> --}}
 @endsection

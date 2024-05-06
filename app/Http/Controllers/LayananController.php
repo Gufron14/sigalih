@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JenisSurat;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
@@ -14,9 +14,12 @@ class LayananController extends Controller
 
     public function show(){
 
-        $jenisSurat = JenisSurat::all();
+        $surats = Surat::all();
 
-        return view('layanan.index', compact('jenisSurat'));
+        // return response()->json([
+        //     'surat' => $surat
+        // ]);
+        return view('layanan.index', compact('surats'));
     }
     
 

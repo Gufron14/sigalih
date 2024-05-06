@@ -8,14 +8,15 @@
         {{-- Hero Section --}}
         <div class="row mt-5 row-sm-12">
             <div class="col">
-                <h1 class="fw-bold">Wilujeung Sumping <br> di Sirnagalih</h1>
+                <h2 class="fw-bold">Wilujeung Sumping <br> di Sirnagalih</h2>
+                 <p class="text-body-tertiary">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</p>
                 <div class="col-9 mt-3">
-                    <p class="">ᮜᮧᮛᮨᮙ᮪ ᮄᮕ᮪ᮞᮥᮙ᮪ ᮓᮧᮜᮧᮁ ᮞᮤᮒ᮪ ᮃᮙᮨᮒ᮪ ᮎᮧᮔ᮪ᮞᮨᮎ᮪ᮒᮨᮒᮥᮁ ᮃᮓᮤᮕᮤᮞᮤᮎᮤᮀ ᮈᮜᮤᮒ᮪. ᮃᮎ᮪ᮎᮥᮞᮃᮙᮥᮞ᮪, ᮃᮓ᮪. ᮛᮨᮙ᮪
-                        ᮖᮥᮌᮤᮃᮒ᮪ ᮈᮟ᮪ ᮇᮕ᮪ᮒᮤᮇ ᮎᮧᮔ᮪ᮞᮨᮋᮥᮅᮔ᮪ᮒᮥᮁ.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptatibus id, repellendus cum
-                        debitis maiores rerum quibusdam.</p>
+                    <small>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat laudantium exercitationem assumenda et odit voluptates nobis totam ipsa porro modi fuga aut, minima tempore quis perferendis architecto magni. Nihil molestias laborum aperiam reprehenderit hic cum itaque vero nemo velit eius!
+                    </small>
+                    
                 </div>
-                <button class="btn btn-primary fw-bold mt-3 fs-5">Selengkapnya</button>
+                <button class="btn btn-primary fw-bold mt-5">Selengkapnya</button>
             </div>
             <div class="col">
                 <div id="carouselExampleCaptions" class="carousel slide">

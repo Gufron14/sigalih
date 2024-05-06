@@ -3,114 +3,166 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Surat;
-use App\Models\Warga;
-use App\Models\JenisSurat;
 use Illuminate\Http\Request;
-use PhpOffice\PhpWord\Settings;
-use PhpOffice\PhpWord\IOFactory;
 use App\Http\Controllers\Controller;
-use PhpOffice\PhpWord\TemplateProcessor;
+use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class SuratController extends Controller
 {
     public function index()
-    {
-        $surats = Surat::with(['warga', 'jenisSurat'])->get();
-
-        // Membuat array untuk menyimpan format waktu masing-masing surat
-        $timeFormats = [];
-
-        foreach ($surats as $surat) {
-            // Mengambil waktu pembuatan (created_at) dari setiap surat
-            $yourDateTime = $surat->created_at;
-
-            // Hitung perbedaan waktu
-            $timeDiff = now()->diffInMinutes($yourDateTime);
-            $timeFormat = '';
-
-            if ($timeDiff < 60) {
-                $timeFormat = $timeDiff . ' menit lalu';
-            } elseif ($timeDiff < 1440) {
-                $timeFormat = floor($timeDiff / 60) . ' jam lalu';
-            } elseif ($timeDiff < 525600) {
-                $timeFormat = $yourDateTime->diffForHumans();
-            } else {
-                $timeFormat = $yourDateTime->format('d M Y');
-            }
-
-            // Menyimpan format waktu untuk surat saat ini ke dalam array
-            $timeFormats[] = $timeFormat;
-        }
-
-        return view('admin.resource.surat.surat', compact('surats', 'timeFormat'));
-    }
-
-    public function show($id)
-    {
-        $surats = Surat::with('warga', 'jenisSurat')->findOrFail($id);
-        return view('admin.resource.surat.view-surat', compact('surats'));
+    {   
+        $surats = Surat::all();
+        return view('admin.resource.surat.surat', compact('surats'));
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nik' => 'required',
-            'id_jenisSurat' => 'required|exists:jenis_surats,id_jenisSurat',
+        $validator = Validator::make(request()->all(), [
+            'nama_surat' => 'required|unique:surats,nama_surat',
+            'desc' => 'required',
+            'template' => 'required|max:10000|mimes:doc,docx',
         ]);
 
         if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors(['error' => 'Kesalahan']);
+            // return redirect()->back()->withErrors($validator);
+
+            return response()->json([
+                'message' => $validator->messages()
+            ]);
         }
 
-        $jenisSurat = JenisSurat::where('id_jenisSurat', $request->id_jenisSurat)->first();
-        if (!$jenisSurat) {
-            return response(['error' => 'Surat belum ada']);
-        }
+        $template = $request->file('template');
 
-        $warga = Warga::where('nik', $request->nik)->first();
-        if (!$warga) {
-            return response(['error' => 'NIK Tidak Terdaftar']);
-        }
+        if ($template) {
+            $templateName = $template->getClientOriginalName();
+    
+            // Check if file with the same name already exists
+            if (file_exists(public_path('word-template') . '/' . $templateName)) {
+                // return redirect()
+                //     ->back()
+                //     ->withErrors(['template' => 'File template dengan nama yang sama sudah ada']);
 
+                return response()->json([
+                    'message' => 'Template dengan nama tersebut sudah ada'
+                ]);
+            }
+    
+            $template->move(public_path('word-template'), $templateName);
+        } else {
+            // return redirect()
+            //     ->back()
+            //     ->withErrors(['template' => 'File template tidak ditemukan']);
+            return response()->json([
+                'error' => 'template tidak ditemukan'
+            ]);
+
+        }
+    
         Surat::create([
-            'nik' => $warga->nik,
-            'id_jenisSurat' => $jenisSurat->id_jenisSurat,
-            'status' => 1, // Atur status default di sini, sesuai kebutuhan
+            'nama_surat' => $request->nama_surat,
+            'desc' => $request->desc,
+            'template' => $templateName,
         ]);
 
-        return redirect()
-            ->back()
-            ->with(['success' => 'Berhasil']);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menambahkan Surat'
+        ]);
+    
+        // return redirect()
+        //     ->back()
+        //     ->with(['success' => 'Berhasil menambahkan jenis surat']);
     }
 
-    public function wordExport($id)
+    public function show($id)
     {
-        $warga = Warga::findOrFail($id);
-        $templateProcessor = new TemplateProcessor('word-template/Surat-Keterangan-Domisili.docx');
-        $templateProcessor->setValues([
-            'id' => $warga->id,
-            'nik' => $warga->nik,
-            'nama' => $warga->nama,
-            'ttl' => $warga->ttl,
-            'jk' => $warga->jk,
-            'alamat' => $warga->alamat,
-            'rt' => $warga->rt,
-            'rw' => $warga->rw,
-            'desa' => $warga->desa,
-            'agama' => $warga->agama,
-            'stts_perkawinan' => $warga->stts_perkawinan,
-            'pekerjaan' => $warga->pekerjaan,
-            'kewarganegaraan' => $warga->kewarganegaraan,
-            'created_at' => $warga->created_at->format('d F Y'),
-        ]);
-
-        $filename = 'SKD-' . $warga->nama;
-        $pathToSave = 'word-template/' . $filename . '.docx';
-        $templateProcessor->saveAs($pathToSave);
-
-        return redirect()->back()->with('success', 'Surat Berhasil Dibuat');
+        try {
+            $surat = Surat::findOrFail($id);
+            
+            return response()->json([
+                'surat' => $surat
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'ID tidak ditemukan'
+            ], 404);
+        }
+        
     }
+
+    public function update(Request $request, Surat $surat, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_surat' => 'unique:surats,nama_surat,',
+            'desc' => '',
+            'template' => 'nullable|max:10000|mimes:doc,docx',
+        ]);
+    
+        if ($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $surat = Surat::findOrFail($id);
+    
+        $surat->update([
+            'nama_surat' => $request->nama_surat,
+            'desc' => $request->desc,
+        ]);
+    
+        if ($request->hasFile('template')){
+            // Upload New Template
+            $template = $request->file('template');
+            $templateName = $template->getClientOriginalName();
+            $template->move(public_path('word-template'), $templateName);
+    
+            // Hapus File Template Lama
+            if ($surat->template) {
+                File::delete(public_path('word-template/') . $surat->template);
+            }
+    
+            // Update Surat dengan Template Baru
+            $surat->update([
+                'template' => $templateName
+            ]);
+        }
+    
+        return response()->json([
+            'status' => true,
+            'message' => 'Surat Berhasil Diperbarui',
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            // Temukan surat berdasarkan ID yang diberikan
+            $surat = Surat::findOrFail($id);
+    
+            // Hapus file template
+            if ($surat->template) {
+                File::delete(public_path('word-template/') . $surat->template);
+            }
+    
+            // Hapus surat dari database
+            $surat->delete();
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Surat Berhasil Dihapus'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal menghapus surat. Pesan kesalahan: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    
 }

@@ -1,24 +1,17 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\Admin\PengajuanController;
 
+Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
 
-// --------------------------- User Authentication -------------------------------
-Route::group(['prefix' => 'user'], function ($router) {
-        Route::post('register', [UserController::class, 'register']);
-        Route::post('login', [UserController::class, 'login']);
-        Route::post('logout', [UserController::class, 'logout']);
-        Route::post('refresh', [UserController::class, 'refresh']);
-        Route::post('me', [UserController::class, 'me']);
-    },
-);
+    Route::post('register', [UserAuthController::class, 'register'])->name('doRegister'); // Do Login
+    Route::post('login', [UserAuthController::class, 'login'])->name('doLogin'); // Do Register
+    
+    Route::post('logout', [UserAuthController::class, 'logout']);
+    Route::post('refresh', [UserAuthController::class, 'refresh']);
+    Route::post('me', [UserAuthController::class, 'me']);
 
-// --------------------------- User Authentication -------------------------------
-
-// --------------------------- Admin Authentication -------------------------------
-// --------------------------- Admin Authentication -------------------------------
+});

@@ -7,15 +7,24 @@
 
 <body>
     {{-- Navbar --}}
-    @include('components.navbar')
+    @if (Request::is('login') || Request::is('register'))
+        
+    @else
+        @include('components.navbar')
+    @endif
 
     {{-- Content --}}
     <div class="min-h-screen">
         @yield('content')
     </div>
 
+    @if (Request::is('login') || Request::is('register'))
+        
+    @else
+        @include('components.footer')
+    @endif
+
     {{-- Footer --}}
-    @include('components.footer')
 
     {{-- Script --}}
     @include('components.script')

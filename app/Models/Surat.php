@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Layanan;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class JenisSurat extends Model
+class Surat extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nama_surat',
-        'deskripsi',
+        'desc',
         'template'
     ];
 
-    public function layanan()
+    public function pengajuan()
     {
-        return $this->hasMany(Layanan::class);
+        return $this->hasMany(Pengajuan::class);
     }
 }
