@@ -38,29 +38,22 @@
                 data-accordion="false">
 
                 {{-- DASHBOARD --}}
-                <li class="nav-item">
-                    <a href="/admin/dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-
+                <x-nav-link :active="request()->routeIs('dashboard')" href="{{ route('dashboard') }}">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>Dashboard</p>
+                </x-nav-link>
+                
                 {{-- SURAT  --}}
                 <li class="nav-header">LAYANAN SURAT</li>
-                <li class="nav-item">
-                    <a href="{{ route('surat') }}" class="nav-link">
-                        <i class="nav-icon fas fa-envelope-open-text"></i>
-                        <p>Surat</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('pengajuan') }}" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>Pengajuan Surat
-                        </p>
-                        <span class="badge badge-success right">1</span>
-                    </a>
-                </li>
+                <x-nav-link :active="request()->routeIs('lihat-surat')" href="{{ route('lihat-surat') }}">
+                    <i class="nav-icon fas fa-envelope-open-text"></i>
+                    <p>Surat</p>
+                </x-nav-link>
+                <x-nav-link :active="request()->routeIs('pengajuan')" href="{{ route('pengajuan') }}">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    <p>Pengajuan Surat</p>
+                    <span class="badge badge-success right">1</span>
+                </x-nav-link>
 
                 {{--  --}}
                 <li class="nav-header">KEPENDUDUKAN</li>

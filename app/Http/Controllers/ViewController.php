@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Surat;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
     public function index(){
-        return view('welcome');
+
+        $surats = Surat::latest()->take('3')->get();
+
+        return view('welcome', compact('surats'));
     }
 
     public function viewLogin()

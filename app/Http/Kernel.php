@@ -2,10 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\isGuest;
-use App\Http\Middleware\isLogin;
-use App\Http\Middleware\UserAuthorization;
-use App\Http\Middleware\VerifyCsrfToken;
+use App\Http\Middleware\CombinedAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -46,6 +43,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // \PHPOpenSourceSaver\JWTAuth\Http\Middleware\Authenticate::class,
         ],
     ];
 
@@ -67,8 +65,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'csrf' => VerifyCsrfToken::class,
-        'isLogin' => isLogin::class,
-        'user-auth' => UserAuthorization::class
+        'csrf' => \App\Http\Middleware\VerifyCsrfToken::class,
+        'user-auth' => \App\Http\Middleware\UserAuth::class,
+        'api.auth' => \App\Http\Middleware\ApiAuth::class,
+        'combined.auth' => CombinedAuth::class,
     ];
 }

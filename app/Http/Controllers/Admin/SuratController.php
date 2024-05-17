@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Surat\SkckController;
 use App\Models\Surat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,10 @@ class SuratController extends Controller
     public function index()
     {   
         $surats = Surat::all();
+
+        // return response()->json([
+        //     'surat' => $surats
+        // ]);
         return view('admin.resource.surat.surat', compact('surats'));
     }
 
@@ -21,7 +26,7 @@ class SuratController extends Controller
     {
         $validator = Validator::make(request()->all(), [
             'nama_surat' => 'required|unique:surats,nama_surat',
-            'desc' => 'required',
+            'desc' => 'nullable',
             'template' => 'required|max:10000|mimes:doc,docx',
         ]);
 
@@ -76,14 +81,11 @@ class SuratController extends Controller
         //     ->with(['success' => 'Berhasil menambahkan jenis surat']);
     }
 
-    public function show($id)
+    public function edit(Surat $surat)
     {
         try {
-            $surat = Surat::findOrFail($id);
-            
-            return response()->json([
-                'surat' => $surat
-            ]);
+
+            return view('admin.resource.surat.surat', compact('surat'));
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
@@ -96,8 +98,8 @@ class SuratController extends Controller
     public function update(Request $request, Surat $surat, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_surat' => 'unique:surats,nama_surat,',
-            'desc' => '',
+            'nama_surat' => 'max:100',
+            'desc' => 'nullable',
             'template' => 'nullable|max:10000|mimes:doc,docx',
         ]);
     

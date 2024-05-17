@@ -22,6 +22,8 @@
 
 <!-- Navbar -->
 @if (Request::is('banksampah/index'))
+
+{{-- BANK SAMPAH NAVBAR --}}
 <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
     <div class="container">
         <a class="navbar-brand fw-bold" href="#">Sampah Sigalih</a>
@@ -48,7 +50,11 @@
         </div>
     </div>
 </nav>
+
 @else
+
+{{-- WEBSITE NAVBAR --}}
+{{--  --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
     <!-- Container wrapper -->
     <div class="container">
@@ -66,93 +72,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left links -->
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active fw-bold" aria-current="page" href="/">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="warga/index">Warga</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Tentang
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/tentang">Sejarah</a></li>
-                        <li><a class="dropdown-item" href="#">Wilayah</a></li>
-                        {{-- <li><hr class="dropdown-divider"></li> --}}
-                        <li><a class="dropdown-item" href="#">Monografi</a></li>
-                        <li><a class="dropdown-item" href="#">Statistik</a></li>
-                        <li><a class="dropdown-item" href="#">Potensi</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Lembaga
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pemerintahan</a></li>
-                        <li><a class="dropdown-item" href="#">BPD</a></li>
-                        <li><a class="dropdown-item" href="#">LPM</a></li>
-                        <li><a class="dropdown-item" href="#">Posyandu</a></li>
-                        <li><a class="dropdown-item" href="#">PKK</a></li>
-                        <li><a class="dropdown-item" href="#">Karang Taruna</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-disabled="true">Pembangunan</a>
-                </li>
+                <x-nav-link :active="request()->routeIs('home')" href="/">Beranda</x-nav-link>
+                <x-nav-link :active="request()->routeIs('berita*')" href="{{ route('berita') }}" >Kabar Desa</x-nav-link>
+                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Tentang</x-nav-link>
+                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Lembaga</x-nav-link>
+                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Pembangunan</x-nav-link>
             </ul>
             <!-- Left links -->
             <!-- Right elements -->
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-3">
                 <!-- Icon -->
-                <a href="{{ route('layanan') }}" class="btn btn-outline-primary fw-bold">
-                    <small>Layanan</small>
-                </a>
-                <a href="banksampah/index" class="btn btn-outline-success fw-bold">
-                    <small>Bank Sampah</small>
-                </a>
-                |
-                <!-- Avatar -->
-                <div class="dropdown">
-                    <a type="button" data-bs-toggle="dropdown" aria-expanded="false">
-
-                            <i class="fas fa-user-circle fs-2 text-secondary"></i>
-                        {{-- <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="32"
-                            alt="Black and White Portrait of a Man" loading="lazy" /> --}}
+                <div>
+                    <a href="{{ route('layanan') }}" class="btn btn-warning fw-bold">
+                        Layanan
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" style="width: 240px">
-                        <div class="text-center mb-3">
-                            <div class="mt-3 mb-2">
-                                <i class="fas fa-user-circle fs-1 text-secondary"></i>
-
-                                {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                                    class="rounded-circle img-fluid" style="width: 80px;" /> --}}
-                            </div>
-                            <div class="mb-3">
-                                <h5 class="mb-3 fw-bold">
-                                    Julie L. Arsenault <br>
-                                        <small class="text-muted mb-4 fs-6">
-                                            3205201403010002
-                                        </small>
-                                </h5>
-                                    <a href="" class="btn btn-outline-primary"><small>Edit Profil</small></a>
-                                    
-                                    <form action="{{ url('api/user/logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><small>Logout</small></button>
-                                    </form>
-                                                                </div>
-                        </div>
-                    </div>
+                    <a href="banksampah/index" class="btn btn-success fw-bold">
+                        Bank Sampah
+                    </a>
                 </div>
+                {{-- @livewire('auth.auth-link') --}}
             </div>
             <!-- Right elements -->
         </div>
         <!-- Collapsible wrapper -->
-
     </div>
     <!-- Container wrapper -->
 </nav>

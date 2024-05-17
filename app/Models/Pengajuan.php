@@ -9,18 +9,25 @@ class Pengajuan extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nik',
+        'user_id',
+        'id_surat',
+        'status'
+    ];
+
     public function warga()
     {
-        return $this->belongsTo(Warga::class, 'warga_id', 'warga_id');
+        return $this->belongsTo(Warga::class, 'nik', 'nik');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'nik', 'nik');
     }
 
     public function surat()
     {
-        return $this->belongsTo(Surat::class);
+        return $this->belongsTo(Surat::class, 'id_surat', 'id');
     }
 }

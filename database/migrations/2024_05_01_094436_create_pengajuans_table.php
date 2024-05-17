@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('warga_id')->constrained('wargas', 'id');
+            $table->foreignId('nik')->constrained('wargas', 'nik');
             $table->foreignId('id_surat')->constrained('surats', 'id');
             $table->enum('status', ['tunggu', 'tinjau', 'proses', 'selesai', 'tolak']);
             $table->timestamps();

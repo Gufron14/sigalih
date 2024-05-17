@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Surat;
 use App\Models\Warga;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Pengajuan;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Admin\Surat\SKDController;
+use App\Http\Controllers\Admin\Surat\SkckController;
 
 class PengajuanController extends Controller
 {
@@ -45,73 +47,63 @@ class PengajuanController extends Controller
         //     'surat' => $pengajuan
         // ]);
 
-        return view('admin.resource.surat.pengajuan', compact('pengajuans', 'timeFormats'));
+        return view('admin.resource.surat.pengajuan', compact('pengajuans', 'timeFormat'));
     }
 
     public function show($id)
     {
-        $pengajuans = Pengajuan::with('warga', 'jenisSurat')->findOrFail($id);
-        return view('admin.resource.surat.view-surat', compact('pengajuans'));
+        $pengajuans = Pengajuan::with('warga', 'surat')->findOrFail($id);
+        return view('admin.resource.surat.view-pengajuan', compact('pengajuans'));
     }
 
-    public function store(Request $request)
+    // protected $SkckController;
+
+    // public function __construct(SkckController $SkckController)
+    // {
+    //     $this->SkckController = $SkckController;
+    // }
+
+    public function createSurat($jenis, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nik' => 'required',
-            'id_surat' => 'required|exists:pengajuans,id',
-        ]);
+        $controllerMap = [
+            'skck' => SkckController::class,
+            'skd' => SKDController::class,
+        ];
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors(['error' => 'Kesalahan']);
+        if (!array_key_exists($jenis, $controllerMap)) {
+            return response()->json(['error' => 'Jenis surat tidak ditemukan'], 404);
         }
 
-        $surats = Surat::where('id_surat', $request->id_surat)->first();
-        if (!$surats) {
-            return response(['error' => 'Surat belum ada']);
-        }
-
-        $warga = Warga::where('nik', $request->nik)->first();
-        if (!$warga) {
-            return response(['error' => 'NIK Tidak Terdaftar']);
-        }
-
-        Surat::create([
-            'nik' => $warga->nik,
-            'id_surat' => $surats->id_surat,
-        ]);
-
-        return redirect()
-            ->back()
-            ->with(['success' => 'Berhasil']);
+        $controllerClass = app($controllerMap[$jenis]);
+        return $controllerClass->wordExport($id);
     }
 
-    public function wordExport($id)
-    {
-        $warga = Warga::findOrFail($id);
-        $templateProcessor = new TemplateProcessor('word-template/Surat-Keterangan-Domisili.docx');
-        $templateProcessor->setValues([
-            'id' => $warga->id,
-            'nik' => $warga->nik,
-            'nama' => $warga->nama,
-            'ttl' => $warga->ttl,
-            'jk' => $warga->jk,
-            'alamat' => $warga->alamat,
-            'rt' => $warga->rt,
-            'rw' => $warga->rw,
-            'desa' => $warga->desa,
-            'agama' => $warga->agama,
-            'stts_perkawinan' => $warga->stts_perkawinan,
-            'pekerjaan' => $warga->pekerjaan,
-            'kewarganegaraan' => $warga->kewarganegaraan,
-            'created_at' => $warga->created_at->format('d F Y'),
-        ]);
 
-        $filename = 'SKD-' . $warga->nama;
-        $pathToSave = 'word-template/' . $filename . '.docx';
-        $templateProcessor->saveAs($pathToSave);
+    // public function wordExport($id)
+    // {
+    //     $warga = Warga::findOrFail($id);
+    //     $templateProcessor = new TemplateProcessor('word-template/Surat-Keterangan-Domisili.docx');
+    //     $templateProcessor->setValues([
+    //         'id' => $warga->id,
+    //         'nik' => $warga->nik,
+    //         'nama' => $warga->nama,
+    //         'ttl' => $warga->ttl,
+    //         'jk' => $warga->jk,
+    //         'alamat' => $warga->alamat,
+    //         'rt' => $warga->rt,
+    //         'rw' => $warga->rw,
+    //         'desa' => $warga->desa,
+    //         'agama' => $warga->agama,
+    //         'stts_perkawinan' => $warga->stts_perkawinan,
+    //         'pekerjaan' => $warga->pekerjaan,
+    //         'kewarganegaraan' => $warga->kewarganegaraan,
+    //         'created_at' => $warga->created_at->format('d F Y'),
+    //     ]);
 
-        return redirect()->back()->with('success', 'Surat Berhasil Dibuat');
-    }
+    //     $filename = 'SKD-' . $warga->nama;
+    //     $pathToSave = 'pengajuan/' . $filename . '.docx';
+    //     $templateProcessor->saveAs($pathToSave);
+
+    //     return redirect()->back()->with('success', 'Surat Berhasil Dibuat');
+    // }
 }
