@@ -41,7 +41,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <img src="https://fisipol.uma.ac.id/wp-content/uploads/2022/01/pengertian-desa.jpg"
-                                class="rounded-2" alt="" style="width: 160px;">
+                                class="" alt="" style="width: 160px;">
                         </div>
                         <div class="col">
                             <h6 class="fw-bold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate,
@@ -73,7 +73,7 @@
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <img src="https://fisipol.uma.ac.id/wp-content/uploads/2022/01/pengertian-desa.jpg"
-                                class="rounded-2" alt="" style="width: 160px;">
+                                class="" alt="" style="width: 160px;">
                         </div>
                         <div class="col">
                             <h6 class="fw-bold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate,
@@ -93,7 +93,7 @@
         @for ($i = 0; $i < 5; $i++)
             <div class="col gap-3 align-items-center">
                 <img src="https://fisipol.uma.ac.id/wp-content/uploads/2022/01/pengertian-desa.jpg"
-                    class="rounded-2 w-100" alt="">
+                    class="w-100" alt="">
                 <h6 class="mt-3 fw-bold">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, architecto.
                 </h6>
             </div>

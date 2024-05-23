@@ -1,4 +1,4 @@
-<div class="card card-primary collapsed-card">
+<div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title fw-bold">Tambah Surat</h3>
         <div class="card-tools">
@@ -8,10 +8,10 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form wire:submit="store" enctype="multipart/form-data">
-            <div class="mb-3">
+        <form wire:submit.prevent="store" enctype="multipart/form-data">
+            <div class="form-group mb-3">
                 <label for="nama_surat" class="form-label">Nama Surat</label>
-                <input type="text" class="form-control" wire:model="nama_surat" placeholder="masukan nama surat">
+                <input type="text" class="form-control" wire:model="nama_surat" placeholder="Masukan Nama Surat">
                 @error('nama_surat')
                     <small class="text-danger">
                         {{ $message }}
@@ -19,8 +19,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="desc" class="form-label">Deskripsi (Opsional)</label>
-                <input class="form-control" wire:model="desc" rows="3" placeholder="deskripsi surat"></input>
+                <label for="desc" class="form-label">Deskripsi</label>
+                <textarea cols="30" rows="4" class="form-control" placeholder="Masukan Deskripsi" wire:model="desc"></textarea>
+                {{-- <textarea id="editor" wire:model="desc"></textarea> --}}
                 @error('desc')
                     <small class="text-danger">
                         {{ $message }}
@@ -36,7 +37,7 @@
                     </small>
                 @enderror
             </div>
-            <button wire:submit class="btn btn-primary fw-bold">Tambahkan</button>
+            <button type="submit" class="btn btn-primary fw-bold">Tambahkan</button>
         </form>
     </div>
     <!-- /.card-body -->

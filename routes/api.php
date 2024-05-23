@@ -6,7 +6,7 @@ use App\Http\Controllers\UserAuthController;
 Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
 
     Route::post('register', [UserAuthController::class, 'register']);
-    Route::post('login', [UserAuthController::class, 'login']);
+    Route::post('login', [UserAuthController::class, 'login'])->name('login');
 
     Route::group(['middleware' => 'api.auth'], function ($router) {
         Route::post('logout', [UserAuthController::class, 'logout']);

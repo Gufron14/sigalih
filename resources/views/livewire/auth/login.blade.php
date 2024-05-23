@@ -1,28 +1,43 @@
 <div class="container-fluid">
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div class="row justify-content-center align-items-center vh-100">
         {{-- @if ($errorMessage)
             <div class="alert alert-danger">{{ $errorMessage }}</div>
         @endif --}}
-        <div class="card" style="width: 480px">
-            <div class="card-body">
+        <div class="card shadow" style="width: 480px">
+            <div class="card-body p-5">
+
                 <div class="mb-5">
+                    <a class="navbar-brand mt-2 mt-lg-0 d-flex align-items-center" href="#">
+                        <img src="{{ asset('assets/img/1.png') }}" height="40" alt="MDB Logo" loading="lazy" />
+                        <span class="ms-3 d-flex flex-column">
+                            <span class="fw-bold">Desa</span>
+                            <span class="fw-bold">Sirnagalih</span>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="mb-3 text-center">
                     <h3 class="fw-bold text-primary">Login</h3>
-                    <small>Untuk mengakses Layanan, silakan login terlebih dahulu!</small>
                 </div>
 
                 {{-- Form --}}
-                <form wire:submit.prevent="login">
+                <form wire:submit.prevent="login" enctype="multipart/form-data">
 
                     <div class="mb-3">
-                        <label for="nik" class="form-label">nik</label>
+                        <label for="nik" class="form-label">NIK</label>
                         <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik"
-                            name="nik" placeholder="Masukan nik" autofocus wire:model="nik">
+                            name="nik" placeholder="Masukan NIK" autofocus wire:model="nik">
                         @error('nik')
-                            <div class="alert alert-danger mt-2">
+                            <small class="text-danger">
                                 {{ $message }}
-                            </div>
+                            </small>
                         @enderror
                     </div>
 
@@ -41,6 +56,11 @@
                                 wire:model="password" placeholder="Masukan Password" aria-describedby="password" />
                             {{-- <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span> --}}
                         </div>
+                        @error('password')
+                            <small class="text-danger">
+                                {{ $message }}
+                            </small>
+                        @enderror
 
 
                     </div>
@@ -53,15 +73,17 @@
                             </div>
                         </div> --}}
                     <div class="mb-3">
-                        <button class="btn btn-primary d-grid w-100 fw-bold" type="submit">Masuk</button>
+
+                        <button type="submit" class="btn btn-primary d-grid w-100 fw-bold">Masuk</button>
                         <a href="/" class="btn btn-outline-secondary w-100 mt-1">Kembali</a>
                     </div>
+
                 </form>
                 {{-- End Form --}}
 
 
-                <div class="mt-3s">
-                    <small>Tidak punya akun? <a href="">Daftar sekarang.</a></small>
+                <div class="mt-3 text-center">
+                    <small>Tidak punya akun? <a href="{{ route('register') }}" class="fw-bold">Daftar sekarang.</a></small>
                 </div>
             </div>
         </div>

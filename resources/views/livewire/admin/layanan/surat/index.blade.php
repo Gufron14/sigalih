@@ -3,21 +3,21 @@
         <div class="row">
             <div class="col-12">
                 {{-- Tambah Surat --}}
-                <livewire:admin.layanan.surat.update :id="$surats->first()->id" />
+                <livewire:admin.layanan.surat.create>
                 {{-- Daftar Surat --}}
-                <div class="card card-primary card-outline">
+                <div class="card card-primary card-outline mt-3">
                     <div class="card-header">
                         <h3 class="card-title fw-bold">Daftar Surat</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Surat</th>
                                     <th>Deskripsi</th>
-                                    <th class="text-center">Template</th>
+                                    <th>Template</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -26,12 +26,12 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $surat->nama_surat }}</td>
-                                        <td>{{ $surat->desc }}</td>
+                                        <td>{!! $surat->desc !!}</td>
                                         <td><a href=""><i class="fas fa-file-word"></i> &nbsp;
                                                 {{ $surat->template }}</a></td>
                                         <td>
                                             <div class="d-flex gap-2 justify-content-center">
-                                                <livewire:admin.layanan.surat.update/>
+                                                {{-- <livewire:admin.layanan.surat.update/> --}}
                                                 {{-- <form action="{{ route('surat.delete', $surat->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE') --}}

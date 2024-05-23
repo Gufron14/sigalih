@@ -4,19 +4,19 @@ namespace App\Livewire\Admin\Layanan\Surat;
 
 use App\Livewire\Forms\SuratForm;
 use App\Models\Surat;
-use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Daftar Surat')]
 class Index extends Component
-{   
-    public SuratForm $form;
+{  
 
-    public function delete(Surat $surat)
+    public function delete($id)
     {
-        $this->form->delete($surat);
+        $surat = Surat::findOrFail($id);
+        $surat->delete();
     }
 
     public function render()

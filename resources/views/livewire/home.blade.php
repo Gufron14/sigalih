@@ -5,22 +5,9 @@
             {{ session('success') }}
         </div>
     @endif
-    
-    {{-- Hero Section --}}
-    <div class="row mt-5 mb-5 row-sm-12">
-        <div class="col">
-            <h1 class="fw-bold">Wilujeung Sumping <br> di Sirnagalih</h1>
-            <h3 class="text-body-tertiary">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</h3>
-            <div class="col-9 mt-3">
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat laudantium exercitationem
-                    assumenda et odit voluptates nobis totam ipsa porro modi fuga aut, minima tempore quis perferendis
-                    architecto magni. Nihil molestias laborum aperiam reprehenderit hic cum itaque vero nemo velit eius!
-                </p>
 
-            </div>
-            <button class="btn btn-primary fw-bold mt-5">Selengkapnya</button>
-        </div>
+    {{-- Hero Section --}}
+    {{-- <div class="row mt-5 mb-5 row-sm-12">
         <div class="col">
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-indicators">
@@ -69,197 +56,207 @@
                 </button>
             </div>
         </div>
+    </div> --}}
+
+    <!-- Hero -->
+    <div class="text-center bg-image"
+        style="
+    background-image: url('https://statik.unesa.ac.id/profileunesa_konten_statik/uploads/pusdippket/thumbnail/a6bf8cce-e619-46de-9715-d3b2b90e6512.jpg');height: 400px;
+">
+        <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                    <div class="h4">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</div>
+                    <div class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</div>
+                    <div class="fst-italic mb-4 h5">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh lungguh, diasah ku kanyaah, disipuh ku karipuh."</div>
+                    <a data-mdb-ripple-init class="btn btn-outline-light mt-3" href="#!"
+                        role="button">Selengkapnya&nbsp;<i class="fas fa-paper-plane"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Hero -->
 
 
     {{-- Layanan --}}
-    <div class="container p-5" style="background-color: rgb(255, 248, 248)">
-        <h3 class="text-center fw-bold mb-5">Layanan Administrasi</h3>
+    <div class="container-fluid">
+        <div class="container p-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bold">Layanan Administrasi</h1>
+                <hr class="w-50 mx-auto text-primary">
+                <p>Yuk, manfaatkan layanan administrasi kependudukan desa kita yang super praktis dan mudah! Sekarang, untuk urusan pembuatan akta kelahiran, akta kematian, kartu keluarga, dan dokumen lainnya, kamu bisa langsung mengajukan permohonan melalui website ini.</p>
+            </div>
 
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            @forelse ($surats as $surat)
-                <div class="col">
-                    <div class="card-group d-flex flex-column card-grow h-100">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ $surat->nama_surat }}</h5>
-                                <small class="card-text">{{ $surat->desc }}</small>
+            <div class="row row-cols-1 row-cols-md-3 g-5">
+                @forelse ($surats as $surat)
+                    <div class="col">
+                        <a href="{{ route('createSurat', ['id' => $surat->id]) }}" class="link-decoration">
+                            <div class="card card-grow bg-transparent">
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <div class="border border-3 border-primary rounded-4 mx-auto mb-3 d-flex align-items-center p-3"
+                                            style="width: 200px;">
+                                            <h1 class="mx-auto fw-bold">SKCK</h1>
+                                        </div>
+                                        {{-- <img src="{{ asset('assets/img/skck.png') }}" alt="" style="width: 200px" class="mb-3"> --}}
+                                        <h4 class="fw-bold">{{ $surat->nama_surat }}</h4>
+                                        <small class="card-text">{!! Str::limit($surat->desc, 100) !!}</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-footer">
-                                <a href="{{ route('create.surat', ['id' => $surat->id]) }}"
-                                    class="btn btn-warning fw-bold">Ajukan Surat</a>
+                        </a>
+
+
+
+                        {{-- <div class="card-group d-flex flex-column card-grow h-100">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ $surat->nama_surat }}</h5>
+                                    <small class="card-text">{!! Str::limit($surat->desc, 100) !!}</small>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <a href="{{ route('createSurat', ['id' => $surat->id]) }}"
+                                        class="btn btn-warning fw-bold w-100">Ajukan Permohonan Surat</a>
+                                </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                </div>
-            @empty
-            @endforelse
-        </div>
+                @empty
+                @endforelse
+            </div>
 
-        <div class="mt-5 text-center">
-            <a href="{{ route('layanan') }}" class="fw-bold">Lihat semua layanan&nbsp;<i
-                    class="fas fa-long-arrow-alt-right"></i></a>
+            <div class="mt-5 text-center">
+                <a href="{{ route('layanan') }}" class="fw-bold fs-5">Lihat semua layanan&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </div>
-    <hr class="m-5">
+
+    {{-- Bank Sampah --}}
+    <div class="container-fluid" style="background-color: rgb(255, 248, 248, 0.6)">
+        <div class="container p-5">
+            <div class="text-center mb-3">
+                <h1 class="fw-bold">Bank Sampah</h1>
+                <hr class="w-50 mx-auto text-primary">
+                <p>Bank Sampah merupakan konsep pengumpulan sampah kering dan dipilah serta memiliki manajemen layaknya perbankan tapi yang ditabung bukan uang melainkan sampah. </p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="fw-bold">Kamu bisa dapat Uang dengan mengikuti program Bank Sampah</h4>
+                    <p class="my-3">Hey, kabar baik! dengan mengikuti program Bank Sampah, kamu bisa dapat uang lho. Ayo ikuti sekarang!</p>
+                    <a href="{{ route('bankSampah') }}" class="btn btn-success fw-bold mt-3">Ikuti Sekarang &nbsp;<i class="fas fa-paper-plane"></i></a>
+                </div>
+                <div class="col">
+                    <img src="{{ asset('assets/img/banksampah.png') }}" alt="" class="w-100">
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Berita & Galeri --}}
-    <div class="row">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="fw-bold">Kabar Desa Terbaru</h3>
-            <a href="" class="btn btn-outline-primary">Lihat Semua&nbsp;<i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://asset.kompas.com/crops/Arm2w34qO5GA02YF_1QMrQNPing=/0x0:0x0/750x500/data/photo/2024/03/25/6601690d2ffa8.jpg"
-                    class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">Soal Gaji Kades dan Perangkat di Purworejo yang Terlambat, Ini
-                        Penjelasan OPD Terkait</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-                        laudantium reiciendis aperiam nemo officia, distinctio commodi beatae ea natus repudiandae.
-                    </p>
+    <div class="container-fluid">
+        <div class="container p-5">
+            <div class="row gap-3 justify-content-between">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="fw-bold">Kabar Desa Terbaru</h2>
+                    <a href="{{ route('berita') }}" class="fw-bold">Lihat semua &nbsp; <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="col-4">
+                        <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/25/40/550692/desadesa-di-china-ini-bayar-pasangan-untuk-punya-banyak-anak-dbu.jpg"
+                            class="rounded w-100" alt="...">
+                            <div class="mt-3">
+                                <h4 class="fw-bold">Mahasiswa IWU membuat Website untuk Desa nya</h5>
+                                <p class="card-text"> <small class="text-secondary"><i class="fas fa-calendar-alt"></i> &nbsp;
+                                        19/05/2024</small>
+                                </p>
+                                <p class="card-text">Gupron Nurjalil, Mahasiswa Informatika International Women University melalui Tugas Akhinya atau bisa disebut Skripsi,.....</p>
+                                <a href="">Baca selengkapnya</a>
+                            </div>
+                </div>
+                <div class="col">
+                    <div class="row row-cols-1 row-cols-md-2 g-5">
+                        @for ($i = 0; $i < 4; $i++)
+                            <div class="col">
+                                <a href="" class="link-decoration">
+                                    <div class="ratio ratio-16x9 mb-2">
+                                        <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/25/40/550692/desadesa-di-china-ini-bayar-pasangan-untuk-punya-banyak-anak-dbu.jpg"
+                                            alt="" class="rounded object-fit-cover">
+                                    </div>
+                                    <p><b>Lorem ipsum dolor sit amet consectetur adipisicing elit. </b><br>
+                                        <span>
+                                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam sit ex
+                                                id. Magni
+                                                voluptatibus eveniet, ipsam quibusdam</small>
+                                        </span>
+                                    </p>
+                                </a>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="row justify-content-end">
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
-                                class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in
-                                    to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                        ago</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
-                                class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in
-                                    to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                        ago</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://cdnwpedutorenews.gramedia.net/wp-content/uploads/2023/01/05171439/Pengertian-Desa.jpg"
-                                class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in
-                                    to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins
-                                        ago</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Include other cards similarly -->
-            </div>
-        </div>
-
     </div>
-
-    <hr class="m-5">
 
     {{-- Penduduk --}}
-    <div class="container">
-        <h3 class="text-center fw-bold mb-5">Statistik Penduduk Desa Sirnagalih</h3>
-        <div class="d-flex d-flex justify-content-center align-items-center gap-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <i class="fas fa-users fs-1"></i>
-                        <div>
-                            <h4 class="fw-bold">1.234.456</h4>
-                            <p>Jiwa</p>
+    <div class="container-fluid" style="background-color: rgb(255, 248, 248, 0.6)">
+        <div class="container p-5">
+            <h1 class="text-center fw-bold mb-5">Kependudukan Sirnagalih</h1>
+
+            <div class="row row-cols-1 row-cols-md-4 g-5">
+                <div class="col d-flex align-items-center justify-content-center card-grow">
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <img src="{{ asset('assets/img/undraw_people_re_8spw.svg') }}" alt="" class="w-50">
+                        </div>
+                        <h4 class="fw-bold">1.000.000 Jiwa</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, ratione?</p>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center card-grow">
+                    <div class="text-center d-flex flex-column">
+                        <div class="mb-3">
+                            <img src="{{ asset('assets/img/undraw_small_town_re_7mcn.svg') }}" alt="" class="w-75">
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="fw-bold">20 Dusun</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, molestiae!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center card-grow">
+                    <div class="text-center d-flex flex-column">
+                        <div class="mb-3">
+                            <img src="{{ asset('assets/img/undraw_off_road_re_leme.svg') }}" alt="" class="w-50">
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="fw-bold">16 Rukun Warga (RW)</h4>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, hic.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-center card-grow">
+                    <div class="text-center d-flex flex-column">
+                        <div class="mb-3">
+                            <img src="{{ asset('assets/img/undraw_celebration_re_kc9k.svg') }}" alt="" class="w-50">
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="fw-bold">31 Rukun Tangga (RT)</h4>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, animi.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <i class="fas fa-users fs-1"></i>
-                        <div>
-                            <h4 class="fw-bold">12</h4>
-                            <p>Dusun</p>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="mt-5 text-center">
+                <a href="" class="fw-bold fs-5">Lihat semua statistik&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <i class="fas fa-users fs-1"></i>
-                        <div>
-                            <h4 class="fw-bold">12 RW</h4>
-                            <p>Rukun Warga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <i class="fas fa-users fs-1"></i>
-                        <div>
-                            <h4 class="fw-bold">12 RW</h4>
-                            <p>Rukun Warga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <i class="fas fa-users fs-1"></i>
-                        <div>
-                            <h4 class="fw-bold">12 RW</h4>
-                            <p>Rukun Warga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-5 text-center">
-            <a href="" class="btn btn-warning fw-bold">Lihat Semua Statistik&nbsp;<i
-                    class="fas fa-paper-plane"></i></a>
         </div>
     </div>
 
-    <hr class="m-5">
-
     {{-- Kontak --}}
-    <section class="kontak">
-        <h3 class="text-center fw-bold mb-5">Kritik dan Saran Masyarakat</h3>
+    <section class="container p-5">
+        <h2 class="text-center fw-bold mb-5">Kritik dan Saran Masyarakat</h2>
         <div class="row justify-content-around">
             <div class="col-4 text-center d-flex fw-bold align-items-center justify-content-center">
                 Beri kami kritik dan saran yang membangun untuk kemajuan Website juga Desa Sirnagalih.
@@ -267,8 +264,7 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Alamat Email</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Kritik dan Saran</label>

@@ -1,4 +1,10 @@
-<div class="mt-5">
+<div class="container mt-5">
+
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row justify-content-between mb-5">
         <div class="col">
             <h4 class="fw-bold">Layanan</h4>
@@ -11,20 +17,19 @@
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-4 g-5">
         @forelse ($surats as $surat)
             <div class="col">
                 <div class="card-group card-grow d-flex flex-column h-100">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="">
+                    <div class="card shadow h-100">
+                        <img src="https://pict.sindonews.net/dyn/850/pena/news/2021/09/25/40/550692/desadesa-di-china-ini-bayar-pasangan-untuk-punya-banyak-anak-dbu.jpg"
+                        class="card-img-top" alt="...">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="mb-3">
                                 <h5 class="fw-bold">{{ $surat->nama_surat }}</h5>
-                                <small class="text-muted">{{ $surat->desc }}</small>
+                                {{-- <small class="text-secondary">{{ $surat->desc }}</small> --}}
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{ route('create.surat', ['id' => $surat->id]) }}"
-                                class="btn btn-primary fw-bold ">Ajukan Surat</a>
+                            <a href="{{ route('createSurat', ['id' => $surat->id]) }}" class="btn btn-primary fw-bold w-100 mt-auto">Buat Permohonan</a>
                         </div>
                     </div>
                 </div>

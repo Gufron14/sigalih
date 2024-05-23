@@ -2,35 +2,58 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\User;
 use GuzzleHttp\Client;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Http;
+use PHPOpenSourceSaver\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Password;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
 
+#[Title('Login - Desa Sirnagalih')]
 class Login extends Component
 {
-    public function login(Request $request)
+    public $nik;
+    public $password;
+
+    protected $rules = [
+        'nik' => ['required', 'exists:wargas,nik'],
+        'password' => ['required', 'min:8'],
+    ];
+
+    public function login()
     {
-        $client = new Client(['base_uri' => env('APP_URL')]);
-        $url = env('APP_URL') . '/api/user/login';
+        $this->validate();
 
-        $cResponse = $client->request('POST', $url, ['json' => [
-            'nik' => $request->nik,
-            'password' => $request->password
-        ]]);
+        $credentials = ['nik' => $this->nik, 'password' => $this->password];
 
-        $cBody = $cResponse->getBody()->getContents();
-        $data = json_decode($cBody, true);
-        extract($data);
-
-        if ($data['status']) {
-            $sesi = session()->put('token', $data['token']);
-            $sesi = session()->put('user', $data['user']['id']);
-            
-            return redirect()->to('/');
+        try {
+            if (!$token = auth()->attempt($credentials)) {
+                session()->flash('error', 'NIK and password invalid.');
+                return;
+            }
+        } catch (JWTException $e) {
+            session()->flash('error', 'Could not create token.');
+            return;
         }
 
-        return view("auth.login", $data);
+        $user = User::where('nik', $this->nik)->first();
+        $user->token = $token;
+        $user->save();
 
+        session()->flash('message', 'Successfully logged in.');
+        session()->flash('token', $token);
+
+        return redirect()->to('layanan');
+    }
+    
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect()->route('login');
     }
 
     public function render()

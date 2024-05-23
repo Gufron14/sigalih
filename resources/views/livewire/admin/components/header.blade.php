@@ -1,4 +1,4 @@
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html;" charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -30,3 +30,16 @@
 <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<link rel="shortcut icon" href="{{ asset('assets/img/1.png') }}">
+
+<script src="https://cdn.tiny.cloud/1/ausccx4z6qqsh06scnqnshr2yeglpv8ospv23rhiu49atxug/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@-10,500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+

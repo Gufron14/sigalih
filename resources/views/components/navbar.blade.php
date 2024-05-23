@@ -6,7 +6,7 @@
             </div>
             <div class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <marquee behavior="" direction="" class="text-white fw-bold">
-                    PENGUMUMAN! Bagi para Warga Sirnagalih yang ingin membuat Surat Permohonan silakan Buat di
+                    PENGUMUMAN! Bagi para Warga Sirnagalih yang ingin membuat Surat Permohonan silakan buat di
                     Website ini.
                 </marquee>
             </div>
@@ -74,22 +74,23 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <x-nav-link :active="request()->routeIs('home')" href="/">Beranda</x-nav-link>
                 <x-nav-link :active="request()->routeIs('berita*')" href="{{ route('berita') }}" >Kabar Desa</x-nav-link>
-                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Tentang</x-nav-link>
                 <x-nav-link :active="request()->routeIs('tentang')" href="/" >Lembaga</x-nav-link>
-                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Pembangunan</x-nav-link>
+                <x-nav-link :active="request()->routeIs('tentang')" href="/" >Profil</x-nav-link>
             </ul>
             <!-- Left links -->
             <!-- Right elements -->
             <div class="d-flex align-items-center gap-3">
                 <!-- Icon -->
-                <div>
+                <div class="">
                     <a href="{{ route('layanan') }}" class="btn btn-warning fw-bold">
                         Layanan
                     </a>
-                    <a href="banksampah/index" class="btn btn-success fw-bold">
+                    <a href="{{ route('bankSampah') }}" class="btn btn-outline-success fw-bold">
                         Bank Sampah
                     </a>
-                </div>
+
+                </div> |
+                <a href="{{ route('login') }}" class="fw-bold">Login</a>
                 {{-- @livewire('auth.auth-link') --}}
             </div>
             <!-- Right elements -->

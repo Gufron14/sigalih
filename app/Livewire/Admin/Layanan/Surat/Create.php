@@ -19,7 +19,7 @@ class Create extends Component
 
     protected $rules = [
         'nama_surat' => 'required|unique:surats,nama_surat',
-        'desc' => 'nullable',
+        'desc' => 'required|string',
         'template' => 'max:1024|mimes:doc,docx', // Pastikan ini sesuai dengan aturan validasi Livewire
     ];
 

@@ -1,6 +1,10 @@
-
 * {
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Radio Canada Big", sans-serif;
+    color: rgb(78, 78, 78);
 }
 
 .min-h-screen {
@@ -9,57 +13,57 @@
 
 a {
     text-decoration: none;
+    /* color: rgb(69, 98, 177); */
 }
 
-.gradient-custom-3 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
-    }
-.gradient-custom-4 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
-    }
+.link-decoration {
+    color: black;
+}
 
 .bg-login {
     background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 .card-grow {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    border: none;
 }
+
 .card-grow:hover {
     transform: scale(1.05);
+}
+
+.card {
+    border: none;
+    border-radius: 16px;
+}
+
+.card-img-top {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.btn {
+    border-radius: 48px;
 }
 
 .timeline-with-icons {
     border-left: 1px solid hsl(0, 0%, 90%);
     position: relative;
     list-style: none;
-  }
-  
-  .timeline-with-icons .timeline-item {
+}
+
+.timeline-with-icons .timeline-item {
     position: relative;
-  }
-  
-  .timeline-with-icons .timeline-item:after {
+}
+
+.timeline-with-icons .timeline-item:after {
     position: absolute;
     display: block;
     top: 0;
-  }
-  
-  .timeline-with-icons .timeline-icon {
+}
+
+.timeline-with-icons .timeline-icon {
     position: absolute;
     left: -48px;
     background-color: hsl(217, 88.2%, 90%);
@@ -70,4 +74,43 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
+
+.nav-link.active {
+    border-bottom: 2px solid rgb(255, 166, 0); /* Garis bawah warna kuning */
+    font-weight: bold; /* Teks tebal */
+    padding-bottom: 5px; /* Menambahkan padding bawah untuk menghindari penumpukan garis */
+}
+.nav-item {
+    margin-left: 10px; /* Tambahkan jarak antar item menu */
+}
+
+.card-bg {
+    background: rgb(255,205,0);
+    background: linear-gradient(90deg, rgba(15, 134, 64, 0.726) 0%, rgb(182, 144, 39) 100%);
+}
+.card-bg2 {
+    background: rgb(45,156,86);
+    background: linear-gradient(94deg, rgba(15, 134, 64, 0.726) 0%, rgb(255, 53, 53) 100%);
+}
+
+/* CSS khusus untuk tab aktif dan tidak aktif */
+.nav-item .btn {
+    transition: background-color 0.3s ease, color 0.3s ease; /* animasi halus untuk transisi warna */
+}
+
+.nav-item .btn[aria-selected="true"] {
+    background-color: #198754; /* warna hijau untuk tombol aktif */
+    color: white; /* warna teks putih untuk tombol aktif */
+    font-weight: 700;
+}
+
+.nav-item .btn[aria-selected="false"] {
+    background-color: #f8f9fa; /* warna light untuk tombol tidak aktif */
+    color: #212529; /* warna teks default untuk tombol tidak aktif */
+}
+
+.form-control {
+    border-radius: 18px;
+}
+

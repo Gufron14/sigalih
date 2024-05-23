@@ -3,13 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use TheSeer\Tokenizer\Exception;
 use Illuminate\Support\Facades\Auth;
+use PHPOpenSourceSaver\JWTAuth\JWTAuth;
 use Symfony\Component\HttpFoundation\Response;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
 
 class UserAuth
 {
@@ -20,29 +19,17 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the request has an Authorization header
-        if(session('token')){
-            try{
-                $client = new Client(['headers' => [
-                    'Authorization' => 'Bearer ' . session('token')
-                ]]);
-                $pResponse = $client->request('GET', env('url') . "me");
-                $pBody = $pResponse->getBody()->getContents();
-                $pData = json_decode($pBody, true);
-                extract($pData);
-        
-                // Set the default variable here
-                $userData = $pData['user'];
-        
-                // Pass the default variable to all views
-                view()->share('userData', $userData);
-        
-                return $next($request);
-            } catch ( Exception $e){
-                session()->forget('token');
-                return redirect()->route('login');
+        try {
+            $user = Auth::parseToken()->authenticate();
+        } catch (Exception $e) {
+            if ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException) {
+                return response()->json(['status' => 'Token is Invalid'], 401);
+            } elseif ($e instanceof \PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException) {
+                return response()->json(['status' => 'Token is Expired'], 401);
+            } else {
+                return redirect()->to('login');
             }
         }
-        return redirect()->route('login');
+        return $next($request);
     }
 }
