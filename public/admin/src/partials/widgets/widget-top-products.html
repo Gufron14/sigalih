@@ -1,0 +1,92 @@
+<div class="card mb-4 h-100">
+    <div class="card-header justify-content-between align-items-center d-flex">
+        <h6 class="card-title m-0">Top categories</h6>
+        <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle dropdown-toggle-icon fw-bold p-0" type="button"
+                id="dropdownTop" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="ri-more-2-line"></i>
+            </button>
+            <ul class="dropdown-menu dropdown" aria-labelledby="dropdownTop">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table m-0">
+            <tbody>
+                <tr>
+                    <td class="ps-0">
+                        <picture>
+                            <img class="f-w-12 rounded" src="{{webRoot}}/assets/images/logos/logo-13.svg"
+                                alt="{{ config.defaultImgAlt }}">
+                        </picture>
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        <span class="text-muted">Nike Mens Running Shoes</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <span class="fw-bolder me-3">£834.98</span>
+                            {{> content/uptrend-icon }}
+                        </div>
+                    </td>
+                    <td class="text-end pe-0">
+                        <div class="progress f-w-20 m-0 me-0 ms-auto f-h-1">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-0">
+                        <picture>
+                            <img class="f-w-12 rounded" src="{{webRoot}}/assets/images/logos/logo-15.svg"
+                                alt="{{ config.defaultImgAlt }}">
+                        </picture>
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        <span class="text-muted">Adidas Womens Jackets</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <span class="fw-bolder me-3">£695.54</span>
+                            {{> content/uptrend-icon }}
+                        </div>
+                    </td>
+                    <td class="text-end pe-0">
+                        <div class="progress f-w-20 m-0 me-0 ms-auto f-h-1">
+                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-0">
+                        <picture>
+                            <img class="f-w-12 rounded" src="{{webRoot}}/assets/images/logos/logo-14.svg"
+                                alt="{{ config.defaultImgAlt }}">
+                        </picture>
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        <span class="text-muted">Under Armour Golf Shorts</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <span class="fw-bolder me-3">£313.18</span>
+                            {{> content/downtrend-icon }}
+                        </div>
+                    </td>
+                    <td class="text-end pe-0">
+                        <div class="progress f-w-20 m-0 me-0 ms-auto f-h-1">
+                            <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="35"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="#" class="btn btn-outline-secondary btn-sm text-body me-0 ms-auto d-table mt-3 pb-2" role="button">See all &rarr;</a>
+    </div>
+</div>

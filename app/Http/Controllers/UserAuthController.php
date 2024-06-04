@@ -64,11 +64,14 @@ class UserAuthController extends Controller
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
             }
+            $user = Auth::user();
+            $user->remember_token = $token;
+            $user->save();
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json(compact('token'));
+        return $this->respondWithToken($token);
     }
 
     public function me()

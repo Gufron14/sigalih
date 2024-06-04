@@ -25,4 +25,9 @@ class ViewController extends Controller
     public function viewRegister(){
         return view('auth.register');
     }
+
+    public function test()
+    {
+        return view('test');
+    }
 }

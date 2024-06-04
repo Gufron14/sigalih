@@ -2,15 +2,15 @@
 
     <ul class="nav justify-content-center" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="btn btn-light" id="icon-tab-0" data-bs-toggle="tab" href="#icon-tabpanel-0"
-                role="tab" aria-controls="icon-tabpanel-0" aria-selected="true">Penukaran Saldo</a>
+            <a class="btn btn-light" id="icon-tab-0" data-bs-toggle="tab" href="#icon-tabpanel-0" role="tab"
+                aria-controls="icon-tabpanel-0" aria-selected="true">Penukaran Saldo</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="btn btn-light" id="icon-tab-1" data-bs-toggle="tab" href="#icon-tabpanel-1" role="tab"
                 aria-controls="icon-tabpanel-1" aria-selected="false">Riwayat Penukaran</a>
         </li>
     </ul>
-    
+
     <div class="tab-content pt-5" id="tab-content">
         {{-- Penukaran --}}
         <div class="tab-pane active" id="icon-tabpanel-0" role="tabpanel" aria-labelledby="icon-tab-0">
@@ -27,7 +27,29 @@
                                 <small class="">Some quick example text to build on the card title and make up the
                                     bulk of the card's content.</small>
                             </div>
-                            <a href="" class="btn btn-warning fw-bold w-100 mt-auto">Rp. 2.000</a>
+                            <button class="btn btn-warning fw-bold w-100 mt-auto" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Rp. 2.000</button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Penukaran Saldo</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-primary">Tukar Saldo</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +116,8 @@
                                 Voucher Wifi
                             </h5>
                             <p class="fw-bold">Rp. 2.000;-</p>
-                            <small class="text-secondary"><i class="fas fa-calendar-alt"></i> &nbsp; 19/05/2024</small>
+                            <small class="text-secondary"><i class="fas fa-calendar-alt"></i> &nbsp;
+                                19/05/2024</small>
                         </div>
                         <div class="col-5 ">
                             <p class="badge text-bg-success">Selesai</p>
@@ -110,7 +133,8 @@
                                 Voucher Sembako
                             </h5>
                             <p class="fw-bold">Rp. 20.000;-</p>
-                            <small class="text-secondary"><i class="fas fa-calendar-alt"></i> &nbsp; 19/05/2024</small>
+                            <small class="text-secondary"><i class="fas fa-calendar-alt"></i> &nbsp;
+                                19/05/2024</small>
                         </div>
                         <div class="col-5 ">
                             <p class="badge text-bg-danger">Gagal</p> <br>

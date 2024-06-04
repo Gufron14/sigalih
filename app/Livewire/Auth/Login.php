@@ -2,58 +2,43 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\User;
-use GuzzleHttp\Client;
 use Livewire\Component;
-use Illuminate\Http\Request;
 use Livewire\Attributes\Title;
-use Illuminate\Support\Facades\Http;
-use PHPOpenSourceSaver\JWTAuth\JWTAuth;
-use Illuminate\Support\Facades\Password;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Auth;
 
 #[Title('Login - Desa Sirnagalih')]
 class Login extends Component
 {
-    public $nik;
-    public $password;
+    public $nik, $password, $user;
 
     protected $rules = [
-        'nik' => ['required', 'exists:wargas,nik'],
-        'password' => ['required', 'min:8'],
+        'nik' => 'required|exists:users,nik',
+        'password' => 'required',
     ];
 
     public function login()
     {
         $this->validate();
 
-        $credentials = ['nik' => $this->nik, 'password' => $this->password];
+        if (Auth::attempt(['nik' => $this->nik, 'password' => $this->password])) {
 
-        try {
-            if (!$token = auth()->attempt($credentials)) {
-                session()->flash('error', 'NIK and password invalid.');
-                return;
-            }
-        } catch (JWTException $e) {
-            session()->flash('error', 'Could not create token.');
-            return;
+            $user = Auth::user();
+            $token = $user->createToken('auth_token', ['*'], now()->addSeconds(30))->plainTextToken;
+
+            session()->flash('success', 'Berhasil Login');
+            return redirect()->route('home');
+        } else {
+            session()->flash('error', 'NIK atau Password Salah');
+
+            return redirect()->back();
         }
-
-        $user = User::where('nik', $this->nik)->first();
-        $user->token = $token;
-        $user->save();
-
-        session()->flash('message', 'Successfully logged in.');
-        session()->flash('token', $token);
-
-        return redirect()->to('layanan');
     }
-    
+
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
 
-        return redirect()->route('login');
+        return redirect('login');
     }
 
     public function render()

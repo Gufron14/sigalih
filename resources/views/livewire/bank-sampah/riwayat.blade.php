@@ -16,26 +16,24 @@
         {{-- Pendapatan --}}
         <div class="tab-pane active" id="icon-tabpanel-0" role="tabpanel" aria-labelledby="icon-tab-0">
             <div class="mb-3">
-                <h5 class="text-success fw-bold">Pendapatan Nama User</h5>
+                <h5 class="text-success fw-bold">Pendapatan {{ $warga->nama }}</h5>
             </div>
         
             <div class="table-responsive">
                 <table class="table align-middle table-sm table-bordered">
                     <thead class="table-success">
                         <tr class="text-center">
-                            <th>NO</th>
                             <th>Tanggal</th>
                             <th>Jenis Sampah</th>
-                            <th>Jumlah (Kg)</th>
+                            <th>Berat</th>
                             <th>Harga/Kg</th>
-                            <th>Jumlah</th>
+                            <th>Pendapatan</th>
                             <th>Total Pendapatan</th>
                             <th>Transaksi</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         <tr>
-                            <td rowspan="2">1</td>
                             <td rowspan="2">11/05/24</td>
                             <td>Besi</td>
                             <td>4 Kg</td>
@@ -47,15 +45,12 @@
                             </td>
                         </tr>
                         <tr>
-            
                             <td>Kardus</td>
                             <td>2 Kg</td>
                             <td>Rp. 2.000</td>
                             <td>Rp. 4.000</td>
-            
                         </tr>
                         <tr>
-                            <td rowspan="3">2</td>
                             <td rowspan="3">18/05/24</td>
                             <td>Besi</td>
                             <td>4 Kg</td>

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Layanan\Pengajuan;
 
 use Livewire\Component;
 use App\Models\Pengajuan;
+use App\Models\RequestSurat;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
@@ -13,7 +14,7 @@ class Index extends Component
 {
     public function render()
     {
-        $pengajuans = Pengajuan::with(['warga', 'surat'])->orderBy('created_at', 'desc')->get();
+        $pengajuans = RequestSurat::with(['warga', 'surat'])->orderBy('created_at', 'desc')->get();
 
         // Inisialisasi array untuk menyimpan format waktu
         $timeFormats = [];
@@ -50,6 +51,6 @@ class Index extends Component
             $timeFormats[] = $timeFormat;
         }
 
-        return view('livewire.admin.layanan.pengajuan.index', compact('pengajuans', 'timeFormat'));
+        return view('livewire.admin.layanan.pengajuan.index', compact('pengajuans'));
     }
 }

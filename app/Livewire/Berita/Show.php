@@ -2,15 +2,21 @@
 
 namespace App\Livewire\Berita;
 
-use Livewire\Attributes\Title;
+use App\Models\Post;
 use Livewire\Component;
 
-
-#[Title('Kabar Sirnagalih')]
 class Show extends Component
-{
-    public function render()
+{   
+    public $post;
+
+    public function mount($slug)
     {
-        return view('livewire.berita.show');
+        $this->post = Post::where('slug', $slug)->firstOrFail();
+    }
+
+    public function render()
+    {   
+        $posts = Post::latest()->take('7')->get();
+        return view('livewire.berita.show', compact('posts'), ['post' => $this->post,]);
     }
 }

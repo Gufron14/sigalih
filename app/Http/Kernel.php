@@ -37,13 +37,13 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\EnsureTokenIsValid::class,
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:api',
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            // \PHPOpenSourceSaver\JWTAuth\Http\Middleware\Authenticate::class,
         ],
     ];
 
@@ -65,9 +65,6 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'csrf' => \App\Http\Middleware\VerifyCsrfToken::class,
-        'user-auth' => \App\Http\Middleware\UserAuth::class,
-        'api.auth' => \App\Http\Middleware\ApiAuth::class,
-        'combined.auth' => CombinedAuth::class,
+        'auth.ensure' => \App\Http\Middleware\EnsureAuthenticated::class,
     ];
 }

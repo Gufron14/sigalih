@@ -6,10 +6,13 @@ use App\Models\Surat;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\this;
 
-
+#[Layout('livewire.admin.layouts.app')]
+#[Title('Tambah Surat')]
 class Create extends Component
 {   
     use WithFileUploads;

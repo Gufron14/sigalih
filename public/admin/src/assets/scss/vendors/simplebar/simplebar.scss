@@ -1,0 +1,38 @@
+.simplebar-content {
+    padding-right: 1.25rem !important;
+}
+.simplebar-track {
+    background: #f7f8f9;
+    border-radius: 4px;
+}
+
+.simplebar-track.simplebar-vertical {
+    width: 6px;
+}
+.simplebar-scrollbar {
+    opacity: .5;
+}
+.simplebar-wrapper {
+    height: 170px;
+}
+
+.aside {
+    .simplebar-content {
+        padding-right: 0 !important;
+    }
+    .simplebar-wrapper {
+        height: 100vh;
+        padding-right: 1px;
+    }
+}
+
+.menu-collapsed {
+    .simplebar-wrapper, 
+    .simplebar-mask, 
+    .simplebar-height-auto-observer-wrapper, 
+    .simplebar-height-auto-observer, 
+    .simplebar-offset, 
+    .simplebar-content-wrapper {
+        overflow: visible!important;
+      }
+}

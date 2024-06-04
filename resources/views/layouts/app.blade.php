@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    @if (Request::is('login') || Request::is('register'))
+    @if (Request::is('login') || Request::is('register') || Request::is('logout'))
     @else
         <x-navbar />
     @endif
@@ -19,7 +19,7 @@
         </div>
     </main>
 
-    @if (Request::is('login') || Request::is('register'))
+    @if (Request::is('login') || Request::is('register') || Request::is('logout'))
     @else
         <x-footer />
     @endif

@@ -2,9 +2,10 @@
     <div class="row justify-content-between mb-3 g-5">
         <div class="col">
             <div class="d-flex align-middle">
-                <h1 class="text-success fw-bold align-middle">Hei, Galih! <br> Sudahkah Lingkunganmu Bersih?</h1>
+                <h1 class="text-success fw-bold align-middle">Hei, {{ $warga->nama }}! <br> Sudahkah Lingkunganmu
+                    Bersih?</h1>
             </div>
-            <p>Bersihkan lingkunganmu, untuk masa depan Sehat.</p> <br>
+            <p>Bersihkan lingkunganmu, untuk masa depan Sehat.</p>
             <a href="{{ route('panduan') }}" class="btn btn-success fw-bold">Lihat Panduan &nbsp; <i
                     class="fas fa-paper-plane"></i> </a>
 
@@ -30,21 +31,23 @@
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            
+
         </div>
 
         <div class="col">
             {{-- TOTAL SALDO --}}
-            <div class="card card-grow mb-3 shadow">
+            <div class="card card-grow card-bg2 mb-3 shadow-sm">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col ms-3">
@@ -56,9 +59,36 @@
                             </h2>
                         </div>
                         <div class="col d-flex justify-content-center">
-                            <div class="btn btn-warning fw-bold ">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
                                 Tarik Saldo
-                            </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">s
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tarik Saldo</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Nominal Penarikan</label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="contoh: 10000">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" class="btn btn-primary fw-bold" onclick="showTarikSaldo()">Tarik Saldo</button>
                         </div>
                     </div>
                 </div>
@@ -121,7 +151,8 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <small><a href="" class="btn btn-outline-success fw-bold">Ajukan Pengambilan</a></small>
+                    <button class="btn btn-outline-success fw-bold" onclick="showSweetAlert()">Ajukan
+                        Pengambilan</button>
                 </div>
             </div>
 
@@ -131,7 +162,7 @@
     <div>
         <div class="d-flex justify-content-between align-items-center mb-3 text-success">
             <h4 class="fw-bold">Pendapatan Terakhir</h4>
-                <a href="{{ route('riwayat') }}">Semua Riwayat &nbsp;<i class="fas fa-arrow-right"></i></a>
+            <a href="{{ route('riwayat') }}">Semua Riwayat &nbsp;<i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="table-responsive">
             <table class="table align-middle table-sm table-bordered">
@@ -171,3 +202,5 @@
         </div>
     </div>
 </div>
+
+

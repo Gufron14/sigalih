@@ -2,83 +2,74 @@
 
 namespace App\Livewire\Auth;
 
-use App\Models\User;
-use App\Models\Warga;
 use Livewire\Component;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
+
+#[Title('Autentikasi - Desa Sirnagalih')]
 
 class UserAuth extends Component
 {   
-    public $nik, $email, $phone, $password;
+
+    public $nik, $password, $email, $phone;
+    public $errorMessage;
 
     protected $rules = [
-        'nik' => ['required', 'exists:wargas,nik', 'unique:users,nik'],
-        'email' => ['required', 'email', 'unique:users,email'],
-        'phone' => ['required', 'unique:users,phone'],
-        'password' => ['required', 'min:8'],
+        'nik' => 'required|string',
+        'password' => 'required|string',
     ];
-
-    public function render()
-    {
-        return view('livewire.auth.user-auth');
-    }
 
     public function register()
     {
-        $this->validate();
-
-        $warga = Warga::where('nik', $this->nik)->first();
-        if (!$warga) {
-            session()->flash('error', 'NIK tidak terdaftar');
-            return;
-        }
-
-        $validator = Validator::make([
+        
+        $response = Http::post('http://127.0.0.1:8000/api/register', [
             'nik' => $this->nik,
             'email' => $this->email,
             'phone' => $this->phone,
             'password' => $this->password,
-        ], $this->rules());
-
-        if ($validator->fails()) {
-            $this->addError('validation', $validator->messages()->toArray());
-            return;
-        }
-
-        $user = User::create([
-            'nik' => $warga->nik,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'password' => Hash::make($this->password),
         ]);
 
-        Auth::login($user, true);
-        session()->flash('success', 'Registrasi Berhasil');
-        return redirect()->to('login');
+        if ($response->successful()) {
+            session()->flash('success', 'Registrasi berhasil. Silakan login.');
+            return redirect()->to('/login');
+        } else {
+            $errors = $response->json('message');
+            session()->flash('error', 'Registrasi gagal: ' . $errors);
+        }
     }
 
     public function login()
-    {
+    {   
         $this->validate();
 
-        $credentials = ['nik' => $this->nik, 'password' => $this->password];
+        $response = Http::post('http://localhost:8000/api/login', [
+            'nik' => $this->nik,
+            'password' => $this->password,
+        ]);
 
-        if (!$token = JWTAuth::attempt($credentials)) {
-            session()->flash('error', 'NIK dan password tidak valid.');
-            return redirect()->to('login');
+        if ($response->successful() && isset($response['token'])) {
+            session(['token' => $response['token']]);
+            session()->flash('success', 'Berhasil Login');
+            return redirect()->route('home');
+        } else {
+            session()->flash('error', 'NIK atau Password salah');
+            return redirect()->back();
         }
-
-        session()->flash('message', 'Berhasil login.');
-        session()->flash('token', $token);
-        return redirect()->to('layanan');
     }
-    
+
     public function logout()
     {
-        auth()->logout();
-        return redirect()->route('login');
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect('/');
+    }
+
+    public function render()
+    {
+        return view('livewire.auth.user-auth');
     }
 }

@@ -6,8 +6,7 @@
         </div>
         <div class="col d-flex align-items-center justify-content-end">
             <form class="d-flex w-100" role="search">
-                <input class="form-control me-2" type="search" placeholder="Cari berita"
-                    aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Cari berita" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Cari</button>
             </form>
         </div>
@@ -18,37 +17,40 @@
         {{-- Berita Terbaru --}}
         <div class="col-5">
             <h4 class="fw-bold mb-3">Berita Terbaru</h4>
-            <a href="">
-                <div class="card">
-                    <img src="https://asset.kompas.com/crops/Arm2w34qO5GA02YF_1QMrQNPing=/0x0:0x0/750x500/data/photo/2024/03/25/6601690d2ffa8.jpg"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Soal Gaji Kades dan Perangkat di Purworejo yang Terlambat, Ini
-                            Penjelasan OPD Terkait</h5>
-                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-                            laudantium reiciendis aperiam nemo officia, distinctio commodi beatae ea natus repudiandae.
-                        </p>
+            @foreach ($post as $item)
+                <a href="{{ route('show', $item->slug) }}">
+                    <div class="card">
+                        <img src="{{ Storage::url($item->image) }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">{{ $item->title }}</h4>
+                            <p class="card-text">
+                                <small class="text-secondary">
+                                    <i
+                                        class="fas fa-calendar-alt"></i>&nbsp;&nbsp;{{ $item->created_at->format('l, M Y') }}
+                                </small>
+                            </p>
+                            <p class="card-text">{!! Str::limit($item->content, 200) !!} </p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            @endforeach
         </div>
 
         {{-- Berita Populer --}}
         <div class="col-6">
             <h5 class="mb-3">Berita Populer</h5>
             <div class="row gap-3">
-                @for ($i = 0; $i < 4; $i++)
+                @foreach ($posts as $post)
                     <div class="row align-items-center">
                         <div class="col-auto">
-                            <img src="https://fisipol.uma.ac.id/wp-content/uploads/2022/01/pengertian-desa.jpg"
+                            <img src="{{ Storage::url($post->image) }}"
                                 class="" alt="" style="width: 160px;">
                         </div>
                         <div class="col">
-                            <h6 class="fw-bold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate,
-                                hic?</h6>
+                            <h6 class="fw-bold">{{ $post->title }}</h6>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
@@ -90,13 +92,13 @@
     {{-- BERITA LAINNYA --}}
     <div class="row gap-3">
         <h4 class="fw-bold">Berita Lainnya</h4>
-        @for ($i = 0; $i < 5; $i++)
+        @foreach ($lainnya as $lain)
             <div class="col gap-3 align-items-center">
-                <img src="https://fisipol.uma.ac.id/wp-content/uploads/2022/01/pengertian-desa.jpg"
-                    class="w-100" alt="">
-                <h6 class="mt-3 fw-bold">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, architecto.
+                <img src="{{ Storage::url($lain->image) }}" class="w-100"
+                    alt="">
+                <h6 class="mt-3 fw-bold">{{ $lain->title }}
                 </h6>
             </div>
-        @endfor
+        @endforeach
     </div>
 </div>

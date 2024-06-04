@@ -14,5 +14,25 @@
         </main>
         
         @include('livewire.bank-sampah.components.script')
+        <script>
+            function showSweetAlert() {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Anda telah mengajukan pengambilan sampah.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            }
+        </script>
+        <script>
+            function showTarikSaldo() {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Saldo berhasil ditarik.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            }
+        </script>
     </body>
 </html>

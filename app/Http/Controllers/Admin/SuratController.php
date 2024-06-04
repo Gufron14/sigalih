@@ -16,10 +16,9 @@ class SuratController extends Controller
     {   
         $surats = Surat::all();
 
-        // return response()->json([
-        //     'surat' => $surats
-        // ]);
-        return view('admin.resource.surat.surat', compact('surats'));
+        return response()->json([
+            'surat' => $surats
+        ]);
     }
 
     public function store(Request $request)
@@ -31,8 +30,6 @@ class SuratController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // return redirect()->back()->withErrors($validator);
-
             return response()->json([
                 'message' => $validator->messages()
             ]);
@@ -45,10 +42,6 @@ class SuratController extends Controller
     
             // Check if file with the same name already exists
             if (file_exists(public_path('word-template') . '/' . $templateName)) {
-                // return redirect()
-                //     ->back()
-                //     ->withErrors(['template' => 'File template dengan nama yang sama sudah ada']);
-
                 return response()->json([
                     'message' => 'Template dengan nama tersebut sudah ada'
                 ]);
@@ -56,9 +49,6 @@ class SuratController extends Controller
     
             $template->move(public_path('word-template'), $templateName);
         } else {
-            // return redirect()
-            //     ->back()
-            //     ->withErrors(['template' => 'File template tidak ditemukan']);
             return response()->json([
                 'error' => 'template tidak ditemukan'
             ]);
@@ -76,15 +66,20 @@ class SuratController extends Controller
             'message' => 'Berhasil menambahkan Surat'
         ]);
     
-        // return redirect()
-        //     ->back()
-        //     ->with(['success' => 'Berhasil menambahkan jenis surat']);
+    }
+
+    public function show($id)
+    {
+        $surat = Surat::findOrFail($id);
+        
+        return response()->json([
+            'surat' => $surat
+        ]);
     }
 
     public function edit(Surat $surat)
     {
         try {
-
             return view('admin.resource.surat.surat', compact('surat'));
         } catch (Exception $e) {
             return response()->json([
@@ -98,7 +93,7 @@ class SuratController extends Controller
     public function update(Request $request, Surat $surat, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_surat' => 'max:100',
+            'nama_surat' => 'nullable|max:100',
             'desc' => 'nullable',
             'template' => 'nullable|max:10000|mimes:doc,docx',
         ]);

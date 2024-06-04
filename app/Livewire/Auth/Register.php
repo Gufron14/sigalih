@@ -5,52 +5,54 @@ namespace App\Livewire\Auth;
 use App\Models\User;
 use App\Models\Warga;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
+
+#[Title('Register - Desa Sirnagalih')]
 class Register extends Component
 {   
-    public $nik, $email, $phone, $password;
+    use WithFileUploads;
 
-    public function render()
-    {
-        return view('livewire.auth.register');
-    }
+    public $nik, $email, $phone, $password, $password_confirmation, $avatar;
 
-    public function rules()
-    {
-        return [
-            'nik' => ['required', 'unique:users', 'exists:wargas,nik'],
-            'email' => ['required', 'email', 'unique:users'],
-            'phone' => ['required', 'unique:users'],
-            'password' => ['required', 'min:8'],
-        ];
-    }
+    protected $rules = [
+        'nik' => 'required|unique:users,nik|exists:wargas,nik',
+        'email' => 'required|email|unique:users,email',
+        'phone' => 'required|unique:users,phone',
+        'password' => 'required|min:6',
+    ];
 
     public function register()
     {
+        
         $this->validate();
 
         $warga = Warga::where('nik', $this->nik)->first();
         if (!$warga) {
-            return response()->json([
-                'status' => false,
-                'message' => 'NIK tidak terdaftar',
-            ]);
+            session()->flash('error', 'NIK tidak Terdaftar, hubungi Administrator jika ini Kesalahan.');
+            return redirect()->back();
         }
 
         $user = User::create([
-            'nik' => $warga->nik,
+            'nik' => $this->nik,
             'email' => $this->email,
-            'phone' => $this->password,
-            'password' => Hash::make(request('password')),
+            'phone' => $this->phone,
+            'password' => Hash::make($this->password),
         ]);
 
-        Auth::login($user, true);
+        // auth()->login($user);
 
-        session()->flash('success', 'berhasil');
+        session()->flash('success', 'Pendaftaran Akun Berhasil');
 
-        return redirect()->to('login');
+        return redirect()->route('login');
+    }
+
+    public function render()
+    {
+        return view('livewire.auth.register');
     }
 }

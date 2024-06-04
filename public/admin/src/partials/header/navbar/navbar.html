@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light border-bottom py-0 fixed-top bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex justify-content-start align-items-center border-end"
+      href="{{webRoot}}/index.html">
+      {{> navbar/logo }}
+    </a>
+    <div class="d-flex justify-content-between align-items-center flex-grow-1 navbar-actions">
+
+      <!-- Search Bar and Menu Toggle-->
+      <div class="d-flex align-items-center">
+
+        <!-- Menu Toggle-->
+        <div class="menu-toggle cursor-pointer me-4 text-primary-hover transition-color disable-child-pointer">
+          <i class="ri-skip-back-mini-line ri-lg fold align-middle" data-bs-toggle="tooltip" data-bs-placement="right"
+            title="Close menu"></i>
+          <i class="ri-skip-forward-mini-line ri-lg unfold align-middle" data-bs-toggle="tooltip" data-bs-placement="right"
+            title="Open Menu"></i>
+        </div>
+        <!-- / Menu Toggle-->
+
+        <!-- Search Bar-->
+        {{> navbar/search }}
+        <!-- / Search Bar-->
+
+      </div>
+      <!-- / Search Bar and Menu Toggle-->
+
+      <!-- Right Side Widgets-->
+      <div class="d-flex align-items-center">
+
+        <!-- Notifications-->
+        {{> navbar/notifications }}
+        <!-- / Notifications-->
+
+        <!-- Activity-->
+        {{> navbar/activity }}
+        <!-- / Activity-->
+
+        <!-- Messages-->
+        {{> navbar/messages }}
+        <!-- / Messages-->
+
+        <!-- Apps-->
+        {{> navbar/apps }}
+        <!-- / Apps-->
+
+        <!-- Profile Menu-->
+        {{> navbar/user }}
+        <!-- / Profile Menu-->
+
+      </div>
+      <!-- / Notifications & Profile-->
+    </div>
+  </div>
+</nav>

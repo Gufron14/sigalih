@@ -11,10 +11,21 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 90vh;
 }
 
+.center{
+    width: 150px;
+      margin: 40px auto;
+      
+    }
+
 a {
     text-decoration: none;
     /* color: rgb(69, 98, 177); */
 }
+
+/* .tombol-kecil {
+    background-color: rgb(233, 233, 233);
+    border-radius: 24px;
+} */
 
 .link-decoration {
     color: black;
@@ -31,12 +42,15 @@ a {
 
 .card-grow:hover {
     transform: scale(1.05);
+    
 }
 
 .card {
     border: none;
     border-radius: 16px;
 }
+
+
 
 .card-img-top {
     border-top-left-radius: 16px;
@@ -86,12 +100,10 @@ a {
 }
 
 .card-bg {
-    background: rgb(255,205,0);
-    background: linear-gradient(90deg, rgba(15, 134, 64, 0.726) 0%, rgb(182, 144, 39) 100%);
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 .card-bg2 {
-    background: rgb(45,156,86);
-    background: linear-gradient(94deg, rgba(15, 134, 64, 0.726) 0%, rgb(255, 53, 53) 100%);
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 /* CSS khusus untuk tab aktif dan tidak aktif */
@@ -114,3 +126,6 @@ a {
     border-radius: 18px;
 }
 
+.dropdown-menu {
+    border: none;
+}

@@ -1,20 +1,29 @@
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                {{-- Tambah Surat --}}
-                <livewire:admin.layanan.surat.create>
-                {{-- Daftar Surat --}}
-                <div class="card card-primary card-outline mt-3">
-                    <div class="card-header">
-                        <h3 class="card-title fw-bold">Daftar Surat</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table class="table">
+<div>
+
+    @section('breadcrumbs')
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Surat</li>
+    @endsection
+    @section('button')
+        <a class="btn btn-sm btn-primary" href="{{ route('surat.create') }}">
+            <i class="ri-add-circle-line align-bottom"></i>&nbsp;Surat Baru
+        </a>
+    @endsection
+
+    <div class="row">
+        <div class="col-12">
+            {{-- Daftar Surat --}}
+            <div class="card card-primary card-outline mt-3">
+                <div class="card-header">
+                    <h5 class="card-title fw-bold">Daftar Surat</h5>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th class="text-center">No</th>
                                     <th>Nama Surat</th>
                                     <th>Deskripsi</th>
                                     <th>Template</th>
@@ -24,7 +33,7 @@
                             <tbody>
                                 @forelse ($surats as $surat)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $surat->nama_surat }}</td>
                                         <td>{!! $surat->desc !!}</td>
                                         <td><a href=""><i class="fas fa-file-word"></i> &nbsp;
@@ -33,9 +42,12 @@
                                             <div class="d-flex gap-2 justify-content-center">
                                                 {{-- <livewire:admin.layanan.surat.update/> --}}
                                                 {{-- <form action="{{ route('surat.delete', $surat->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE') --}}
-                                                    <button wire:click="delete({{ $surat->id }})" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                            @csrf
+                                                            @method('DELETE') --}}
+                                                <a href="" class="fas fa-edit text-primary"
+                                                    wire:click="update({{ $surat->id }})"></a>
+                                                <a href="" class="fas fa-trash text-danger"
+                                                    wire:click="delete({{ $surat->id }})"></a>
                                                 {{-- </form> --}}
                                             </div>
                                         </td>
@@ -51,12 +63,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
+                <!-- /.card-body -->
             </div>
-            <!-- /.col -->
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
     </div>
-</section>
+    <!-- /.row -->
+
+</div>
