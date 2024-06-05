@@ -10,11 +10,7 @@ class JenisSurat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_surat', 'desc', 'singkatan', 'form_fields'
-    ];
-
-    protected $casts = [
-        'form_fields' => 'array'
+        'nama_surat', 'desc', 'singkatan',
     ];
 
     public function requestSurat()
@@ -25,5 +21,10 @@ class JenisSurat extends Model
     public function formFields() 
     {
         return $this->hasMany(FormField::class);
+    }
+
+    public function fileSurat()
+    {
+        return $this->hasOne(FileSurat::class);
     }
 }

@@ -52,7 +52,6 @@ class SuratController extends Controller
             return response()->json([
                 'error' => 'template tidak ditemukan'
             ]);
-
         }
     
         Surat::create([

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('request_surats', function (Blueprint $table) {
-            $table->id('request_surat_id');
+            $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
             $table->foreignId('jenis_surat_id')->constrained('jenis_surats', 'id');
             $table->json('form_data');

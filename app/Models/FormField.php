@@ -10,15 +10,19 @@ class FormField extends Model
     use HasFactory;
 
     protected $fillable = [
-        'field_name',
         'field_label',
         'field_type',
-        'rules',
         'jenis_surat_id',
+        'request_surat_id',
     ];
 
     public function jeniSurat()
     {
         return $this->belongsTo(JenisSurat::class);
+    }
+
+    public function requestSurat()
+    {
+        return $this->belongsTo(RequestSurat::class);
     }
 }

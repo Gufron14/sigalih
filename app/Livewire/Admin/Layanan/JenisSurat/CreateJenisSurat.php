@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Layanan\JenisSurat;
 
+use App\Models\FileSurat;
 use Livewire\Component;
 use App\Models\JenisSurat;
 use Livewire\WithFileUploads;
@@ -17,42 +18,54 @@ class CreateJenisSurat extends Component
     public $nama_surat,
         $desc,
         $singkatan,
+        $file_path,
         $form_fields = [];
 
     protected $rules = [
         'nama_surat' => 'required|max:100',
         'desc' => 'required',
         'singkatan' => 'required|max:10',
+        'file_path' => 'required|max:1000|mimes:doc,docx',
+        'form_fields' => 'nullable|array',
         'form_fields.*' => 'nullable|array',
         'form_fields.*.name' => 'required|string',
-        'form_fields.*.rules' => 'required|string',
+        'form_fields.*.type' => 'required|string|in:text,number,file',
     ];
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
 
     public function store()
     {
-        $this->validate();
+        $validatedData = $this->validate();
 
         $jenisSurat = JenisSurat::create([
-            'nama_surat' => $this->nama_surat,
-            'desc' => $this->desc,
-            'singkatan' => $this->singkatan,
-            'form_fields' => $this->form_fields,
+            'nama_surat' => $validatedData['nama_surat'],
+            'desc' => $validatedData['desc'],
+            'singkatan' => $validatedData['singkatan'],
         ]);
 
         // Simpan form_fields sebagai relasi dengan FormField
-        foreach ($this->form_fields as $field) {
+        foreach ($validatedData['form_fields'] as $field) {
             $jenisSurat->formFields()->create([
-                'field_name' => $field['name'],
-                'field_label' => $field['name'], // Atau sesuaikan dengan kebutuhan Anda
-                'field_type' => $field['rules'], // Atau sesuaikan dengan kebutuhan Anda
-                'rules' => $field['rules'], // Isi dengan aturan validasi yang sesuai
+                'field_label' => $field['name'],
+                'field_type' => $field['type'],
             ]);
         }
+
+        // ...
+
+        if ($this->file_path) {
+            $originalFilename = $this->file_path->getClientOriginalName();
+            $path = $this->file_path->storeAs('templates', $originalFilename, 'public');
+
+            // Buat instance FileSurat baru
+            $fileSurat = new FileSurat([
+                'file_path' => $path,
+            ]);
+
+            // Simpan FileSurat ke database dan hubungkan dengan JenisSurat
+            $jenisSurat->fileSurat()->save($fileSurat);
+        }
+
+        // ...
 
         $this->reset();
 
@@ -63,7 +76,15 @@ class CreateJenisSurat extends Component
 
     public function addFormField()
     {
-        $this->form_fields[] = ['name' => '', 'rules' => ''];
+        $this->form_fields[] = [
+            'name' => '',
+            'type' => '',
+        ];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 
     public function removeFormField($index)

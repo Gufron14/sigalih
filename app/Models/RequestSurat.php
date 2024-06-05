@@ -12,9 +12,11 @@ class RequestSurat extends Model
     protected $fillable = [
         'nik',
         'jenis_surat_id',
+        'user_id',
         'data_permintaan',
         'status',
         'catatan_admin',
+        'form_data'
     ];
 
     public function user()
@@ -24,5 +26,10 @@ class RequestSurat extends Model
     public function jenisSurat()
     {
         return $this->belongsTo(JenisSurat::class);
+    }
+
+    public function formField()
+    {
+        return $this->hasOne(FormField::class);
     }
 }

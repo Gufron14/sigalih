@@ -74,23 +74,23 @@
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <x-nav-link :active="request()->routeIs('home')" href="/">Beranda</x-nav-link>
                     <x-nav-link :active="request()->routeIs('berita.*')" href="{{ route('berita') }}">Kabar Desa</x-nav-link>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Aplikasi
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('layanan') }}">Layanan Surat</a></li>
+                            <li><a class="dropdown-item" href="{{ route('bankSampah') }}">Bank Sampah</a></li>
+                        </ul>
+                    </li>
                     <x-nav-link :active="request()->routeIs('tentang')" href="/">Lembaga</x-nav-link>
                     <x-nav-link :active="request()->routeIs('tentang')" href="/">Profil</x-nav-link>
                 </ul>
                 <!-- Left links -->
                 <!-- Right elements -->
                 <div class="d-flex align-items-center gap-3">
-                    <!-- Icon -->
-                    <div class="">
-                        <a href="{{ route('layanan') }}" class="btn btn-warning fw-bold">
-                            Layanan
-                        </a>
-                        <a href="{{ route('bankSampah') }}" class="btn btn-outline-success fw-bold">
-                            Bank Sampah
-                        </a>
-
-                    </div>
-                    |
+                    <i class="fas fa-bell fs-4 text-danger"></i>
                     @if (Auth::check())
                         <div class="dropdown">
                             <div data-bs-toggle="dropdown" aria-expanded="false">

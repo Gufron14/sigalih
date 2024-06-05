@@ -6,7 +6,7 @@
 
     <div class="card">
         <div class="card-header">
-                <h5 class="fw-bold">Daftar Permohonan Surat</h5>
+            <h5 class="fw-bold">Daftar Permohonan Surat</h5>
         </div>
         <div class="card-body">
             <table class="table table-hover">
@@ -23,30 +23,18 @@
                     @forelse ($pengajuans as $pengajuan)
                         <tr>
                             <td>{{ $pengajuan->created_at->format('d/m/Y - H:i:s') }}</td>
-                            <td>{{ $pengajuan->warga->nama }}</td>
-                            <td>{{ $pengajuan->surat->nama_surat }}</td>
+                            <td>{{ $pengajuan->user->warga->nama }}</td>
+                            <td>{{ $pengajuan->jenisSurat->nama_surat }}</td>
                             <td>
-                                @if ($pengajuan->status === 'tunggu')
-                                    <div class="badge bg-secondary-faded text-dark">
-                                        Menunggu
-                                    </div>
-                                @elseif ($pengajuan->status === 'proses')
-                                    <div class="badge bg-primary-faded">
-                                        Diproses
-                                    </div>
-                                @elseif ($pengajuan->status === 'selesai')
-                                    <div class="badge bg-success-faded">
-                                        Selesai
-                                    </div>
-                                @elseif ($pengajuan->status === 'tolak')
-                                    <div class="badge bg-danger-faded">
-                                        Ditolak
-                                    </div>
+                                @if ($pengajuan->approved == false)
+                                    <span class="badge bg-warning text-dark">Menunggu</span>
+                                @else
+                                    <span class="badge bg-success text-white">Disetujui</span>
                                 @endif
                             </td>
 
                             <td class="text-center">
-                                <a href="{{ route('view-pengajuan', $pengajuan->id) }}">Proses</a>
+                                <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}">Proses</a>
                             </td>
                         </tr>
                     @empty

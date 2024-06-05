@@ -26,7 +26,7 @@
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div class="mb-3">
                                     <h5 class="fw-bold">{{ $surat->nama_surat }}</h5>
-                                    <small class="text-secondary">{{ $surat->desc }}</small>
+                                    <small class="text-secondary">{!! Str::limit($surat->desc, 100)  !!}</small>
                                 </div>
                             </div>
                         </div>

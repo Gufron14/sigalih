@@ -16,6 +16,7 @@ class CreateRequestSurat extends Component
 
     public $jenisSurat;
     public $selectedLetterId;
+    public $formFields;
     public $formData = [];
     public $rules = [];
 
@@ -45,34 +46,40 @@ class CreateRequestSurat extends Component
         $surat = RequestSurat::create([
             'jenis_surat_id' => $this->selectedLetterId,
             'user_id' => auth()->id(),
-            'form_data' => $this->formData,
+            'form_data' => json_encode($this->formData),
         ]);
 
-        $this->dispatchBrowserEvent('letter-submitted', ['message' => 'Surat ' . $jenisSurat->nama_surat . ' berhasil diajukan.']);
+        $this->reset();
+
+        session()->flash('message', 'Surat '. $jenisSurat->nama_surat. 'berhasil diajukan.');
+
+        return redirect()->back();
     }
 
     protected function loadFormFields()
     {
         $jenisSurat = JenisSurat::with('formFields')->find($this->selectedLetterId);
-    
-        // Tambahkan baris berikut untuk debugging
+
         if ($jenisSurat->formFields->isEmpty()) {
             $this->dispatchBrowserEvent('error', ['message' => 'Tidak ada field yang ditemukan untuk jenis surat ini.']);
             return;
         }
-    
+
         $this->rules = [];
         $this->formData = [];
-    
+        $this->formFields = $jenisSurat->formFields;
+
         foreach ($jenisSurat->formFields as $field) {
             $fieldLabel = $field->field_label;
             if (!array_key_exists($fieldLabel, $this->formData)) {
                 $this->formData[$fieldLabel] = '';
-                $this->rules[$fieldLabel] = $field->field_type;
+                $this->rules['formData.' .$fieldLabel] = 'required';
+                if ($field['field_type'] === 'file') {
+                    $this->rules['formData.' .$fieldLabel] .= '|file';
+                }
             }
         }
     }
-    
 
     public function render()
     {

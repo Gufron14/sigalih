@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_surat')->unique();
             $table->text('desc');
             $table->string('singkatan');
-            $table->json('form_fields');
+            //$table->json('form_fields');
             $table->timestamps();
         });
     }

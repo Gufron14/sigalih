@@ -14,11 +14,10 @@ class Index extends Component
 {
     public function render()
     {
-        $pengajuans = RequestSurat::with(['warga', 'surat'])->orderBy('created_at', 'desc')->get();
+        $pengajuans = RequestSurat::with(['user', 'jenisSurat'])->orderBy('created_at', 'desc')->get();
 
         // Inisialisasi array untuk menyimpan format waktu
         $timeFormats = [];
-
         // Iterasi melalui setiap pengajuan
         foreach ($pengajuans as $pengajuan) {
             // Mengambil waktu pembuatan (created_at) dari setiap pengajuan

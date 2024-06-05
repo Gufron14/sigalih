@@ -22,7 +22,7 @@
                     <div class="fst-italic mb-4 h5">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
                         lungguh, diasah ku kanyaah, disipuh ku karipuh."</div>
                     <a data-mdb-ripple-init class="btn btn-outline-light mt-3" href="#!"
-                        role="button">Selengkapnya&nbsp;<i class="fas fa-paper-plane"></i></a>
+                        role="button">Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
             </div>
         </div>
@@ -63,7 +63,8 @@
             </div>
 
             <div class="mt-5 text-center">
-                {{-- s --}}
+                <a href="{{ route('layanan') }}" class="fw-bold fs-5">Lihat semua Layanan<i
+                    class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
     </div>
@@ -79,8 +80,8 @@
                     <h2 class="fw-bold">Kamu bisa dapat Uang dengan mengikuti program Bank Sampah</h4>
                         <p class="my-3">Hey, kabar baik! dengan mengikuti program Bank Sampah, kamu bisa dapat uang
                             lho. Ayo ikuti sekarang!</p>
-                        <a href="{{ route('bankSampah') }}" class="btn btn-success fw-bold mt-3">Ikuti Sekarang &nbsp;<i
-                                class="fas fa-paper-plane"></i></a>
+                        <a href="{{ route('bankSampah') }}" class="btn btn-success card-grow fw-bold mt-3">Ikuti Sekarang<i
+                                class="fas fa-paper-plane ms-2"></i></a>
                 </div>
             </div>
         </div>
@@ -92,8 +93,8 @@
             <div class="row gap-3 justify-content-between">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="fw-bold">Kabar Desa Terbaru</h2>
-                    <a href="{{ route('berita') }}" class="fw-bold">Lihat semua &nbsp; <i
-                            class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('berita') }}" class="fw-bold">Lihat semua <i
+                            class="fas fa-arrow-right ms-2"></i></a>
                 </div>
                 <div class="col-4">
                     @foreach ($post as $item)
@@ -103,7 +104,7 @@
                                 <p class="card-text">
                                     <small class="text-secondary">
                                         <i
-                                            class="fas fa-calendar-alt"></i>&nbsp;{{ $item->created_at->diffForHumans() }}
+                                            class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->diffForHumans() }}
                                     </small>
                                 </p>
                                 <p class="card-text">{!! Str::limit($item->content, 200) !!}
@@ -192,8 +193,8 @@
         </div>
 
         <div class="mt-5 text-center">
-            <a href="" class="fw-bold fs-5">Lihat semua statistik&nbsp;&nbsp;<i
-                    class="fas fa-arrow-right"></i></a>
+            <a href="" class="fw-bold fs-5">Lihat semua statistik<i
+                    class="fas fa-arrow-right ms-2"></i></a>
         </div>
     </div>
 </div>
@@ -215,7 +216,7 @@
                     <label for="exampleFormControlTextarea1" class="form-label">Kritik dan Saran</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                <button class="btn btn-primary fw-bold mx-auto">Kirim&nbsp;<i class="fas fa-paper-plane"></i></button>
+                <button class="btn btn-primary fw-bold mx-auto">Kirim<i class="fas fa-paper-plane ms-2"></i></button>
             </div>
         </div>
     </section>
