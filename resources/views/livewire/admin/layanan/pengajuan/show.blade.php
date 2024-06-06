@@ -1,4 +1,11 @@
 <div>
+
+    @if (session()->has('error'))
+        <span class="alert alert-danger">
+            {{ session('error') }}
+        </span>
+    @endif
+
     <div class="card card-primary card-outline">
         <div class="card-header">
             <div class="card-title">

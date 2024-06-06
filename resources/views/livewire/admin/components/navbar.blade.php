@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <a class="navbar-brand d-flex justify-content-start align-items-center border-end" href="./index.html">
             <div class="d-flex align-items-center">
-                <img src="{{ asset('assets/img/1.png') }}" alt="" style="width: 30px"> &nbsp;&nbsp;
-                <span class="fw-black text-uppercase fs-4 lh-1">sigalih</span>
+                <img src="{{ asset('assets/img/1.png') }}" alt="" style="width: 30px" class="me-3">
+                <span class="fw-black fs-4 lh-1">Sigalih</span>
             </div>
         </a>
         <div class="d-flex justify-content-between align-items-center flex-grow-1 navbar-actions">

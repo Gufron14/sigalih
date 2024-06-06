@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(RequestSurat::class);
     }
+
+    public function formFields()
+    {
+        return $this->hasMany(FormField::class);
+    }
 }

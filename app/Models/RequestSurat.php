@@ -27,9 +27,4 @@ class RequestSurat extends Model
     {
         return $this->belongsTo(JenisSurat::class);
     }
-
-    public function formField()
-    {
-        return $this->hasOne(FormField::class);
-    }
 }

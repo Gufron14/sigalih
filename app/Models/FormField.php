@@ -13,7 +13,7 @@ class FormField extends Model
         'field_label',
         'field_type',
         'jenis_surat_id',
-        'request_surat_id',
+        'user_id'
     ];
 
     public function jeniSurat()
@@ -21,8 +21,8 @@ class FormField extends Model
         return $this->belongsTo(JenisSurat::class);
     }
 
-    public function requestSurat()
+    public function user()
     {
-        return $this->belongsTo(RequestSurat::class);
+        return $this->belongsTo(User::class);
     }
 }

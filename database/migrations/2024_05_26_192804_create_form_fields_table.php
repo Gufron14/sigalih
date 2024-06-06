@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_surat_id')->constrained('jenis_surats', 'id')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id');
             $table->string('field_label');
             $table->string('field_type');
             $table->timestamps();

@@ -15,6 +15,8 @@
             {{ session('success') }}
         </div>
     @endif
+
+    {{-- BODY --}}
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
@@ -36,11 +38,16 @@
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $jenis_surat->nama_surat }}</td>
-                                <td class="badge bg-primary-faded text-primary">{{ $jenis_surat->singkatan }}</td>
+                                <td>
+                                    <span class="badge bg-primary-faded text-primary">
+                                        {{ $jenis_surat->singkatan }}</td>
+                                    </span>
                                 <td>{{ $jenis_surat->desc }}</td>
                                 <td class="text-center">
-                                    <a href="">Edit</a> |
-                                    <a type="submit" wire:click="destroy({{ $jenis_surat->id }})" wire:confirm="Yakin nih?">Hapus</a>
+                                    <button type="submit" wire:click="destroy({{ $jenis_surat->id }}"
+                                        class="btn btn-danger">
+                                        <i class="bi bi-trash-fill text-white"></i>
+                                    </button>
                                 </td>
                             @empty
                                 <td colspan="5" class="text-danger text-center p-5">Belum ada Surat.</td>
