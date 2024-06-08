@@ -3,18 +3,21 @@
 namespace App\Livewire\Admin\Berita;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Masmerise\Toaster\Toastable;
 use Svg\Tag\Path;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Daftar Berita')]
 class Index extends Component
 {   
+    use Toastable;
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
@@ -27,10 +30,10 @@ class Index extends Component
         }
 
         //flash message
-        session()->flash('message', 'Data Berhasil Dihapus.');
+        // session()->flash('message', 'Data Berhasil Dihapus.');
 
         //redirect
-        return redirect()->back();
+        return Redirect::back()->success('Berhasil menghapus berita');
 
     }
 

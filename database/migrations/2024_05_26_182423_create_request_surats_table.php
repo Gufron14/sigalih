@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('request_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->foreignId('jenis_surat_id')->constrained('jenis_surats', 'id');
+            $table->foreignId('user_id')
+                ->constrained('users', 'id')
+                ->cascadeOnDelete();
+            $table->foreignId('jenis_surat_id')
+                ->constrained('jenis_surats', 'id')
+                ->cascadeOnDelete();
             $table->json('form_data');
             $table->boolean('approved')->default(false);
             $table->text('catatan_admin')->nullable();

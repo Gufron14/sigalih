@@ -2,7 +2,7 @@
 
     @section('breadcrumbs')
         <li class="breadcrumb-item"><a href="{{ route('surat') }}">Manajemen Surat</a></li>
-        <li class="breadcrumb-item active">Tambah Jenis Surat</li>
+        <li class="breadcrumb-item active">Perbarui Jenis Surat</li>
     @endsection
 
     @if (session()->has('success'))
@@ -11,9 +11,9 @@
         </div>
     @endif
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <form wire:submit.prevent="store">
+    <div class="card">
+       <div class="card-body">
+            <form wire:submit.prevent="update">
                 <div class="row">
                     <div class="col">
                         <div class="mb-3">
@@ -31,7 +31,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="file_path" class="form-label">file_path Surat</label>
+                            <label for="file_path" class="form-label">Template Surat (.doc/.docx)</label>
                             <input type="file" wire:model="file_path" class="form-control @error('file_path') is-invalid @enderror">
                             @error('file_path')
                                 <small class="text-danger">{{ $message }}</small>
@@ -78,8 +78,7 @@
                     @endforeach
                     <button type="button" class="btn btn-info-faded text-dark    btn-sm" wire:click="addFormField"><i class="fas fa-plus me-2"></i>Tambah Field</button>
                 </div>
-                <button type="submit" class="btn btn-primary fw-bold">
-                    <i class="fas fa-save me-2"></i>Simpan</button>
+                <button type="submit" class="btn btn-primary fw-bold">Simpan</button>
             </form>
             
         </div>

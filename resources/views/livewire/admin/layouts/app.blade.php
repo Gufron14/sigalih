@@ -4,6 +4,7 @@
 <head>
     @include('livewire.admin.components.header')
     <title>{{ $title ?? config('app.name') }}</title>
+    @livewireStyles()
 </head>
 
 <body class="">
@@ -15,6 +16,7 @@
 
     <!-- Main Sidebar Container -->
     @include('livewire.admin.components.sidebar')
+    
 
     <main id="main">
 
@@ -332,7 +334,8 @@
     </main>
 
     @include('livewire.admin.components.script')
-    
+    <x-toaster-hub />
+    @livewireScripts()
 </body>
 
 </html>

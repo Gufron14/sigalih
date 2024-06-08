@@ -11,6 +11,7 @@ use App\Models\RequestSurat;
 use Livewire\Attributes\Title;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
+use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 #[Layout('livewire.admin.layouts.app')]
@@ -73,33 +74,43 @@ class Show extends Component
             foreach ($formData as $key => $value) {
                 $templateProcessor->setValue($key, $value);
             }
-        } 
-        
+        }
 
         // Menyimpan dokumen sementara sebagai file .docx
         $filename = $this->pengajuan->jenisSurat->singkatan . '-' . $user->warga->nama . '.docx';
         $pathToSave = storage_path('app/public/templates/' . $filename);
         $templateProcessor->saveAs($pathToSave);
-        // // Konversi dokumen .docx ke PDF
-        // $pdfPath = $this->convertToPdf($pathToSave);
 
-        // // Tampilkan PDF di browser
-        // return response()->file($pdfPath);
+        // Konversi dokumen .docx ke PDF menggunakan PHPWord
+        $pdfPath = $this->convertToPdfWithPhpWord($pathToSave);
+        if ($pdfPath !== null) {
+            return response()->file($pdfPath)->deleteFileAfterSend(true);
+        } else {
+            // Tangani kasus ketika konversi ke PDF gagal
+            return response('Gagal mengonversi dokumen ke PDF', 500);
+        }
     }
 
-    protected function parseFormData($formData)
+    protected function convertToPdfWithPhpWord($docxPath)
     {
-        if (is_null($formData)) {
-            return ''; // Kembalikan string kosong jika formData adalah null
+        $pdfPath = str_replace('.docx', '.pdf', $docxPath);
+
+        // Membuat objek Word baru
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        // Memuat template Word
+        $phpWord->setTemplate($docxPath);
+
+        // Menyimpan dokumen sebagai PDF
+        $rendererPdf = IOFactory::createWriter($phpWord, 'PDF');
+        $rendererPdf->save($pdfPath);
+
+        if (file_exists($pdfPath)) {
+            return $pdfPath;
+        } else {
+            session()->flash('error', 'Konversi ke PDF gagal');
+            return null;
         }
-
-        $parsedData = [];
-
-        foreach ($formData as $key => $value) {
-            $parsedData[] = "$key: $value";
-        }
-
-        return implode(', ', $parsedData);
     }
 
     protected function convertToPdf($docxPath)
@@ -110,7 +121,7 @@ class Show extends Component
         shell_exec($command);
 
         if (file_exists($pdfPath)) {
-            return response()->file($pdfPath)->deleteFileAfterSend(true);
+            return response()->file($pdfPath);
         } else {
             session()->flash('error', 'Konversi ke PDF gagal');
         }

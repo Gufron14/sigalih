@@ -1,15 +1,12 @@
 <div>
     @section('breadcrumbs')
-            <a href="{{ route('riwayatSetoran') }}" class="fs-6 tombol-kecil">Riwayat Setor Sampah</a>
+        <li class="breadcrumb-item"><a href="{{ route('jenisSampah') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Sampah</li>
     @endsection
 
     @section('button')
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            + Jenis Sampah
-        </button>
-        <a href="{{ route('setorSampah') }}" class="btn btn-warning">
-            Setor Sampah
-        </a>
+        <a href="{{ route('riwayatSetoran') }}" class="btn btn-success-faded btn-sm text-dark">Riwayat Setor</a>
+        <a href="{{ route('setorSampah') }}" class="btn btn-success-faded btn-sm text-dark">Setor Sampah</a>
     @endsection
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -49,7 +46,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary fw-bold">
+                            <i class="fas fa-save me-2"></i>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -63,78 +61,92 @@
     @endif
 
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title">
                 Daftar Jenis Sampah
-            </h4>
+            </h5>
+            <button type="button" class="btn btn-primary btn-sm fw-bold" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                <i class="fas fa-plus-circle me-2"></i> Jenis Sampah
+            </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
-                        <th>No</th>
+                        <th class="text-center">No</th>
                         <th>Jenis Sampah</th>
                         <th>Harga/kg</th>
                         <th>Deskripsi</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                     </thead>
                     <tbody>
                         @forelse ($jenis_sampahs as $sampah)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $sampah->jenis_sampah }}</td>
                                 <td>@currency($sampah->harga_per_kg)</td>
                                 <td>{{ $sampah->desc }}</td>
-                                <td>
+                                <td class="text-center">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#editSampahModal">
-                                        Edit
+                                    <button type="button" class="btn btn-secondary-faded btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editSampahModal{{ $sampah->id }}">
+                                        <i class="fas fa-edit text-primary"></i>
+                                    </button>
+
+                                    <button type="submit" class="btn btn-secondary-faded btn-sm"
+                                        wire:click="destroy({{ $sampah->id }})"
+                                        wire:confirm="Anda yakin ingin menghapus jenis sampah {{ $sampah->jenis_sampah }}?">
+                                        <i class="bi bi-trash-fill text-danger fs-6"></i>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="editSampahModal" tabindex="-1"
+                                    <div class="modal fade" id="editSampahModal{{ $sampah->id }}" tabindex="-1"
                                         aria-labelledby="editSampahModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="editSampahModalLabel">Edit Jenis
-                                                        Sampah
+                                                    <h1 class="modal-title fs-5" id="editSampahModalLabel">Edit
+                                                        {{ $sampah->jenis_sampah }}</h1>
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <form wire:submit.prevent="update" enctype="multipart/form-data">
                                                     <div class="modal-body">
-                                                        <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control @error('jenis_sampah') is-invalid @enderror"
-                                                                id="jenis_sampah" wire:model="jenis_sampah" placeholder="{{ $sampah->jenis_sampah }}">
+                                                        <div class="mb-3">
                                                             <label for="jenis_sampah" class="form-label">Jenis Sampah</label>
+                                                            <input type="text" class="form-control @error('jenis_sampah') is-invalid @enderror"
+                                                                wire:model="jenis_sampah" placeholder="{{ $sampah->jenis_sampah }}">
                                                             @error('jenis_sampah')
                                                                 <small class="text-danger">
                                                                     {{ $message }}
                                                                 </small>
                                                             @enderror
                                                         </div>
-                                                        <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control @error('harga_per_kg') is-invalid @enderror"
-                                                                id="harga_per_kg" wire:model="harga_per_kg" placeholder="@currency($sampah->harga_per_kg)">
+                                                        <div class="mb-3">
                                                             <label for="harga_per_kg" class="form-label">Harga/kg</label>
+                                                            <input type="text" class="form-control @error('harga_per_kg') is-invalid @enderror"
+                                                                wire:model="harga_per_kg" placeholder="@currency($sampah->harga_per_kg)">
                                                             @error('harga_per_kg')
                                                                 <small class="text-danger">
                                                                     {{ $message }}
                                                                 </small>
                                                             @enderror
                                                         </div>
-                                                        <div class="form-floating">
-                                                            <textarea class="form-control" placeholder="Leave a comment here" id="desc" style="height: 100px"
-                                                                wire:model="desc"></textarea>
+                                                        <div class="">
                                                             <label for="desc" class="form-label">Deskripsi</label>
+                                                            <textarea class="form-control" style="height: 100px" wire:model="desc"
+                                                            placeholder="{{  $sampah->desc }}"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary fw-bold"
+                                                            wire:click="update({{ $sampah->id }})">
+                                                            <i class="fas fa-save me-2"></i>Simpan
+                                                            Perubahan</button>
                                                     </div>
                                                 </form>
                                             </div>

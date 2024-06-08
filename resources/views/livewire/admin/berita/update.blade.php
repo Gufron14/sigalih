@@ -19,7 +19,7 @@
         <div class="card-body">
             <form wire:submit.prevent="update">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-5">
                         <div class="mb-3">
                             <label for="title" class="form-label">Judul Berita</label>
                             <input type="text" class="form-control"
@@ -51,7 +51,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-7">
                         <div class="mb-3">
                             <label for="content" class="form-label">Isi Berita</label>
                             <textarea name="" id="editor" cols="30" rows="10" wire:model='content' class="form-control"></textarea>
@@ -63,7 +63,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" wire:click="update">Publikasi</button>
+                <button type="submit" class="btn btn-primary fw-bold" wire:click="update">
+                    <i class="fas fa-save me-2"></i>Simpan Perubahan</button>
             </form>
         </div>
     </div>

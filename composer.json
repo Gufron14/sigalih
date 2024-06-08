@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^3.4",
+        "masmerise/livewire-toaster": "^2.1",
         "php-open-source-saver/jwt-auth": "^2.2",
         "phpoffice/phpword": "^1.2",
         "snapappointments/bootstrap-select": "^1.13"

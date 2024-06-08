@@ -6,10 +6,10 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="fw-bold">Daftar Permohonan Surat</h5>
+            <h5>Daftar Permohonan Surat</h5>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>Tanggal & Waktu</th>
@@ -27,14 +27,16 @@
                             <td>{{ $pengajuan->jenisSurat->nama_surat }}</td>
                             <td>
                                 @if ($pengajuan->approved == false)
-                                    <span class="badge bg-warning text-dark">Menunggu</span>
+                                    <span class="badge bg-warning-faded text-dark">Menunggu</span>
                                 @else
-                                    <span class="badge bg-success text-white">Disetujui</span>
+                                    <span class="badge bg-success-faded text-white">Disetujui</span>
                                 @endif
                             </td>
 
                             <td class="text-center">
-                                <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}">Proses</a>
+                                <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}"
+                                    class="btn btn-secondary-faded btn-sm"> <i class="fas fa-tools text-primary"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty

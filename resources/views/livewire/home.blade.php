@@ -126,7 +126,7 @@
                                 </div>
                                 <p><b>{{ $post->title }} </b><br>
                                     <span>
-                                        <small>{!! Str::limit($post->content, 200) !!}
+                                        <small>{!! Str::limit($post->content, 100) !!}
                                             <span>
                                                 <a href="">baca selengkapnya</a></span></small>
                                     </span>

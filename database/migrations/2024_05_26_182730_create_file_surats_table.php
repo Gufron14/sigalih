@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('file_surats', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->constrained('users', 'id');
-            $table->foreignId('jenis_surat_id')->constrained('jenis_surats', 'id');
-            // $table->foreignId('request_surat_id')->constrained('request_surats', 'request_surat_id');
+            $table->foreignId('jenis_surat_id')
+                ->constrained('jenis_surats', 'id')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();  
             $table->string('file_path');
             // $table->enum('status', ['Dikirim','Diunduh']);
             // $table->date('tgl_persetujuan');

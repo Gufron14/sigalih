@@ -3,8 +3,9 @@
         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
         <li class="breadcrumb-item active">Setor Sampah</li>
     @endsection
+
     @section('button')
-        <a href="{{ route('riwayatSetoran') }}">Riwayat Setoran</a>
+        <a href="{{ route('riwayatSetoran') }}" class="btn btn-primary btn-sm fw-bold">Riwayat Setoran</a>
     @endsection
 
     @if (session()->has('success'))
@@ -100,7 +101,8 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <button type="submit" class="btn btn-primary">Setor Sampah</button>
+                    <button type="submit" class="btn btn-primary fw-bold">
+                        <i class="fas fa-save me-2"></i>Setor Sampah</button>
                 </div>
             </form>
 

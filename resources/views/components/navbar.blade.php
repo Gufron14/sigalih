@@ -5,10 +5,10 @@
                 <i class="fas fa-phone-alt"></i>&nbsp;&nbsp;081234567890
             </div>
             <div class="navbar-nav mx-auto mb-2 mb-lg-0">
-                {{-- <marquee behavior="" direction="" class="text-white fw-bold">
+                <marquee behavior="" direction="" class="text-white fw-bold">
                     PENGUMUMAN! Bagi para Warga Sirnagalih yang ingin membuat Surat Permohonan silakan buat di
                     Website ini.
-                </marquee> --}}
+                </marquee>
             </div>
             <div class="text-white d-flex gap-3">
                 <i class="fab fa-facebook-f"></i>

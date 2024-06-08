@@ -5,16 +5,16 @@
     @endsection
 
     @section('button')
-        <button class="btn btn-primary">
+        <button class="btn btn-success-faded text-dark btn-sm">
             Setor Sampah
         </button>
     @endsection
 
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">
+            <h5 class="card-title">
                 Riwayat Setor Sampah
-            </h4>
+            </h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">

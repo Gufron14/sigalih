@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Masmerise\Toaster\Toaster;
 use Livewire\Attributes\Layout;
 
 #[Layout('livewire.admin.layouts.app')]
@@ -42,9 +43,9 @@ class Create extends Component
             'slug' => $this->slug
         ]);
 
-        session()->flash('success', 'Berhasil membuat Berita');
+        // Toaster::success('Berhasil menambahkan jenis sampah baru');
         $this->reset();
-        return redirect()->to('admin/berita');
+        return redirect()->back()->success('Berhasil menambahkan jenis sampah baru');
     }
     
     public function render()

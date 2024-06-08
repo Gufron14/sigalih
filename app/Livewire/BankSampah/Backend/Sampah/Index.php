@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\BankSampah\JenisSampah;
+use Masmerise\Toaster\Toaster;
 
 #[Layout('livewire.bank-sampah.backend.layout.bs-layout')]
 #[Title('Jenis Sampah - Sampah Sigalih')]
@@ -16,16 +17,10 @@ class Index extends Component
     public $desc;
     public $jenisSampahId;
 
-    public function mount($jenisSampahId = null)
-    {
-        if ($jenisSampahId) {
-            $this->loadJenisSampah($jenisSampahId);
-        }
-    }
-
-    public function loadJenisSampah($id)
+    public function mount($id)
     {
         $jenisSampah = JenisSampah::findOrFail($id);
+
         $this->jenisSampahId = $jenisSampah->id;
         $this->jenis_sampah = $jenisSampah->jenis_sampah;
         $this->harga_per_kg = $jenisSampah->harga_per_kg;
@@ -46,46 +41,49 @@ class Index extends Component
             'desc' => $this->desc
         ]);
 
-        session()->flash('success', 'Jenis Sampah berhasil ditambahkan');
         $this->reset();
+        Toaster::success('Berhasil menambahkan jenis sampah baru');
         return redirect()->to('bs-admin/sampah');
     }
 
     public function update()
     {
-        $this->validate([
+        $validatedData = $this->validate([
             'jenis_sampah' => 'max:100',
             'harga_per_kg' => 'numeric',
             'desc' => 'nullable|string',
         ]);
 
-        $jenisSampah = JenisSampah::findOrFail($this->jenisSampahId);
+        try {
+            // Temukan jenis sampah berdasarkan ID
+            $jenisSampah = JenisSampah::findOrFail($this->jenisSampahId);
+    
+            // Update data jenis sampah
+            $jenisSampah->update($validatedData);
+    
+            // Reset form atau state setelah berhasil update
+            $this->reset();
+    
+            // Set pesan sukses
+            session()->flash('success', 'Berhasil Update');
+        } catch (\Exception $e) {
+            // Set pesan error jika terjadi kesalahan
+            session()->flash('error', 'Gagal Update: ' . $e->getMessage());
+        }
 
-        $jenisSampah->update([
-            'jenis_sampah' => $this->jenis_sampah,
-            'harga_per_kg' => $this->harga_per_kg,
-            'desc' => $this->desc
-        ]);
+        return redirect()->to('bs-admin/sampah');
 
-        $this->reset();
-        $this->jenis_sampah = JenisSampah::all();
-
-        session()->flash('success', 'Berhasil Update');
-        $this->resetInputs();
-        return redirect()->route('dashboard');
     }
 
-    public function resetInputs()
+    public function destroy($id)
     {
-        $this->jenisSampahId = null;
-        $this->jenis_sampah = '';
-        $this->harga_per_kg = '';
-        $this->desc = '';
+        JenisSampah::destroy($id);
+        session()->flash('success', 'Jenis Sampah berhasil dihapus');
+        return redirect()->to('bs-admin/sampah');
     }
 
     public function render()
     {
-        // $sampahs = JenisSampah::all();
         return view('livewire.bank-sampah.backend.sampah.index', [
             'jenis_sampahs' => JenisSampah::all(),
         ]);

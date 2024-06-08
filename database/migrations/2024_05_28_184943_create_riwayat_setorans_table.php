@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('riwayat_setorans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nasabah_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->foreignId('jenis_sampah_id')->constrained('jenis_sampahs', 'id');
+            $table->foreignId('jenis_sampah_id')
+                ->constrained('jenis_sampahs', 'id')
+                ->cascadeOnDelete();
             $table->decimal('berat_sampah', 8, 2);
             $table->decimal('pendapatan', 8, 2);
             $table->enum('jenis_transaksi', ['tunai', 'tabung']);

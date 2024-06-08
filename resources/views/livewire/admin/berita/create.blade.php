@@ -19,7 +19,7 @@
         <div class="card-body">
             <form wire:submit.prevent="store">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-5">
                         <div class="mb-3">
                             <label for="title" class="form-label">Judul Berita</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
@@ -52,7 +52,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-7">
                         <div class="mb-3">
                             <label for="content" class="form-label">Isi Berita</label>
                             <textarea name="" id="editor" cols="30" rows="10" wire:model='content' class="form-control"></textarea>
@@ -64,7 +64,11 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Publikasi</button>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary fw-bold"
+                    @click="Toaster.success('Form submitted!')">
+                        <i class="fas fa-save me-2"></i>Publikasi</button>
+                </div>
             </form>
         </div>
     </div>
