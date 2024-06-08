@@ -18,9 +18,9 @@
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">
                     <div class="h4">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</div>
-                    <div class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</div>
-                    <div class="fst-italic mb-4 h5">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
-                        lungguh, diasah ku kanyaah, disipuh ku karipuh."</div>
+                    <h1 class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</h1>
+                    <h5 class="fst-italic mb-4s h5">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
+                        lungguh, diasah ku kanyaah, disipuh ku karipuh."</h5>
                     <a data-mdb-ripple-init class="btn btn-outline-light mt-3" href="#!"
                         role="button">Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
@@ -80,8 +80,8 @@
                     <h2 class="fw-bold">Kamu bisa dapat Uang dengan mengikuti program Bank Sampah</h4>
                         <p class="my-3">Hey, kabar baik! dengan mengikuti program Bank Sampah, kamu bisa dapat uang
                             lho. Ayo ikuti sekarang!</p>
-                        <a href="{{ route('bankSampah') }}" class="btn btn-success card-grow fw-bold mt-3">Ikuti Sekarang<i
-                                class="fas fa-paper-plane ms-2"></i></a>
+                        <a href="{{ route('bankSampah') }}" class="btn btn-success card-grow fw-bold mt-3" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">
+                            Ikuti Sekarang<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
             </div>
         </div>

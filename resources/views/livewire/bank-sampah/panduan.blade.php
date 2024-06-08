@@ -1,5 +1,4 @@
-<div class="my-5">
-    <div>
+<div class="container">
         <h5 class="text-success fw-bold mb-3">Tentang Bank Sampah</h5>
         <div>
             <p> <b class="fw-bold text-success">Apa itu Bank Sampah?</b> <br>
@@ -28,4 +27,4 @@
             </p>
         </div>
     </div>
-</div>
+

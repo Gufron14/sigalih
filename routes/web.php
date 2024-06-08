@@ -17,6 +17,7 @@ use App\Livewire\Admin\Layanan\JenisSurat\UpdateJenisSurat;
 use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
+use App\Livewire\BankSampah\Backend\Sampah\UpdateSampah;
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/laravel/myproject/vendor/livewire/livewire.js', $handle);
@@ -96,6 +97,7 @@ Route::prefix('admin')->group(function () {
 Route::prefix('bs-admin')->group(function () {
     Route::get('dashboard', BackendDashboard::class);
     Route::get('sampah', SampahIndex::class)->name('jenisSampah');
+    Route::get('sampah/{id}', UpdateSampah::class)->name('editSampah');
     Route::get('setor-sampah', SetorSampah::class)->name('setorSampah');
     Route::get('riwayat-setoran', RiwayatSetoran::class)->name('riwayatSetoran');
 });

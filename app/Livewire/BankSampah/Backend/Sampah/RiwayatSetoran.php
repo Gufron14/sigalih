@@ -11,13 +11,15 @@ use Livewire\Attributes\Layout;
 #[Layout('livewire.bank-sampah.backend.layout.bs-layout')]
 class RiwayatSetoran extends Component
 {
+    public $nasabahs;
     public $setorans;
     public $totalBerat = 0;
     public $totalPendapatan = 0;
 
     public function mount()
     {
-        $this->setorans = \App\Models\BankSampah\RiwayatSetoran::with('JenisSampah', 'user.warga')->get();
+        $this->setorans = \App\Models\BankSampah\RiwayatSetoran::with('JenisSampah')->get();
+        $this->nasabahs = User::with('warga')->get();
 
         $this->totalBerat = $this->setorans->sum('berat_sampah');
         $this->totalPendapatan = $this->setorans->sum('pendapatan');
@@ -25,12 +27,11 @@ class RiwayatSetoran extends Component
 
     public function render()
     {   
-        $nasabahs = User::with('warga')->get();
         return view('livewire.bank-sampah.backend.sampah.riwayat-setoran', [
             'setorans' => $this->setorans,
             'totalBerat' => $this->totalBerat,
             'totalPendapatan' => $this->totalPendapatan,
-            'nasabahs' => $nasabahs,
+            'nasabahs' => $this->nasabahs,
         ]);
     }
 }

@@ -1,13 +1,13 @@
-<div class="container my-5">
+<div class="container">
     <div class="row justify-content-between mb-3 g-5">
         <div class="col">
             <div class="d-flex align-middle">
-                <h1 class="text-success fw-bold align-middle">Hei, {{ $warga->nama }}! <br> Sudahkah Lingkunganmu
-                    Bersih?</h1>
+                <h2 class="text-success fw-bold align-middle" data-aos="zoom-in-right">Hei, {{ $warga->nama }}! <br> Sudahkah Lingkunganmu
+                    Bersih?</h2>
             </div>
             <p>Bersihkan lingkunganmu, untuk masa depan Sehat.</p>
-            <a href="{{ route('panduan') }}" class="btn btn-success fw-bold">Lihat Panduan &nbsp; <i
-                    class="fas fa-paper-plane"></i> </a>
+            <a href="{{ route('panduan') }}" data-aos="fade-right" class="btn text-white fw-bold rounded-5" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">Lihat Panduan <i
+                    class="fas fa-paper-plane ms-2"></i> </a>
 
             {{-- Carousel --}}
             <div id="carouselExampleInterval" class="my-5 carousel slide" data-bs-ride="carousel">
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col d-flex justify-content-center">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-warning fw-bold rounded-5" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 Tarik Saldo
                             </button>
@@ -151,7 +151,7 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <button class="btn btn-outline-success fw-bold" onclick="showSweetAlert()">Ajukan
+                    <button class="btn btn-outline-success fw-bold rounded-5" onclick="showSweetAlert()">Ajukan
                         Pengambilan</button>
                 </div>
             </div>

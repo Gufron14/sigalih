@@ -10,6 +10,7 @@
             {{ session('success') }}
         </div>
     @endif
+    
     <div class="card">
         <div class="card-header">
             <div class="card-title">
@@ -65,8 +66,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-primary fw-bold"
-                    @click="Toaster.success('Form submitted!')">
+                    <button type="submit" class="btn btn-primary fw-bold">
                         <i class="fas fa-save me-2"></i>Publikasi</button>
                 </div>
             </form>

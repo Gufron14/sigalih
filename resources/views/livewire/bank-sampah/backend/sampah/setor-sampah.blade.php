@@ -15,11 +15,6 @@
     @endif
 
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">
-                Setor Sampah
-            </h4>
-        </div>
         <div class="card-body">
             <form wire:submit.prevent="store" enctype="multipart/form-data">
                 <div class="row">

@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="container">
 
     <ul class="nav justify-content-center" role="tablist">
         <li class="nav-item" role="presentation">
@@ -24,10 +24,12 @@
                     <thead class="table-success">
                         <tr class="text-center">
                             <th>Tanggal</th>
+                            <th>Nama Nasabah</th>
                             <th>Jenis Sampah</th>
                             <th>Berat</th>
                             <th>Harga/Kg</th>
                             <th>Pendapatan</th>
+                            <th>Total Berat</th>
                             <th>Total Pendapatan</th>
                             <th>Transaksi</th>
                         </tr>
@@ -35,10 +37,12 @@
                     <tbody class="text-center">
                         <tr>
                             <td rowspan="2">11/05/24</td>
+                            <td rowspan="2">John Doe</td>
                             <td>Besi</td>
                             <td>4 Kg</td>
                             <td>Rp. 3.000</td>
                             <td>Rp. 12.000</td>
+                            <td rowspan="2">6 Kg</td>
                             <td class="fw-bold" rowspan="2">Rp. 16.000;-</td>
                             <td rowspan="2">
                                 <div class="badge text-bg-primary"> Ditabung </div>
@@ -52,10 +56,12 @@
                         </tr>
                         <tr>
                             <td rowspan="3">18/05/24</td>
+                            <td rowspan="3">Miya</td>
                             <td>Besi</td>
                             <td>4 Kg</td>
                             <td>Rp. 3.000</td>
                             <td>Rp. 12.000</td>
+                            <td rowspan="3">8 Kg</td>
                             <td class="fw-bold" rowspan="3">Rp. 20.000;-</td>
                             <td rowspan="3">
                                 <div class="badge text-bg-success"> Tunai </div>

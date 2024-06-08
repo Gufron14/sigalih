@@ -89,11 +89,10 @@
                                 <td>{{ $sampah->desc }}</td>
                                 <td class="text-center">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-secondary-faded btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editSampahModal{{ $sampah->id }}">
+                                    <a href="{{ route('editSampah', $sampah->id) }}" type="button" class="btn btn-secondary-faded btn-sm">
                                         <i class="fas fa-edit text-primary"></i>
-                                    </button>
-
+                                    </a>
+                                    
                                     <button type="submit" class="btn btn-secondary-faded btn-sm"
                                         wire:click="destroy({{ $sampah->id }})"
                                         wire:confirm="Anda yakin ingin menghapus jenis sampah {{ $sampah->jenis_sampah }}?">
@@ -112,6 +111,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
+                                                
                                                 <form wire:submit.prevent="update" enctype="multipart/form-data">
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -143,11 +143,10 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-primary fw-bold"
-                                                            wire:click="update({{ $sampah->id }})">
+                                                        <button type="submit" class="btn btn-primary fw-bold">
                                                             <i class="fas fa-save me-2"></i>Simpan
                                                             Perubahan</button>
-                                                    </div>
+                                                    </div>  
                                                 </form>
                                             </div>
                                         </div>

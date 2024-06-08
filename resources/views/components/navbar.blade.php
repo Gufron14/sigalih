@@ -20,38 +20,7 @@
     </nav>
 @endif
 
-<!-- Navbar -->
-@if (Request::is('banksampah/index'))
 
-    {{-- BANK SAMPAH NAVBAR --}}
-    <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Sampah Sigalih</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Sampah</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Riwayat</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                </ul>
-                <a href="/" class="btn btn-outline-light fw-bold text-uppercase">website</a>
-            </div>
-        </div>
-    </nav>
-@else
     {{-- WEBSITE NAVBAR --}}
     {{--  --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
@@ -73,7 +42,7 @@
                 <!-- Left links -->
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <x-nav-link :active="request()->routeIs('home')" href="/">Beranda</x-nav-link>
-                    <x-nav-link :active="request()->routeIs('berita.*')" href="{{ route('berita') }}">Kabar Desa</x-nav-link>
+                    <x-nav-link :active="request()->routeIs('berita')" href="{{ route('berita') }}">Kabar Desa</x-nav-link>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -123,8 +92,6 @@
         <!-- Container wrapper -->
     </nav>
 
-@endif
-<!-- Navbar -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">

@@ -17,7 +17,6 @@ use Svg\Tag\Path;
 #[Title('Daftar Berita')]
 class Index extends Component
 {   
-    use Toastable;
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
@@ -30,10 +29,10 @@ class Index extends Component
         }
 
         //flash message
-        // session()->flash('message', 'Data Berhasil Dihapus.');
+        session()->flash('message', 'Data Berhasil Dihapus.');
 
         //redirect
-        return Redirect::back()->success('Berhasil menghapus berita');
+        return Redirect::back();
 
     }
 

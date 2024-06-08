@@ -90,11 +90,7 @@ a {
     justify-content: center;
 }
 
-.nav-link.active {
-    border-bottom: 2px solid rgb(255, 166, 0); /* Garis bawah warna kuning */
-    font-weight: bold; /* Teks tebal */
-    padding-bottom: 5px; /* Menambahkan padding bawah untuk menghindari penumpukan garis */
-}
+
 .nav-item {
     margin-left: 10px; /* Tambahkan jarak antar item menu */
 }
@@ -128,4 +124,9 @@ a {
 
 .dropdown-menu {
     border: none;
+}
+
+.transparent-background {
+    background-color: url('https://www.toptal.com/designers/subtlepatterns/uploads/leaves.png');
+    opacity: 50%;
 }

@@ -9,13 +9,13 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Masmerise\Toaster\Toaster;
 use Livewire\Attributes\Layout;
+use Masmerise\Toaster\Toastable;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Tambah Berita')]
 
 class Create extends Component
-{
-
+{   
     use WithFileUploads;
 
     public $title, $content, $image, $slug;
@@ -43,9 +43,9 @@ class Create extends Component
             'slug' => $this->slug
         ]);
 
-        // Toaster::success('Berhasil menambahkan jenis sampah baru');
+        session()->flash('success', 'Data Berhasil Ditambahkan.');
         $this->reset();
-        return redirect()->back()->success('Berhasil menambahkan jenis sampah baru');
+        return redirect()->back();
     }
     
     public function render()

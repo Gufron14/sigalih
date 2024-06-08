@@ -7,11 +7,24 @@
     <body>
         @include('livewire.bank-sampah.components.navbar')
 
-        <main class="min-h-screen">
+        <main class="container min-h-screen">
             <div class="container">
                 {{ $slot }}
             </div>
         </main>
+
+        <footer class="mt-5" style="background: rgb(240, 240, 240)">
+            <div class="row mx-5 py-3 justify-content-between">
+                <div class="col text-secondary">
+                    &copy; <small>2024. Bank Sampah Sirnagalih.</small> 
+                </div>
+                <div class="col text-end">
+                    <a href="">
+                        <i class="fas fa-globe me-2"></i><small>sirnagalih.go.org</small>
+                    </a>
+                </div>
+            </div>
+        </footer>
         
         @include('livewire.bank-sampah.components.script')
         <script>
