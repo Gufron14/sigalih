@@ -16,7 +16,9 @@ class RequestSurat extends Model
         'data_permintaan',
         'status',
         'catatan_admin',
-        'form_data'
+        'form_data',
+        'label',
+        'value',
     ];
 
     public function user()

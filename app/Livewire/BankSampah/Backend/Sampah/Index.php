@@ -17,12 +17,6 @@ class Index extends Component
     public $desc;
     public $jenisSampahId;
 
-    // protected $rules = [
-    //     'jenis_sampah' => 'max:100',
-    //     'harga_per_kg' => 'numeric',
-    //     'desc' => 'nullable|string',
-    // ];
-
     public function store()
     {
         $this->validate([
@@ -41,9 +35,6 @@ class Index extends Component
         Toaster::success('Berhasil menambahkan jenis sampah baru');
         return redirect()->to('bs-admin/sampah');
     }
-
-
-
 
 
     public function destroy($id)

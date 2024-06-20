@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Layanan\Surat;
 
+use App\Models\JenisSurat;
 use App\Models\Surat;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
@@ -43,7 +44,7 @@ class Create extends Component
             $this->template->storeAs('word-template', $templateName);
         }
 
-        Surat::create([
+        JenisSurat::create([
             'nama_surat' => $this->nama_surat,
             'desc' => $this->desc,
             'template' => $templateName

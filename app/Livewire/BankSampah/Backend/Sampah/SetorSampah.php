@@ -77,7 +77,7 @@ class SetorSampah extends Component
         }
     }
 
-    public function store($request)
+    public function store()
     {
         if (is_null($this->nasabahId) || $this->nasabahId === '') {
             session()->flash('error', 'Nama Nasabah harus dipilih.');
@@ -92,11 +92,11 @@ class SetorSampah extends Component
         foreach ($this->sampahs as $sampah) {
             if ($this->checkedRows[$sampah->id]) {
                 RiwayatSetoran::create([
-                    'nasabah_id' => $this->nasabahId,
-                    'jenis_sampah_id' => $sampah->id->$request->toArray(),
+                    'nasabah_id' => $this->nasabahId, // Atau sesuaikan dengan ID nasabah yang sesuai
+                    'jenis_sampah_id' => $sampah->id,
                     'berat_sampah' => $this->inputs[$sampah->id]['berat'],
                     'pendapatan' => $this->inputs[$sampah->id]['pendapatan'],
-                    'jenis_transaksi' => $this->jenisTransaksi,
+                    'jenis_transaksi' => $this->jenisTransaksi, // Atau sesuai dengan inputan dari pengguna
                 ]);
             }
         }

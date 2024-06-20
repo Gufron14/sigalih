@@ -8,6 +8,7 @@ use App\Models\JenisSurat;
 use App\Models\RequestSurat;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Livewire\TemporaryUploadedFile;
 
 #[Title('Buat Permohonan')]
 class CreateRequestSurat extends Component
@@ -18,7 +19,10 @@ class CreateRequestSurat extends Component
     public $selectedLetterId;
     public $formFields;
     public $formData = [];
-    public $rules = [];
+    public $file;
+    public $rules = [
+        'file' => 'required|file|max:2048', // Aturan validasi untuk file
+    ];
 
     public function mount($nama_surat)
     {
@@ -43,6 +47,13 @@ class CreateRequestSurat extends Component
             return;
         }
 
+        foreach ($this->formData as $key => $value) {
+            if ($value instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
+                $filePath = $value->store('uploads', 'public');
+                $this->formData[$key] = $filePath;
+            }
+        }
+
         $surat = RequestSurat::create([
             'jenis_surat_id' => $this->selectedLetterId,
             'user_id' => auth()->id(),
@@ -51,9 +62,9 @@ class CreateRequestSurat extends Component
 
         $this->reset();
 
-        session()->flash('message', 'Surat '. $jenisSurat->nama_surat. 'berhasil diajukan.');
+        session()->flash('message', $jenisSurat->nama_surat . ' berhasil diajukan.');
 
-        return redirect()->back();
+        return redirect()->route('progres');
     }
 
     protected function loadFormFields()
@@ -84,7 +95,7 @@ class CreateRequestSurat extends Component
     public function render()
     {
         return view('livewire.layanan.create-request-surat', [
-            'surat' => JenisSurat::find($this->selectedLetterId),
+            'surat' => JenisSurat::findOrFail($this->selectedLetterId),
             'jenisSurat' => $this->jenisSurat,
             'formData' => $this->formData,
         ]);

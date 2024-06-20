@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
+use Dompdf\Dompdf;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\FileSurat;
@@ -20,6 +21,7 @@ class Show extends Component
 {
     public $jenisSurat;
     public $pengajuan;
+
     public function mount($id)
     {
         $this->pengajuan = RequestSurat::with('user', 'jenisSurat')->findOrFail($id);
@@ -30,7 +32,7 @@ class Show extends Component
         $user = User::with('warga')
             ->where('id', $this->pengajuan->user_id)
             ->firstOrFail();
-        $formFields = FormField::firstOrFail();
+        $formField = FormField::firstOrFail();
 
         // Ambil file template yang terkait dengan jenis surat
         $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
@@ -38,18 +40,20 @@ class Show extends Component
         // Pastikan file template ditemukan
         if (!$fileSurat) {
             session()->flash('error', 'template gak ada');
+            return;
         }
 
         // Ambil jalur file template
         $filePath = storage_path('app/public/' . $fileSurat->file_path);
 
-        if (file_exists($filePath)) {
-            $templateProcessor = new TemplateProcessor($filePath);
-        } else {
+        if (!file_exists($filePath)) {
             session()->flash('error', 'File template surat tidak ditemukan');
             return redirect()->back();
         }
 
+        $templateProcessor = new TemplateProcessor($filePath);
+
+        // Set the user-related values in the template
         $templateProcessor->setValues([
             'nama' => $user->warga->nama,
             'nik' => $user->warga->nik,
@@ -64,16 +68,15 @@ class Show extends Component
             'agama' => $user->warga->agama,
             'status' => $user->warga->status,
             'pekerjaan' => $user->warga->pekerjaan,
-
-            //'form_data' => $this->parseFormData(json_decode($formFields->form_data)),
         ]);
 
-        $formData = json_decode($formFields->form_data, true);
+        // Decode form data and set in template
+        $formData = json_decode($formField->form_data, true);
 
+        // Check if the decoded data is an array
         if (is_array($formData)) {
-            foreach ($formData as $key => $value) {
-                $templateProcessor->setValue($key, $value);
-            }
+            // Set values in template processor
+            $templateProcessor->setValues($formData);
         }
 
         // Menyimpan dokumen sementara sebagai file .docx
@@ -81,67 +84,14 @@ class Show extends Component
         $pathToSave = storage_path('app/public/templates/' . $filename);
         $templateProcessor->saveAs($pathToSave);
 
-        // Konversi dokumen .docx ke PDF menggunakan PHPWord
-        $pdfPath = $this->convertToPdfWithPhpWord($pathToSave);
-        if ($pdfPath !== null) {
-            return response()->file($pdfPath)->deleteFileAfterSend(true);
-        } else {
-            // Tangani kasus ketika konversi ke PDF gagal
-            return response('Gagal mengonversi dokumen ke PDF', 500);
-        }
-    }
-
-    protected function convertToPdfWithPhpWord($docxPath)
-    {
-        $pdfPath = str_replace('.docx', '.pdf', $docxPath);
-
-        // Membuat objek Word baru
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-
-        // Memuat template Word
-        $phpWord->setTemplate($docxPath);
-
-        // Menyimpan dokumen sebagai PDF
-        $rendererPdf = IOFactory::createWriter($phpWord, 'PDF');
-        $rendererPdf->save($pdfPath);
-
-        if (file_exists($pdfPath)) {
-            return $pdfPath;
-        } else {
-            session()->flash('error', 'Konversi ke PDF gagal');
-            return null;
-        }
-    }
-
-    protected function convertToPdf($docxPath)
-    {
-        $pdfPath = str_replace('.docx', '.pdf', $docxPath);
-        // Menggunakan LibreOffice untuk mengonversi ke PDF
-        $command = 'libreoffice --headless --convert-to pdf --outdir ' . dirname($pdfPath) . ' ' . $docxPath;
-        shell_exec($command);
-
-        if (file_exists($pdfPath)) {
-            return response()->file($pdfPath);
-        } else {
-            session()->flash('error', 'Konversi ke PDF gagal');
-        }
-    }
-
-    public function downloadPDF()
-    {
-        $pdf = Pdf::loadView('livewire/admin/layanan/pengajuan/CreatePDF', ['pengajuan' => $this->pengajuan]);
-
-        $pdf->setPaper('A4', 'potrait');
-
-        return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->output();
-        }, 'SKD-' . $this->pengajuan->user->warga->nama . '.pdf');
+        return response()->download($pathToSave)->deleteFileAfterSend(true);
     }
 
     public function render()
     {
         return view('livewire.admin.layanan.pengajuan.show', [
             'pengajuan' => $this->pengajuan,
+            'groupedPengajuan' => $this->groupedPengajuan ?? [],
         ]);
     }
 }

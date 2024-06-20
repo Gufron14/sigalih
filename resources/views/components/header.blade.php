@@ -26,6 +26,8 @@
 
 <link rel="shortcut icon" href="{{ asset('assets/img/1.png') }}">
 
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 {{-- Sweet Alert --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css">
 

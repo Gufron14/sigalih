@@ -2,11 +2,11 @@
     <div class="row justify-content-between mb-3 g-5">
         <div class="col">
             <div class="d-flex align-middle">
-                <h2 class="text-success fw-bold align-middle" data-aos="zoom-in-right">Hei, {{ $warga->nama }}! <br> Sudahkah Lingkunganmu
+                <h2 class="text-success fw-bold align-middle">Hei, {{ $warga->nama }}! <br> Sudahkah Lingkunganmu
                     Bersih?</h2>
             </div>
             <p>Bersihkan lingkunganmu, untuk masa depan Sehat.</p>
-            <a href="{{ route('panduan') }}" data-aos="fade-right" class="btn text-white fw-bold rounded-5" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">Lihat Panduan <i
+            <a href="{{ route('panduan') }}" class="btn text-white fw-bold rounded-5 card-grow" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">Lihat Panduan <i
                     class="fas fa-paper-plane ms-2"></i> </a>
 
             {{-- Carousel --}}
@@ -144,8 +144,8 @@
 
             {{-- Jadwal --}}
             <div class="row align-items-center justify-content-center p-3">
-                <div class="col-7 text-center">
-                    <small>Pengambilan sampah berikutnya pada:</small>
+                <div class="col-6 text-center">
+                    <small>Pengambilan sampah berikutnya:</small>
                     <div class="card-title fw-bold">
                         Minggu, 19 Mei 2024
                     </div>

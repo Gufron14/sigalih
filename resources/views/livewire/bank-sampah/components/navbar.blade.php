@@ -1,4 +1,4 @@
-<div class="container p-4 mb-4">
+<div class="container sticky-top p-4 mb-4">
     <nav class="navbar navbar-expand-lg rounded-4 p-2" data-bs-theme="dark" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#"> <i class="fas fa-recycle"></i></a>

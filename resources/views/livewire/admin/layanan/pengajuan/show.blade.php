@@ -45,7 +45,8 @@
                                     <div class="d-flex align-items-center justify-content-center">
                                         @if ($pengajuan->user->warga->foto)
                                             <img src="{{ asset('storage/' . $pengajuan->user->warga->foto) }}"
-                                                alt="" style="width: 4cm; height:6cm" class="border border-danger">
+                                                alt="" style="width: 4cm; height:6cm"
+                                                class="border border-danger">
                                         @else
                                             <img src="https://via.placeholder.com/150" alt=""
                                                 style="width: 4cm; height:6cm" class="border border-danger">
@@ -75,7 +76,8 @@
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td>: {{ $pengajuan->user->warga->alamat }}, RT. {{ $pengajuan->user->warga->rt }} , RW.
+                                <td>: {{ $pengajuan->user->warga->alamat }}, RT. {{ $pengajuan->user->warga->rt }} ,
+                                    RW.
                                     {{ $pengajuan->user->warga->rw }}, Ds. {{ $pengajuan->user->warga->desa }}</td>
                             </tr>
                         </tbody>
@@ -87,25 +89,26 @@
                     </label>
                     <table class="table table-sm">
                         <tbody>
-                            @php
-                                $formData = json_decode($pengajuan->form_data, true);
-                            @endphp
-                            @foreach ($formData as $key => $value)
-                                <tr>
-                                    <td>
-                                        {{ $key }}
-                                    </td>
-                                    <td>:
-                                        @if (is_string($value))
-                                            {{ $value }}
-                                        @elseif (is_array($value))
-                                            @foreach ($value as $item)
-                                                {{ $item }}
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @php
+                            $formData = json_decode($pengajuan->form_data, true);
+                        @endphp
+                        @foreach ($formData as $key => $value)
+                            <tr>
+                                <td>{{ $key }}</td>
+                                <td>:
+                                    @if (is_string($value) && str_starts_with($value, 'uploads/'))
+                                        <img src="{{ asset('storage/' . $value) }}" class="img-fluid rounded" alt="Image" width="200px">
+                                    @elseif (is_string($value))
+                                        {{ $value }}
+                                    @elseif (is_array($value))
+                                        @foreach ($value as $item)
+                                            {{ $item }}
+                                        @endforeach
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        
                         </tbody>
                     </table>
                 </div>
@@ -115,10 +118,10 @@
                 {{-- Lihat PDF --}}
                 <button wire:click="lihatPdf" class="btn btn-primary fw-bold">
                     <i class="fas fa-save me-2"></i>Simpan</button>
-    
+
                 {{-- Kirim Ke User --}}
                 <button wire:click="kirimSurat" class="btn btn-success text-white fw-bold">
-                    <i class="fas fa-thumbs-up me-2"></i>Terima Pengajuan</button>    
+                    <i class="fas fa-thumbs-up me-2"></i>Terima Pengajuan</button>
             </div>
 
         </div>

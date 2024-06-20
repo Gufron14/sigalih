@@ -29,9 +29,8 @@
         <div class="col mt-5">
             <div class="card shadow-sm">
                 <div class="card-body p-5">
-                    <div class="mb-3">
+                    <div class="mb-5">
                         <h5 class="fw-bold">Formulir {{ $surat->nama_surat }}</h5>
-                        <hr>
                     </div>
                     <form wire:submit.prevent="submit">
                         @if (!empty($formFields))
@@ -41,7 +40,7 @@
                                         <label for="{{ $field->field_label }}"
                                             class="form-label">{{ $field->field_label }}</label>
                                         <input type="text" wire:model="formData.{{ $field->field_label }}"
-                                            class="form-control" placeholder="{{ $field->field_label }}">
+                                            class="form-control" placeholder="{{ $field->field_label }}" autofocus>
                                     @elseif($field->field_type === 'number')
                                         <label for="{{ $field->field_label }}"
                                             class="form-label">{{ $field->field_label }}</label>

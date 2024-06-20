@@ -26,7 +26,7 @@
                             <p class="card-text">
                                 <small class="text-secondary">
                                     <i
-                                        class="fas fa-calendar-alt"></i>&nbsp;&nbsp;{{ $item->created_at->format('l, M Y') }}
+                                        class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->format('l, M Y') }}
                                 </small>
                             </p>
                             <p class="card-text">{!! Str::limit($item->content, 200) !!} </p>
