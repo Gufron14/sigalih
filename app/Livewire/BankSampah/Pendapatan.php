@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\BankSampah\PenarikanSaldo;
 
 #[Layout('livewire.bank-sampah.layouts.app')]
-#[Title('Riwayat Pendapatan Sampah')]
-class Riwayat extends Component
+#[Title('Pendapatan')]
+
+class Pendapatan extends Component
 {
     public $warga;
     public $riwayatSetorans;
@@ -27,10 +28,9 @@ class Riwayat extends Component
 
     public function render()
     {
-        $penarikanSaldo = PenarikanSaldo::where('nasabah_id', Auth::user()->id)
-            ->orderBy('created_at', 'desc')->get();
+        $penarikanSaldo = PenarikanSaldo::where('nasabah_id', Auth::user()->id)->get();
 
-        return view('livewire.bank-sampah.riwayat', [
+        return view('livewire.bank-sampah.pendapatan', [
             'riwayatSetorans' => $this->riwayatSetorans,
             'penarikanSaldo' => $penarikanSaldo,
 

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayat_setorans', function (Blueprint $table) {
+        Schema::create('penarikan_saldos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nasabah_id')->constrained('users', 'id')->onDelete('cascade');
-            $table->decimal('total_berat_sampah', 8, 2);
-            $table->decimal('total_pendapatan', 10, 2);
-            $table->enum('jenis_transaksi', ['tunai', 'tabung']);
+            $table->foreignId('nasabah_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->decimal('nominal', 10, 2);
+            $table->enum('status', ['pending', 'approved','rejected', 'selesai'])->default('pending');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayat_setorans');
+        Schema::dropIfExists('penarikan_saldos');
     }
 };

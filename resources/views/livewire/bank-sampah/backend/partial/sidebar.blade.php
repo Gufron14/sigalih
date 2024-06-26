@@ -69,10 +69,18 @@
                             <span class="menu-link">Sampah</span>
                         </a>
                     </li>
-
-                    {{-- Transaksi --}}
                     <li class="menu-item">
-                        <a class="d-flex align-items-center collapsed" href="#" data-bs-toggle="collapse"
+                        <a class="d-flex align-items-center" href="{{ route('riwayatSetoran') }}"
+                            data-bs-target="#collapseMenuItemUsers" aria-expanded="false"
+                            aria-controls="collapseMenuItemUsers">
+                            <span class="menu-icon">
+                                <i class="fas fa-history"></i>
+                            </span>
+                            <span class="menu-link">Riwayat</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="d-flex align-items-center" href="{{ route('transaksi') }}"
                             data-bs-target="#collapseMenuItemUsers" aria-expanded="false"
                             aria-controls="collapseMenuItemUsers">
                             <span class="menu-icon">
@@ -80,45 +88,35 @@
                             </span>
                             <span class="menu-link">Transaksi</span>
                         </a>
-                        <div class="collapse" id="collapseMenuItemUsers">
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Penarikan Saldo</a></li>
-                            </ul>
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Penukaran Saldo</a></li>
-                            </ul>
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Riwayat</a></li>
-                            </ul>
-                        </div>
                     </li>
-
-                    <li class="menu-section mt-4">Pengambilan Sampah</li>
                     <li class="menu-item">
-                        <a class="d-flex align-items-center collapsed" href="#" data-bs-toggle="collapse"
+                        <a class="d-flex align-items-center" href="{{ route('jenisSampah') }}"
                             data-bs-target="#collapseMenuItemUsers" aria-expanded="false"
                             aria-controls="collapseMenuItemUsers">
                             <span class="menu-icon">
-                                <i class="fas fa-hand-holding-usd"></i>
+                                <i class="fas fa-calendar"></i>
                             </span>
-                            <span class="menu-link">Pengambilan Sampah</span>
+                            <span class="menu-link">Jadwal</span>
                         </a>
-                        <div class="collapse" id="collapseMenuItemUsers">
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Penarikan Saldo</a></li>
-                            </ul>
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Penukaran Saldo</a></li>
-                            </ul>
-                            <ul class="submenu">
-                                <li><a href="./user-listing.html">Riwayat</a></li>
-                            </ul>
-                        </div>
+                    </li>
+
+                    {{-- Produk --}}
+                    <li class="menu-section mt-4">kelola produk</li>
+                    <li class="menu-item">
+                        <a class="d-flex align-items-center" href="{{ route('dashboard') }}">
+                            <span class="menu-icon">
+                                <i class="fas fa-store"></i>
+                            </span>
+                            <span class="menu-link">
+                                Produk
+                            </span>
+                        </a>
                     </li>
 
                     {{-- Nasabah --}}
+                    <li class="menu-section mt-4">kelola nasabah</li>
                     <li class="menu-item">
-                        <a class="d-flex align-items-center" href="{{ route('dashboard') }}">
+                        <a class="d-flex align-items-center" href="{{ route('nasabah') }}">
                             <span class="menu-icon">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
@@ -143,19 +141,6 @@
                             </span>
                             <span class="menu-link">
                                 Nasabah
-                            </span>
-                        </a>
-                    </li>
-
-                    {{-- Konten --}}
-                    <li class="menu-section mt-4">kelola konten</li>
-                    <li class="menu-item">
-                        <a class="d-flex align-items-center" href="{{ route('dashboard') }}">
-                            <span class="menu-icon">
-                                <i class="fas fa-images"></i>
-                            </span>
-                            <span class="menu-link">
-                                Slider
                             </span>
                         </a>
                     </li>

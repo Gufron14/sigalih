@@ -18,57 +18,55 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm">
+                <table class="table table-sm table-bordered">
                     <thead>
-                        <th>Tanggal</th>
-                        <th>Nama Nasabah</th>
-                        <th>Sampah</th>
-                        <th>Berat</th>
-                        <th>Pendapatan</th>
-                        <th>Total Berat</th>
-                        <th>Total Pendapatan</th>
-                        <th>Transaksi</th>
-                        <th>Aksi</th>
+                        <tr class="text-center">
+                            <th>Jenis Sampah</th>
+                            <th>Berat</th>
+                            <th>Pendapatan</th>
+                            <th>Nama</th>
+                            <th>Total Berat</th>
+                            <th>Total Pendapatan</th>
+                            <th>Transaksi</th>
+                            <th>Tanggal</th>
+                        </tr>
                     </thead>
-                    <tbody>
-                        @isset($groupedSetorans)
-                        @forelse ($groupedSetorans as $nasabahId => $setorans)
+                    <tbody class="text-center">
+                        @php
+                            $grandTotalPendapatan = 0;
+                            $grandTotalBerat = 0;
+                        @endphp
+                        @foreach ($riwayatSetorans as $riwayatSetoran)
                             @php
-                                $rowCount = $setorans->count();
-                                $nasabah = $nasabahs->firstWhere('id', $nasabahId);
+                                $rowCount = $riwayatSetoran->riwayatSetoranDetails->count();
+                                $grandTotalPendapatan += $riwayatSetoran->total_pendapatan;
+                                $grandTotalBerat += $riwayatSetoran->total_berat_sampah;
                             @endphp
-                            @foreach ($setorans as $index => $setoran)
+                            @foreach ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
                                 <tr>
+                                    <td class="text-start">{{ $detail->jenisSampah->jenis_sampah }}</td>
+                                    <td>{{ (int) $detail->berat_sampah }} Kg</td>
+                                    <td>@currency($detail->pendapatan)</td>
                                     @if ($index === 0)
-                                        <td rowspan="{{ $rowCount }}">{{ $setoran->created_at->format('d-m-Y') }}</td>
-                                        <td rowspan="{{ $rowCount }}">{{ $nasabah->name }}</td>
+                                        <td rowspan="{{ $rowCount }}" class="text-start">{{ $riwayatSetoran->nama_warga }}</td>
+                                        <td rowspan="{{ $rowCount }}">{{ (int) $riwayatSetoran->total_berat_sampah }} Kg</td>
+                                        <td rowspan="{{ $rowCount }}">@currency($riwayatSetoran->total_pendapatan)</td>
+                                        <td rowspan="{{ $rowCount }}">
+                                            @if ($riwayatSetoran->jenis_transaksi == 'tabung')
+                                                <span class="badge text-bg-primary text-capitalize">
+                                                    {{ $riwayatSetoran->jenis_transaksi }}
+                                                </span>
+                                            @elseif ($riwayatSetoran->jenis_transaksi == 'tunai')
+                                                <span class="badge text-bg-success text-capitalize">
+                                                    {{ $riwayatSetoran->jenis_transaksi }}
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td rowspan="{{ $rowCount }}">{{ $riwayatSetoran->created_at->format('d/m/Y') }}</td>
                                     @endif
-                                    <td>{{ $setoran->jenisSampah->jenis_sampah }}</td>
-                                    <td>{{ (int) $setoran->berat_sampah }} Kg</td>
-                                    @if ($index === 0)
-                                        <td rowspan="{{ $rowCount }}">{{ $totalBerat[$nasabahId] }} Kg</td>
-                                        <td rowspan="{{ $rowCount }}">@currency($totalPendapatan[$nasabahId])</td>
-                                    @endif
-                                    <td>
-                                        @if ($setoran->jenis_transaksi == 'tabung')
-                                            <div class="badge bg-info-faded text-capitalize text-dark"> {{ $setoran->jenis_transaksi }}</div>
-                                        @else
-                                            <div class="badge bg-success-faded text-capitalize text-light"> {{ $setoran->jenis_transaksi }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-secondary-faded btn-sm text-dark">
-                                            <i class="bi bi-eye-fill me-2"></i>Detail
-                                        </a>
-                                    </td>
                                 </tr>
                             @endforeach
-                        @empty
-                            <tr>
-                                <td colspan="9">Tidak ada data</td>
-                            </tr>
-                        @endforelse
-                        @endisset
+                        @endforeach
                     </tbody>
                 </table>
             </div>

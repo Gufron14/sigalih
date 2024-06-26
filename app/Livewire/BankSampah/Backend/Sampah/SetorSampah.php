@@ -8,6 +8,8 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use App\Models\BankSampah\JenisSampah;
 use App\Models\BankSampah\RiwayatSetoran;
+use App\Models\BankSampah\Tabungan;
+use App\Models\DetailRiwayatSetoran;
 
 #[Title('Setor Sampah - Sampah Sigalih')]
 #[Layout('livewire.bank-sampah.backend.layout.bs-layout')]
@@ -19,7 +21,6 @@ class SetorSampah extends Component
     public $totalBerat = 0;
     public $totalPendapatan = 0;
     public $selectAll = false;
-
     public $nasabahId;
     public $jenisTransaksi;
 
@@ -78,33 +79,53 @@ class SetorSampah extends Component
     }
 
     public function store()
-    {
+    {   
         if (is_null($this->nasabahId) || $this->nasabahId === '') {
             session()->flash('error', 'Nama Nasabah harus dipilih.');
             return;
         }
-
+    
         if (is_null($this->jenisTransaksi) || $this->jenisTransaksi === '') {
             session()->flash('error', 'Jenis Transaksi harus dipilih.');
             return;
         }
+    
+        $totalPendapatan = 0;
 
+        $riwayatSetoran = RiwayatSetoran::create([
+            'nasabah_id' => $this->nasabahId,
+            'jenis_transaksi' => $this->jenisTransaksi,
+            'total_berat_sampah' => $this->totalBerat,
+            'total_pendapatan' => $this->totalPendapatan,
+        ]);
+    
         foreach ($this->sampahs as $sampah) {
             if ($this->checkedRows[$sampah->id]) {
-                RiwayatSetoran::create([
-                    'nasabah_id' => $this->nasabahId, // Atau sesuaikan dengan ID nasabah yang sesuai
+                $detailSetoran = DetailRiwayatSetoran::create([
+                    'riwayat_setoran_id' => $riwayatSetoran->id,
                     'jenis_sampah_id' => $sampah->id,
                     'berat_sampah' => $this->inputs[$sampah->id]['berat'],
                     'pendapatan' => $this->inputs[$sampah->id]['pendapatan'],
-                    'jenis_transaksi' => $this->jenisTransaksi, // Atau sesuai dengan inputan dari pengguna
                 ]);
+                $totalPendapatan += $detailSetoran->pendapatan;
             }
         }
 
+        $riwayatSetoran->total_pendapatan = $totalPendapatan;
+        $riwayatSetoran->save();
+
+        if ($this->jenisTransaksi === 'tabung') {
+            $tabungan = Tabungan::firstOrCreate(['nasabah_id' => $this->nasabahId]);
+            $tabungan->saldo += $this->totalPendapatan;
+            $tabungan->pemasukan += $this->totalPendapatan;
+            $tabungan->save();
+        }
+    
         // Reset inputan setelah menyimpan
         $this->resetInputs();
         session()->flash('success', 'Setoran berhasil disimpan.');
     }
+    
 
     private function resetInputs()
     {
