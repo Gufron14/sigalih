@@ -58,7 +58,7 @@
     <hr class="mt-5 mb-5">
 
     {{-- VIDEO --}}
-    <div class="row gap-5">
+    {{-- <div class="row gap-5">
         <div class="col">
             <h4 class="fw-bold mb-3">Video</h4>
             <iframe class="w-100" src="https://www.youtube.com/watch?v=GEyUDgXmHHI" frameborder="0"
@@ -87,10 +87,10 @@
         </div>
     </div>
 
-    <hr class="mt-5 mb-5">
+    <hr class="mt-5 mb-5"> --}}
 
     {{-- BERITA LAINNYA --}}
-    <div class="row gap-3">
+    {{-- <div class="row gap-3">
         <h4 class="fw-bold">Berita Lainnya</h4>
         @foreach ($lainnya as $lain)
             <div class="col gap-3 align-items-center">
@@ -100,5 +100,5 @@
                 </h6>
             </div>
         @endforeach
-    </div>
+    </div> --}}
 </div>

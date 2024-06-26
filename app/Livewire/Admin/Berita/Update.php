@@ -18,7 +18,6 @@ class Update extends Component
 
     public $title, $content, $image, $slug;
     public $postId;
-    public $posts;
     public $existingImage;
 
     public function mount($id)
@@ -70,7 +69,6 @@ class Update extends Component
         $post->save();
 
         $this->reset();
-        $this->posts = Post::all();
 
         session()->flash('success', 'Berhasil memperbarui Berita');
 
@@ -79,8 +77,7 @@ class Update extends Component
     
     public function render()
     {
-        return view('livewire.admin.berita.update', [
-            'posts' => $this->posts,
-        ]);
+        $post = Post::findOrFail($this->postId);
+        return view('livewire.admin.berita.update', compact('post'));
     }
 }

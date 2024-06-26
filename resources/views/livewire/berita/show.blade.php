@@ -15,7 +15,7 @@
             <img src="{{ Storage::url($post->image)}}"
                 alt="{{ $post->image }}" class="rounded" style="width: 800px"> 
             <div class="col-10 mt-5 lh-lg">{{ $post->content }}</div>
-            <hr class="mt-5 mb-3">
+            {{-- <hr class="mt-5 mb-3">
             <a href="">
                 <div class="d-inline-flex align-items-center gap-3">
                     <i class="far fa-thumbs-up fs-3"></i>
@@ -53,7 +53,7 @@
                     </a>
                 </div>
             </div>
-            <hr class="text-secondary">
+            <hr class="text-secondary"> --}}
 
         </div>
         <div class="col">

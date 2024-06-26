@@ -8,7 +8,6 @@ use App\Models\JenisSurat;
 use App\Models\RequestSurat;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
-use Livewire\TemporaryUploadedFile;
 
 #[Title('Buat Permohonan')]
 class CreateRequestSurat extends Component
@@ -38,13 +37,10 @@ class CreateRequestSurat extends Component
         $jenisSurat = JenisSurat::find($this->selectedLetterId);
         $existingRequest = RequestSurat::where('user_id', auth()->id())
             ->where('jenis_surat_id', $this->selectedLetterId)
-            ->where('approved', true)
-            ->where('expired_at', '>', now())
             ->first();
 
         if ($existingRequest) {
-            $this->dispatchBrowserEvent('letter-submission-failed', ['message' => 'Anda tidak dapat mengajukan surat ini saat ini karena masih dalam tenggat waktu.']);
-            return;
+            session()->flash('error', 'Anda sudah mengajukan surat ini.');
         }
 
         foreach ($this->formData as $key => $value) {
@@ -63,8 +59,6 @@ class CreateRequestSurat extends Component
         $this->reset();
 
         session()->flash('message', $jenisSurat->nama_surat . ' berhasil diajukan.');
-
-        return redirect()->route('progres');
     }
 
     protected function loadFormFields()

@@ -29,24 +29,24 @@
         <div class="card-body">
             <table class="table table-sm">
                 <thead>
-                    {{-- <th>Gambar</th> --}}
+                    <th>Gambar</th>
                     <th>Judul Berita</th>
-                    {{-- <th>Konten</th> --}}
+                    <th>Konten</th>
                     <th class="text-center">Aksi</th>
                 </thead>
                 <tbody>
                     @forelse ($posts as $post)
                         <tr>
-                            {{-- <td wire:key='{{ $post->image }}'>
-                                <img src="{{ Storage::url($post->image) }}" alt="image" style="width: 100px">
-                            </td> --}}
+                            <td wire:key='{{ $post->image }}'>
+                                <img src="{{ Storage::url($post->image) }}" alt="{{ $post->title }}" style="width: 100px">
+                            </td>
                             <td wire:key='{{ $post->title }}'>{{ $post->title }}</td>
-                            {{-- <td>{!! Str::limit($post->content, 100) !!}</td> --}}
+                            <td>{!! Str::limit($post->content, 100) !!}</td>
                             <td class="text-center">
                                 <a href="{{ route('updateBerita', $post->id) }}" class="btn btn-sm btn-secondary-faded">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                <button @click="Toaster.success('teu jelas')" class="btn btn-sm btn-secondary-faded" wire:click="destroy({{ $post->id }})"
+                                <button class="btn btn-sm btn-secondary-faded" wire:click="destroy({{ $post->id }})"
                                     wire:confirm="Apa kamu yakin ingin Hapus ini?">
                                     <i class="fas fa-trash text-danger"></i>
                                 </button>

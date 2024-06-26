@@ -89,39 +89,122 @@
                     </label>
                     <table class="table table-sm">
                         <tbody>
-                        @php
-                            $formData = json_decode($pengajuan->form_data, true);
-                        @endphp
-                        @foreach ($formData as $key => $value)
-                            <tr>
-                                <td>{{ $key }}</td>
-                                <td>:
-                                    @if (is_string($value) && str_starts_with($value, 'uploads/'))
-                                        <img src="{{ asset('storage/' . $value) }}" class="img-fluid rounded" alt="Image" width="200px">
-                                    @elseif (is_string($value))
-                                        {{ $value }}
-                                    @elseif (is_array($value))
-                                        @foreach ($value as $item)
-                                            {{ $item }}
-                                        @endforeach
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                        
+                            @php
+                                $formData = json_decode($pengajuan->form_data, true);
+                            @endphp
+                            @foreach ($formData as $key => $value)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td>:
+                                        @if (is_string($value) && str_starts_with($value, 'uploads/'))
+                                            <img src="{{ asset('storage/' . $value) }}" class="img-fluid rounded"
+                                                alt="Image" width="200px">
+                                        @elseif (is_string($value))
+                                            {{ $value }}
+                                        @elseif (is_array($value))
+                                            @foreach ($value as $item)
+                                                {{ $item }}
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div class="text-end">
-                {{-- Lihat PDF --}}
-                <button wire:click="lihatPdf" class="btn btn-primary fw-bold">
-                    <i class="fas fa-save me-2"></i>Simpan</button>
+            <div class="text-start">
 
-                {{-- Kirim Ke User --}}
-                <button wire:click="kirimSurat" class="btn btn-success text-white fw-bold">
-                    <i class="fas fa-thumbs-up me-2"></i>Terima Pengajuan</button>
+
+                @if ($pengajuan->status == 'tunggu')                    
+                    <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fas fa-thumbs-up me-2"></i>Terima Pengajuan
+                    </button>
+
+                    <button type="button" class="btn btn-danger text-white fw-bold" data-bs-toggle="modal" data-bs-target="#tolakModal">
+                        <i class="fas fa-thumbs-down me-2"></i>Tolak Pengajuan
+                    </button>
+                @endif
+
+                <!-- Modal Terima -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Terima Permohonan</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form wire:submit.prevent="terimaPermohonan" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-floating mb-3">
+                                        <input  type="text"
+                                            class="form-control @error('nomor_surat') is-invalid @enderror"
+                                            id="nomor_surat" wire:model="nomor_surat">
+                                        <label for="nomor_surat" class="form-label">Nomor Surat</label>
+                                        @error('nomor_surat')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="date"
+                                            class="form-control @error('tanggal_surat') is-invalid @enderror"
+                                            id="tanggal_surat" wire:model="tanggal_surat">
+                                        <label for="tanggal_surat" class="form-label">Tanggal Surat</label>
+                                        @error('tanggal_surat')
+                                            <small class="text-danger">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a comment here" id="desc" style="height: 100px"
+                                            wire:model="catatan_admin"></textarea>
+                                        <label for="catatan_admin" class="form-label">Catatan</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-primary fw-bold">
+                                        <i class="fas fa-save me-2"></i>Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Modal Tolak --}}
+                <div class="modal fade" id="tolakModal" tabindex="-1" aria-labelledby="tolakModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tolakModalLabel">Tolak Permohonan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form wire:submit.prevent="tolakPermohonan">
+                                <div class="modal-body">
+                                    <div class="form-floating">
+                                        <textarea class="form-control @error('catatan_admin') is-invalid @enderror" placeholder="Catatan" id="catatan_admin" style="height: 100px" wire:model="catatan_admin"></textarea>
+                                        <label for="catatan_admin" class="form-label">Catatan Penolakan</label>
+                                        @error('catatan_admin')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-danger">Tolak Permohonan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

@@ -10,15 +10,14 @@ class RequestSurat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nik',
         'jenis_surat_id',
         'user_id',
-        'data_permintaan',
         'status',
         'catatan_admin',
         'form_data',
-        'label',
-        'value',
+        'nomor_surat',
+        'tanggal_surat',
+        'file_surat',
     ];
 
     public function user()

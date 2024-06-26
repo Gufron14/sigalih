@@ -16,9 +16,15 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::create([
             "nik" => "3205201403010002",
-            "password" => "password",
+            "password" => bcrypt("password"),
             "phone" => "081234567890",
             "email" => "gufron@test.com",
+        ]);
+        \App\Models\User::create([
+            "nik" => "3205202711030003",
+            "password" => bcrypt("password"),
+            "phone" => "081234567891",
+            "email" => "test@test.com",
         ]);
     }
 }

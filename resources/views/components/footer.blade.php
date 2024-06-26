@@ -59,16 +59,16 @@
                             Aplikasi
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Layanan Administrasi</a>
+                            <a href="{{ route('layanan') }}" class="text-reset">Layanan Administrasi</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Bank Sampah Desa</a>
+                            <a href="{{ route('bankSampah') }}" class="text-reset">Bank Sampah Desa</a>
                         </p>
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    {{-- <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
                             Organisasi
@@ -85,7 +85,7 @@
                         <p>
                             <a href="#!" class="text-reset">Help</a>
                         </p>
-                    </div>
+                    </div> --}}
                     <!-- Grid column -->
 
                     <!-- Grid column -->
@@ -98,7 +98,7 @@
                             sirnagalih@gmail.com
                         </p>
                         <p><i class="fas fa-phone me-3"></i> +62 812 3456 7890</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        {{-- <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p> --}}
                     </div>
                     <!-- Grid column -->
                 </div>

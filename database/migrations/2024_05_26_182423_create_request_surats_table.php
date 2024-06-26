@@ -20,8 +20,11 @@ return new class extends Migration
                 ->constrained('jenis_surats', 'id')
                 ->cascadeOnDelete();
             $table->json('form_data');
-            $table->boolean('approved')->default(false);
+            $table->string('nomor_surat')->nullable()->unique();
+            $table->date('tanggal_surat')->nullable();
             $table->text('catatan_admin')->nullable();
+            $table->string('file_surat')->nullable();
+            $table->enum('status', ['tunggu', 'terima', 'tolak'])->default('tunggu');
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });

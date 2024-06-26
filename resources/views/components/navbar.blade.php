@@ -1,8 +1,10 @@
 @if (Request::is('/'))
-    <nav class="navbar navbar-expand-lg" style="background-color: #b40000">
+    {{-- <nav class="navbar navbar-expand-lg" style="background-color: #b40000">
         <div class="container-fluid">
             <div class="text-white ms-3 fw-bold">
-                <i class="fas fa-phone-alt me-2"></i>081234567890
+                <a href="https://wa.me/+6281234567890" class="text-white">
+                    <i class="fas fa-phone-alt me-2"></i>081234567890
+                </a>
             </div>
             <div class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <marquee behavior="" direction="" class="text-white fw-bold">
@@ -17,7 +19,7 @@
                 <i class="fab fa-whatsapp"></i>
             </div>
         </div>
-    </nav>
+    </nav> --}}
 @endif
 
 
@@ -27,7 +29,7 @@
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <a class="navbar-brand mt-2 mt-lg-0" href="/">
             <img src="{{ asset('assets/img/1.png') }}" height="40" alt="MDB Logo" loading="lazy" /> <span
                 class="ms-3 fw-bold">Desa Sirnagalih</span>
         </a>
@@ -49,7 +51,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('layanan') }}">Perencanaan</a></li>
-                        <li><a class="dropdown-item" href="{{ route('transparansi') }}">Transparansi</a></li>
+                        <li><a class="dropdown-item" href="{{ route('dana-desa') }}">Transparansi</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -82,7 +84,7 @@
             <!-- Right elements -->
             <div class="d-flex align-items-center gap-3">
                 @if (Auth::check())
-                <i class="fas fa-bell fs-4 text-danger"></i>
+                {{-- <i class="fas fa-bell fs-4 text-danger"></i> --}}
                     <div class="dropdown">
                         <div data-bs-toggle="dropdown" aria-expanded="false">
                             <a href=""><i class="fas fa-user-circle fs-3 text-secondary"></a></i>

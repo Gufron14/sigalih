@@ -9,6 +9,7 @@
         "barryvdh/laravel-dompdf": "^2.1",
         "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "ilovepdf/ilovepdf-php": "^1.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.7",

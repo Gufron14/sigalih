@@ -5,19 +5,19 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="row justify-content-between mb-5">
+    <div class="row justify-content-between mb-3">
         <div class="col">
-            <h4 class="fw-bold">Layanan</h4>
+            <h3 class="fw-bold">Layanan Surat</h3>
         </div>
         <div class="col d-flex align-items-center justify-content-end">
-            <form class="d-flex w-100" role="search">
+            {{-- <form class="d-flex w-100" role="search">
                 <input class="form-control me-2" type="search" placeholder="Cari layanan" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Cari</button>
-            </form>
+            </form> --}}
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         @forelse ($surats as $surat)
             <div class="col">
                     <a href="{{ route('createPermohonan', ['nama_surat' => $surat->nama_surat]) }}">

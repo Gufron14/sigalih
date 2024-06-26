@@ -18,6 +18,11 @@ use App\Livewire\Admin\Layanan\JenisSurat\UpdateJenisSurat;
 use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
+use App\Livewire\BankSampah\Backend\Nasabah;
+use App\Livewire\BankSampah\Backend\Sampah\Transaksi;
+use App\Livewire\BankSampah\Index as BankSampahIndex;
+use App\Livewire\BankSampah\SyaratKetentuan;
+use App\Livewire\Pembangunan\DanaDesa;
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/laravel/myproject/vendor/livewire/livewire.js', $handle);
@@ -39,10 +44,12 @@ Route::get('berita', \App\Livewire\Berita\Index::class)->name('berita'); // Beri
 Route::get('berita/{slug}', \App\Livewire\Berita\Show::class)->name('show'); // Show Berita
 
 // Tentang
-Route::get('sejarah', Sejarah::class)->name('sejarah');
+Route::prefix('tentang')->group(function () {
+    Route::get('sejarah', Sejarah::class)->name('sejarah');
+});
 
 // Pembangunan
-Route::get('transparansi', Transparansi::class)->name('transparansi');
+Route::get('transparansi-dana-desa', DanaDesa::class)->name('dana-desa');
 
 // Auth
 Route::middleware('guest')->group(function () {
@@ -65,12 +72,12 @@ Route::prefix('layanan')->group(function () {
 }); 
 
 // Bank Sampah
-Route::get('bank-sampah', \App\Livewire\BankSampah\Index::class)
-    ->name('bankSampah')
-    ->middleware('auth');
-Route::prefix('bank-sampah/')->group(function () {
+Route::get('bank-sampah', BankSampahIndex::class)->name('bankSampah')->middleware('auth');
+Route::prefix('bank-sampah')->group(function () {
+    Route::get('syarat&ketentuan', SyaratKetentuan::class)->name('syaratKetentuan');
     Route::get('riwayat', \App\Livewire\BankSampah\Riwayat::class)->name('riwayat');
     Route::get('tukar-saldo', \App\Livewire\BankSampah\TukarSaldo::class)->name('tukarSaldo');
+    Route::get('pendapatan', \App\Livewire\BankSampah\Pendapatan::class)->name('pendapatan');
     Route::get('riwayat-penukaran', \App\Livewire\BankSampah\RiwayatPenukaran::class)->name('riwayatPenukaran');
     Route::get('panduan', \App\Livewire\BankSampah\Panduan::class)->name('panduan');
 });
@@ -100,6 +107,11 @@ Route::prefix('admin')->group(function () {
     // Pengajuan
     Route::get('pengajuan', \App\Livewire\Admin\Layanan\Pengajuan\Index::class)->name('pengajuan');
     Route::get('pengajuan/{id}', Show::class)->name('view-pengajuan');
+
+    // TRANSPARANSI
+    Route::get('transparansi', \App\Livewire\Admin\Transparansi\Index::class)->name('transparan');
+    Route::get('transparansi/create', \App\Livewire\Admin\Transparansi\Create::class)->name('createTransparan');
+    Route::get('transparansi/update/{id}', \App\Livewire\Admin\Transparansi\Update::class)->name('updateTransparan');
 });
 
 // Bank Sampah Admin
@@ -109,4 +121,6 @@ Route::prefix('bs-admin')->group(function () {
     Route::get('sampah/{id}', UpdateSampah::class)->name('editSampah');
     Route::get('setor-sampah', SetorSampah::class)->name('setorSampah');
     Route::get('riwayat-setoran', RiwayatSetoran::class)->name('riwayatSetoran');
+    Route::get('transaksi', Transaksi::class)->name('transaksi');
+    Route::get('nasabah', Nasabah::class)->name('nasabah');
 });

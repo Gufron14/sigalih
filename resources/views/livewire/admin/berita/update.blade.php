@@ -39,6 +39,7 @@
                                     {{ $message }}
                                 </small>
                             @enderror
+                                <img src="{{ Storage::url($post->image) }}" alt="" width="100" class="img-fluid border">
                         </div>
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug</label>

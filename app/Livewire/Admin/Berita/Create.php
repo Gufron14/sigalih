@@ -7,9 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
-use Masmerise\Toaster\Toaster;
 use Livewire\Attributes\Layout;
-use Masmerise\Toaster\Toastable;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Tambah Berita')]
@@ -30,7 +28,7 @@ class Create extends Component
         $this->validate([
             'title' => 'required|max:100',
             'content' => 'required',
-            'image' => 'image|mimes:png,jpg|max:1024',
+            'image' => 'image|mimes:png,jpg|max:2048',
             'slug' => 'required|unique:posts,slug',
         ]);
 

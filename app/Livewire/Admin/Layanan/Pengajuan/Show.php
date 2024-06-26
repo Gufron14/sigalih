@@ -3,16 +3,19 @@
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\User;
+use Ilovepdf\Ilovepdf;
 use Livewire\Component;
-use App\Models\FileSurat;
 use App\Models\FormField;
-use App\Models\Pengajuan;
 use App\Models\RequestSurat;
 use Livewire\Attributes\Title;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
+use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Writer\HTML;
+use Illuminate\Support\Facades\File;
+use PhpOffice\PhpWord\Shared\XMLWriter;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 #[Layout('livewire.admin.layouts.app')]
@@ -21,18 +24,41 @@ class Show extends Component
 {
     public $jenisSurat;
     public $pengajuan;
+    public $nomor_surat;
+    public $tanggal_surat;
+    public $catatan_admin;
+
+    protected $rules = [
+        'nomor_surat' => 'required',
+        'tanggal_surat' => 'required',
+        'catatan_admin' => 'required',
+    ];
 
     public function mount($id)
     {
         $this->pengajuan = RequestSurat::with('user', 'jenisSurat')->findOrFail($id);
+
+        $this->nomor_surat = $this->pengajuan->nomor_surat;
+        $this->tanggal_surat = $this->pengajuan->tanggal_surat;
+        $this->catatan_admin = $this->pengajuan->catatan_admin;
     }
 
-    public function lihatPdf()
+    public function terimaPermohonan()
     {
+        $this->validate();
+
+        $this->pengajuan->update([
+            'nomor_surat' => $this->nomor_surat,
+            'tanggal_surat' => $this->tanggal_surat,
+            'catatan_admin' => $this->catatan_admin,
+            'status' => 'terima',
+        ]);
+
         $user = User::with('warga')
             ->where('id', $this->pengajuan->user_id)
             ->firstOrFail();
-        $formField = FormField::firstOrFail();
+
+        $formField = FormField::where('jenis_surat_id', $this->pengajuan->jenisSurat->id)->first();
 
         // Ambil file template yang terkait dengan jenis surat
         $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
@@ -68,15 +94,20 @@ class Show extends Component
             'agama' => $user->warga->agama,
             'status' => $user->warga->status,
             'pekerjaan' => $user->warga->pekerjaan,
+            'nomor_surat' => $this->pengajuan->nomor_surat,
+            'tanggal_surat' => $this->pengajuan->tanggal_surat,
         ]);
 
         // Decode form data and set in template
-        $formData = json_decode($formField->form_data, true);
+        $formData = json_decode($this->pengajuan->form_data, true);
 
-        // Check if the decoded data is an array
-        if (is_array($formData)) {
-            // Set values in template processor
-            $templateProcessor->setValues($formData);
+        if (!$formData) {
+            session()->flash('error', 'Data form tidak ditemukan');
+            return redirect()->back();
+        }
+
+        foreach ($formData as $key => $value) {
+            $templateProcessor->setValue($key, "$value");
         }
 
         // Menyimpan dokumen sementara sebagai file .docx
@@ -84,7 +115,44 @@ class Show extends Component
         $pathToSave = storage_path('app/public/templates/' . $filename);
         $templateProcessor->saveAs($pathToSave);
 
-        return response()->download($pathToSave)->deleteFileAfterSend(true);
+        // Konversi file Word menjadi PDF menggunakan ilovepdf 
+        $ilovepdf = new Ilovepdf('project_public_2c27f90aa7df4963be8367251286fcc9_iSDLs2358d70cf1369adc7cb11b17b825d72a', 'secret_key_25fb2fe0707d23ecdbb7f13175eaa085_dW6SFd6d17c31c0e94c5aab7ee03b8fd5c981');
+        $myTaskConvertOffice = $ilovepdf->newTask('officepdf');
+        $file = $myTaskConvertOffice->addFile($pathToSave);
+        $myTaskConvertOffice->execute();
+
+        // Buat atau gunakan folder sementara untuk mengunduh file PDF
+        $tempFolder = storage_path('app/public/temp');
+        if (!File::isDirectory($tempFolder)) {
+            File::makeDirectory($tempFolder, 0755, true);
+        }
+
+        $pdfFilename = $this->pengajuan->jenisSurat->singkatan . '-' . $user->warga->nama . '.pdf';
+        $myTaskConvertOffice->download($tempFolder);
+
+        $pdfPathToSave = storage_path('app/public/templates/' . $pdfFilename);
+        File::move($tempFolder . '/' . $pdfFilename, $pdfPathToSave);
+
+        // Hapus folder sementara
+        File::deleteDirectory($tempFolder);
+
+        $this->pengajuan->update([
+            'file_surat' => 'templates/' . $pdfFilename,
+        ]);
+
+        session()->flash('success', 'Permohonan surat berhasil diterima.');
+    }
+
+    public function tolakPermohonan()
+    {
+        $this->validate(['catatan_admin' => 'required|string']);
+
+        $this->pengajuan->update([
+            'catatan_admin' => $this->catatan_admin,
+            'status' => 'tolak',
+        ]);
+
+        session()->flash('success', 'Permohonan surat berhasil ditolak.');
     }
 
     public function render()

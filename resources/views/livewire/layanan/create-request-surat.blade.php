@@ -1,7 +1,7 @@
 <div class="container">
 
-    @if (session()->has('message'))
-        <div class="alert alert-success mt-5">{{ session('message') }}</div>
+    @if (session()->has('success'))
+        <div class="alert alert-success mt-5">{{ session('success') }}</div>
     @endif
 
     @if (session()->has('error'))
@@ -38,20 +38,32 @@
                                 <div class="mb-4">
                                     @if ($field->field_type === 'text')
                                         <label for="{{ $field->field_label }}"
-                                            class="form-label">{{ $field->field_label }}</label>
+                                            class="form-label text-capitalize">{{ $field->field_label }}</label>
                                         <input type="text" wire:model="formData.{{ $field->field_label }}"
-                                            class="form-control" placeholder="{{ $field->field_label }}" autofocus>
+                                            class="form-control @error('formData.{{ $field->field_label }}') is-invalid @enderror"
+                                                 placeholder="{{ $field->field_label }}" autofocus>
+                                                 @error('formData.{{ $field->field_label }}')
+                                                     <small class="text-danger">{{ $message }}</small>
+                                                 @enderror
                                     @elseif($field->field_type === 'number')
                                         <label for="{{ $field->field_label }}"
-                                            class="form-label">{{ $field->field_label }}</label>
+                                            class="form-label text-capitalize">{{ $field->field_label }}</label>
                                         <input type="number" wire:model="formData.{{ $field->field_label }}"
-                                            class="form-control" placeholder="{{ $field->field_label }}">
+                                            class="form-control @error('formData.{{ $field->field_label }}') is-invalid @enderror"
+                                                 placeholder="{{ $field->field_label }}">
+                                                 @error('formData.{{ $field->field_label }}')
+                                                     <small class="text-danger">{{ $message }}</small>
+                                                 @enderror
                                     @elseif($field->field_type === 'file')
                                         <label for="{{ $field->field_label }}"
-                                            class="form-label">{{ $field->field_label }}</label>
+                                            class="form-label text-capitalize">{{ $field->field_label }}</label>
                                         <input type="file" wire:model="formData.{{ $field->field_label }}"
-                                            class="form-control" id="{{ $field->field_label }}"
+                                            class="form-control @error('formData.{{ $field->field_label }}') is-invalid @enderror"
+                                                 id="{{ $field->field_label }}"
                                             accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                            @error('formData.{{ $field->field_label }}')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                     @endif
                                     @error($field->field_label)
                                         <small class="text-danger">{{ $message }}</small>

@@ -1,15 +1,4 @@
 <div>
-    @if (session()->has('success'))
-        <div class="alert alert-success w-50 mx-auto my-3">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session()->has('error'))
-        <div class="alert alert-danger w-50 mx-auto my-3">
-            {{ session('error') }}
-        </div>
-    @endif
-
     <!-- Hero -->
     <div class="text-center bg-image"
         style="
@@ -97,13 +86,39 @@
                     <h2 class="fw-bold">Untuk kesejahteraan Masyarakat, kami berkomitmen pada Transparansi</h4>
                         <p class="my-3">Kami terus berupaya meningkatkan kepercayaan masyarakat dengan bersikap
                             terbuka dalam pengelolaan Dana Desa</p>
-                        <a href="{{ route('transparansi') }}" class="img-fluid btn btn-success card-grow fw-bold mt-3"
+                        <a href="{{ route('dana-desa') }}" class="img-fluid btn btn-success card-grow fw-bold mt-3"
                             style="background-image: linear-gradient(to right, #960a0a 0%, #ba3c3c 100%);">
                             Lihat Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
                 <div class="col-md-5 col-sm-12">
-                    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fsyakal.iainkediri.ac.id%2Fkendala-terhadap-pengelolaan-dana-desa%2F&psig=AOvVaw25mXfIqaYHo9OE_hQMHHlm&ust=1718866150390000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLCnn8WJ54YDFQAAAAAdAAAAABAj"
-                        alt="dana desa" class="w-100 rounded-3 border">
+                    <div id="carouselDanaDesa" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @forelse ($transparansis as $item)
+                                <div class="carousel-item @if ($loop->first) active @endif">
+                                        <img src="{{ Storage::url($item->infografik) }}" height="360px" class="d-block object-fit-cover" alt="{{ $item->keterangan }}">
+                                        {{-- <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="fw-bold">{{ $item->keterangan }}</h5>
+                                            <p>Tahun : {{ $item->tahun }}</p>
+                                        </div> --}}
+                                </div>
+                            @empty
+                                <div class="carousel-item active">
+                                    <img src="{{ asset('images/no-image.png') }}" class="d-block w-100" alt="No Image">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDanaDesa" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselDanaDesa" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,7 +180,7 @@
     </div>
 
     {{-- Penduduk --}}
-    <div class="container-fluid" style="background-color: rgb(255, 248, 248, 0.6)">
+    {{-- <div class="container-fluid" style="background-color: rgb(255, 248, 248, 0.6)">
         <div class="container p-5">
             <h1 class="text-center fw-bold mb-5">Kependudukan Sirnagalih</h1>
             <div class="row row-cols-1 row-cols-md-4 g-5">
@@ -218,11 +233,11 @@
                         class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     {{-- Kontak --}}
-    <section class="container p-5">
+    {{-- <section class="container p-5">
         <h2 class="text-center fw-bold mb-5">Kritik dan Saran Masyarakat</h2>
         <div class="row justify-content-around">
             <div class="col-lg-4 text-center d-flex fw-bold align-items-center justify-content-center">
@@ -240,6 +255,6 @@
                 <button class="btn btn-primary fw-bold mx-auto">Kirim<i class="fas fa-paper-plane ms-2"></i></button>
             </div>
         </div>
-    </section>
+    </section> --}}
 </div>
 </div>

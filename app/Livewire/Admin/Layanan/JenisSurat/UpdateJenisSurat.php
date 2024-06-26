@@ -85,7 +85,7 @@ class UpdateJenisSurat extends Component
         // Simpan file surat baru jika ada
         if ($this->file_path) {
             $validatedFileData = $this->validate([
-                'file_path' => 'required|max:1000|mimes:doc,docx',
+                'file_path' => 'nullable|max:1000|mimes:doc,docx',
             ]);
 
             $originalFilename = $validatedFileData['file_path']->getClientOriginalName();

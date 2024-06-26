@@ -22,21 +22,29 @@
                 <tbody>
                     @forelse ($pengajuans as $pengajuan)
                         <tr>
-                            <td>{{ $pengajuan->created_at->format('d/m/Y - H:i:s') }}</td>
+                            <td>{{ $pengajuan->created_at->format('d/m/Y - H:i') }}</td>
                             <td>{{ $pengajuan->user->warga->nama }}</td>
                             <td>{{ $pengajuan->jenisSurat->nama_surat }}</td>
                             <td>
-                                @if ($pengajuan->approved == false)
-                                    <span class="badge bg-warning-faded text-dark">Menunggu</span>
+                                @if ($pengajuan->status == 'tunggu')
+                                    <span class="badge bg-warning text-dark"><i class="fas fa-hourglass-half me-1"></i>Menunggu</span>
+                                @elseif ($pengajuan->status == 'terima')
+                                    <span class="badge bg-success text-white"><i class="fas fa-check me-1"></i>Selesai</span>
                                 @else
-                                    <span class="badge bg-success-faded text-white">Disetujui</span>
+                                    <span class="badge bg-danger text-white"><i class="fas fa-times me-1"></i>Ditolak</span>
                                 @endif
                             </td>
 
                             <td class="text-center">
-                                <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}"
-                                    class="btn btn-secondary-faded btn-sm"> <i class="fas fa-tools text-primary"></i>
-                                </a>
+                                @if ($pengajuan->status == 'tunggu')
+                                    <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}"
+                                        class="btn btn-secondary-faded btn-sm text-primary"> <i class="fas fa-edit me-1 text-primary"></i>Proses
+                                    </a>
+                                @elseif ($pengajuan->status == 'terima')
+                                    <a href="{{ Storage::url($pengajuan->file_surat) }}" target="_blank" download=""
+                                        class="btn btn-secondary-faded btn-sm text-primary"> <i class="fas fa-eye me-1 text-primary"></i>Lihat Surat
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @empty
