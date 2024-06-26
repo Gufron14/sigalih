@@ -30,10 +30,10 @@
                     @foreach ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
                         <tr>
                             <td class="text-start">{{ $detail->jenisSampah->jenis_sampah }}</td>
-                            <td>{{ (int) $detail->berat_sampah }} Kg</td>
+                            <td>{{ (float) $detail->berat_sampah }} Kg</td>
                             <td>@currency($detail->pendapatan)</td>
                             @if ($index === 0)
-                                <td rowspan="{{ $rowCount }}">{{ (int) $riwayatSetoran->total_berat_sampah }} Kg</td>
+                                <td rowspan="{{ $rowCount }}">{{ (float) $riwayatSetoran->total_berat_sampah }} Kg</td>
                                 <td rowspan="{{ $rowCount }}">@currency($riwayatSetoran->total_pendapatan)</td>
                                 <td rowspan="{{ $rowCount }}">
                                     @if ($riwayatSetoran->jenis_transaksi == 'tabung')
@@ -59,7 +59,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <h6 class="fw-bold text-success">Grand Total Berat Sampah</h6>
-                <h4 class="fw-bold">{{ (int) $grandTotalBerat }} Kg</h4>
+                <h4 class="fw-bold">{{ (float) $grandTotalBerat }} Kg</h4>
             </div>
         </div>
         <div class="card shadow-sm">

@@ -115,7 +115,7 @@
                 <div class="col">
                     <div class="card card-grow border-success shadow-sm">
                         <div class="card-body text-success text-center">
-                            <h6>Hebat👏 <span class="fw-bold h5 text-success">{{ (int) $totalBeratSampah }} Kg</span>
+                            <h6>Hebat👏 <span class="fw-bold h5 text-success">{{ (float) $totalBeratSampah }} Kg</span>
                                 Sampah, sudah kamu bersihkan.</h6>
                         </div>
                     </div>
