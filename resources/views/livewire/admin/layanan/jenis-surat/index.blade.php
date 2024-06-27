@@ -46,8 +46,8 @@
                                         <i class="fas fa-edit text-primary fs-6"></i>
                                     </a>
                                     <button type="submit" 
+                                    wire:confirm="Are you sure you want to delete this item?"
                                         wire:click="destroy({{ $jenis_surat->id }})"
-                                        wire:confirm="Are you sure you want to delete this item?"
                                         class="btn btn-secondary-faded btn-sm">
                                         <i class="bi bi-trash-fill text-danger fs-6"></i>
                                     </button>

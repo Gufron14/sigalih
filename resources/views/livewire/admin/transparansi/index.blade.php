@@ -48,7 +48,9 @@
                                     <a href="{{ route('updateTransparan', $transparansi->id) }}" class="btn btn-sm btn-secondary-faded">
                                         <i class="fas fa-edit text-primary"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-secondary-faded">
+                                    <button class="btn btn-sm btn-secondary-faded" 
+                                        wire:confirm="Anda yakin ingin menghapus data ini?"
+                                         wire:click="destroy({{ $transparansi->id }})">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
                                 </td>

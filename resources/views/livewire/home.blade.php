@@ -10,7 +10,7 @@
                     <h1 class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</h1>
                     <h5 class="fst-italic mb-4s h5 px-3">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
                         lungguh, diasah ku kanyaah, disipuh ku karipuh."</h5>
-                    <a data-mdb-ripple-init class="btn btn-outline-light mt-3" href="#!"
+                    <a data-mdb-ripple-init class="btn btn-outline-light mt-3 rounded-5" href="#!"
                         role="button">Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
             </div>
@@ -67,12 +67,20 @@
                     <img src="{{ asset('assets/img/banksampah.png') }}" alt="" class="w-100">
                 </div>
                 <div class="col-md-5 col-sm-12">
-                    <h2 class="fw-bold">Kamu bisa dapat Uang dengan mengikuti program Bank Sampah</h4>
-                        <p class="my-3">Hey, kabar baik! dengan mengikuti program Bank Sampah, kamu bisa dapat uang
-                            lho. Ayo ikuti sekarang!</p>
-                        <a href="{{ route('bankSampah') }}" class="btn btn-success card-grow fw-bold mt-3"
-                            style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">
-                            Ikuti Sekarang<i class="fas fa-paper-plane ms-2"></i></a>
+                    @if (auth()->check())
+                        <h2 class="fw-bold">Hey, ajak rekanmu buat ikutan Program Bank Sampah</h4>
+                            <p class="my-3">Ayo sama-sama bersihkan lingkungan dan dapatkan manfaat program bank sampah.</p>
+                            <a href="https://api.whatsapp.com/send?text=Ayo%20ikuti%20Program%20Bank%20Sampah%20di%20https://sigalih.desa.id" class="btn btn-success card-grow fw-bold mt-3 rounded-5" target="_blank" style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);"><i class="fab fa-whatsapp me-2"></i>Bagikan di WhatsApp</a>
+                    @endif
+
+                    @if (!auth()->check())
+                        <h2 class="fw-bold">Kamu bisa dapat Uang dengan mengikuti program Bank Sampah</h4>
+                            <p class="my-3">Hey, kabar baik! dengan mengikuti program Bank Sampah, kamu bisa dapat uang
+                                lho. Ayo ikuti sekarang!</p>
+                            <a href="{{ route('login') }}" class="btn btn-success card-grow fw-bold mt-3 rounded-5"
+                                style="background-image: linear-gradient(to right, #0a9659 0%, #3cba53 100%);">
+                                Ikuti Sekarang<i class="fas fa-paper-plane ms-2"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -86,9 +94,9 @@
                     <h2 class="fw-bold">Untuk kesejahteraan Masyarakat, kami berkomitmen pada Transparansi</h4>
                         <p class="my-3">Kami terus berupaya meningkatkan kepercayaan masyarakat dengan bersikap
                             terbuka dalam pengelolaan Dana Desa</p>
-                        <a href="{{ route('dana-desa') }}" class="img-fluid btn btn-success card-grow fw-bold mt-3"
+                        <a href="{{ route('dana-desa') }}" class="img-fluid btn btn-success card-grow fw-bold mt-3 rounded-5"
                             style="background-image: linear-gradient(to right, #960a0a 0%, #ba3c3c 100%);">
-                            Lihat Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
+                            Lihat Transparansi<i class="fas fa-paper-plane ms-2"></i></a>
                 </div>
                 <div class="col-md-5 col-sm-12">
                     <div id="carouselDanaDesa" class="carousel slide" data-bs-ride="carousel">
