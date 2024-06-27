@@ -1,8 +1,3 @@
-@section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Manajemen Surat</li>
-@endsection
-
 @if (session()->has('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -12,7 +7,7 @@
 {{-- BODY --}}
 <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">
+            <h5 class="card-title fw-bold">
                 Daftar Surat
             </h5>
             <a href="{{ route('createSurat') }}" class="btn btn-primary btn-sm fw-bold">

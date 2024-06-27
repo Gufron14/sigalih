@@ -55,6 +55,12 @@
                                     </button>
                                 </td>
                             @empty
+                                <td colspan="7" class="text-danger text-center p-5">
+                                    <p>Belum ada Data.</p>
+                                    <a href="{{ route('createTransparan') }}" class="btn btn-primary btn-sm fw-bold">
+                                        <i class="fas fa-plus-circle me-2"></i>Tambah Data
+                                    </a>
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>

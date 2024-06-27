@@ -1,12 +1,7 @@
 <div>
-    @section('breadcrumbs')
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Permohonan Surat</li>
-    @endsection
-
     <div class="card">
         <div class="card-header">
-            <h5>Daftar Permohonan Surat</h5>
+            <h5 class="card-title fw-bold">Daftar Permohonan Surat</h5>
         </div>
         <div class="card-body">
             <table class="table table-sm">

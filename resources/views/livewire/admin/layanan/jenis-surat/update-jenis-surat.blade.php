@@ -12,6 +12,9 @@
     @endif
 
     <div class="card">
+        <div class="card-header d-flex align-items-center">
+            <h5 class="card-title fw-bold">Edit Surat</h5>
+        </div>
        <div class="card-body">
             <form wire:submit.prevent="update">
                 <div class="row">
@@ -78,7 +81,8 @@
                     @endforeach
                     <button type="button" class="btn btn-info-faded text-dark    btn-sm" wire:click="addFormField"><i class="fas fa-plus me-2"></i>Tambah Field</button>
                 </div>
-                <button type="submit" class="btn btn-primary fw-bold">Simpan</button>
+                <button type="submit" class="btn btn-primary fw-bold">
+                    <i class="fas fa-save me-2"></i>Simpan Perubahan</button>
             </form>
             
         </div>

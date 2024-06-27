@@ -1,24 +1,17 @@
-@section('breadcrumbs')
-    <li class="breadcrumb-item"><a href="{{ route('pengajuan') }}">Permohonan Surat</a></li>
-    <li class="breadcrumb-item active">{{ $pengajuan->jenisSurat->nama_surat }}</li>
-@endsection
-
+@if (session()->has('error'))
+    <span class="alert alert-danger">
+        {{ session('error') }}
+    </span>
+@endif
 <div>
-    @if (session()->has('error'))
-        <span class="alert alert-danger">
-            {{ session('error') }}
-        </span>
-    @endif
 
-    <div class="card card-primary card-outline">
+    <div class="card">
         <div class="card-header">
-            <div class="card-title">
-                <div class=" d-flex justify-content-between">
-                    <h5 class="fw-bold">Permohonan {{ $pengajuan->jenisSurat->nama_surat }} </h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title fw-bold">Permohonan {{ $pengajuan->jenisSurat->nama_surat }} </h5>
                     <small d-flex justify-content-end>{{ $pengajuan->created_at->translatedFormat('l, d F Y') }} -
-                        {{ $pengajuan->created_at->format('H:i:s') }} WIB</small>
+                        {{ $pengajuan->created_at->format('H:i') }} WIB</small>
                 </div>
-            </div>
         </div>
         <div class="card-body">
             {{-- <div class="row mb-3">
@@ -34,7 +27,7 @@
             <label class="form-label text-uppercase fw-bold">
                 Identitas Pemohon
             </label>
-            <div class="table-responsive mb-4">
+            <div class="table-responsive">
                 <div class="mb-3">
                     <table class="table table-sm">
                         <tbody>

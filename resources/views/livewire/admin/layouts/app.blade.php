@@ -20,34 +20,9 @@
 
     <main id="main">
 
-        @if (!Request::is('livewire/admin/dashboard'))            
-        <div class="bg-white border-bottom py-3 mb-3">
-            <div
-                class="container-fluid d-flex justify-content-between align-items-start align-items-md-center flex-column flex-md-row">
-                <nav class="mb-0" aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0 fs-6">
-                        @yield('breadcrumbs')
-                    </ol>
-                </nav>
-                <div class="d-flex justify-content-end align-items-center mt-3 mt-md-0">
-                    @yield('button')
-                </div>
-            </div>
-        </div> <!-- / Breadcrumbs-->
-        @endif
-        <!-- Breadcrumbs-->
-
         <!-- Content-->
-        <section class="container-fluid">
-            
+        <section class="container-fluid mt-3">   
             {{ $slot }}
-
-            <!-- Sidebar Menu Overlay-->
-            <div class="menu-overlay-bg"></div>
-            <!-- / Sidebar Menu Overlay-->
-
-
-
         </section>
         <!-- / Content-->
 

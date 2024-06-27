@@ -58,7 +58,7 @@
                                                 <small class="text-secondary">{{ $request_surat->catatan_admin }}</small>
                                             @endif
                                         </div>
-                                        <a href="">Download Surat</a>
+                                        <a href="{{ Storage::url($request_surat->file_surat) }}" target="_blank" download="" class="btn btn-sm btn-primary fw-bold rounded-3"><i class="bi bi-download me-2"></i>Download Surat</a>
                                     </div>
                                 </div>
                             </div>

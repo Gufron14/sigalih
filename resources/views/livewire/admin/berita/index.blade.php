@@ -53,7 +53,12 @@
                             </td>
                         </tr>
                     @empty
-                        <td colspan="5" class="text-danger text-center p-5">Nothing.</td>
+                        <td colspan="5" class="text-danger text-center p-5">
+                            <p>Belum ada Data.</p>
+                            <a href="{{ route('createBerita') }}" class="btn btn-primary btn-sm fw-bold">
+                                <i class="fas fa-plus-circle me-2"></i>Tambah Berita
+                            </a>
+                        </td>
                     @endforelse
                 </tbody>
             </table>

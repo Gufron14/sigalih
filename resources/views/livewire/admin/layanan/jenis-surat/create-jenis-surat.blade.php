@@ -12,6 +12,9 @@
     @endif
 
     <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title fw-bold">Tambah Jenis Surat</h5>
+        </div>
         <div class="card-body">
             <form wire:submit.prevent="store">
                 <div class="row">
