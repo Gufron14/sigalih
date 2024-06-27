@@ -39,19 +39,19 @@ a {
     transform: scale(1.05);
 }
 
-.card {
+/* .card {
     border: none;
-    /* border-radius: 16px; */
-}
+    border-radius: 16px;
+} */
 
 .card-img-top {
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
 }
 
-.btn {
+/* .btn {
     border-radius: 48px;
-}
+} */
 
 .timeline-with-icons {
     border-left: 1px solid hsl(0, 0%, 90%);
