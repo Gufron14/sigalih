@@ -162,10 +162,16 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary fw-bold">
-                                        <i class="fas fa-save me-2"></i>Simpan</button>
+                                    <div wire:loading wire:target="terimaPermohonan">
+                                        <span class="spinner-border spinner-border-sm text-primary" aria-hidden="true"></span>
+                                        <span role="status text-dark">Sedang membuat surat...</span>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary fw-bold">
+                                            <i class="fas fa-save me-2"></i>Simpan</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

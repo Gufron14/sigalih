@@ -11,13 +11,13 @@
                         <th>Nama Pemohon</th>
                         <th>Jenis Surat</th>
                         <th>Status</th>
-                        <th class="text-center">Aksi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($pengajuans as $pengajuan)
                         <tr>
-                            <td>{{ $pengajuan->created_at->format('d/m/Y - H:i') }}</td>
+                            <td>{{ $pengajuan->created_at->format('d/m/Y - H:i') }} WIB</td>
                             <td>{{ $pengajuan->user->warga->nama }}</td>
                             <td>{{ $pengajuan->jenisSurat->nama_surat }}</td>
                             <td>
@@ -30,7 +30,7 @@
                                 @endif
                             </td>
 
-                            <td class="text-center">
+                            <td class="">
                                 @if ($pengajuan->status == 'tunggu')
                                     <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}"
                                         class="btn btn-secondary-faded btn-sm text-primary"> <i class="fas fa-edit me-1 text-primary"></i>Proses
@@ -44,8 +44,7 @@
                         </tr>
                     @empty
                         <td colspan="5" class="text-center p-5">
-                            <i class="far fa-times-circle text-danger mb-5" style="font-size: 58px"></i>
-                            <p>Belum ada yang mengajukan Surat Permohonan</p>
+                            <p class="text-danger">Belum ada yang mengajukan Surat Permohonan.</p>
                         </td>
                     @endforelse
                 </tbody>

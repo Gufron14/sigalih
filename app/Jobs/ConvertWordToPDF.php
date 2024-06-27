@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use Ilovepdf\Ilovepdf;
 use App\Models\FormField;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\File;
 use Illuminate\Queue\SerializesModels;
@@ -59,7 +61,7 @@ class ConvertWordToPDF implements ShouldQueue
             'status' => $this->user->warga->status,
             'pekerjaan' => $this->user->warga->pekerjaan,
             'nomor_surat' => $this->pengajuan->nomor_surat,
-            'tanggal_surat' => $this->pengajuan->tanggal_surat,
+            'tanggal_surat' => Carbon::parse($this->pengajuan->tanggal_surat)->translatedFormat('d F Y'),
         ]);
 
         // Decode form data and set in template

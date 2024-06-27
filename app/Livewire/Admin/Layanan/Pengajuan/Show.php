@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
 use App\Jobs\ConvertWordToPDF;
+use App\Jobs\CreateWordDocument;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\RequestSurat;
@@ -22,7 +23,7 @@ class Show extends Component
     protected $rules = [
         'nomor_surat' => 'required',
         'tanggal_surat' => 'required',
-        'catatan_admin' => 'required',
+        'catatan_admin' => 'nullable',
     ];
 
     public function mount($id)
