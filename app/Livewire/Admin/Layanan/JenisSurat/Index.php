@@ -27,6 +27,7 @@ class Index extends Component
         $jenisSurat->formFields()->delete();
 
         $jenisSurat->delete();
+        JenisSurat::all();
 
         session()->flash('success', 'Berhasil dihapus');
 

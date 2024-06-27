@@ -9,16 +9,16 @@ class RequestSurat extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'jenis_surat_id',
-        'user_id',
-        'status',
-        'catatan_admin',
-        'form_data',
-        'nomor_surat',
-        'tanggal_surat',
-        'file_surat',
-    ];
+    protected $fillable = ['jenis_surat_id', 'user_id', 'status', 'catatan_admin', 'form_data', 'nomor_surat', 'tanggal_surat', 'file_surat'];
+
+    protected static function booted()
+    {
+        static::creating(function ($requestSurat) {
+            if (is_null($requestSurat->expired_at)) {
+                $requestSurat->expired_at = now()->addDays(30);
+            }
+        });
+    }
 
     public function user()
     {

@@ -19,29 +19,41 @@ class CreateRequestSurat extends Component
     public $formFields;
     public $formData = [];
     public $file;
+    public $statusPermohonan;
+    public $existingRequest;
     public $rules = [
         'file' => 'required|file|max:2048', // Aturan validasi untuk file
     ];
 
     public function mount($nama_surat)
     {
-        $jenisSurat = JenisSurat::where('nama_surat', $nama_surat)->firstOrFail();
-        $this->selectedLetterId = $jenisSurat->id;
+        $this->jenisSurat = JenisSurat::where('nama_surat', $nama_surat)->firstOrFail();
+        $this->selectedLetterId = $this->jenisSurat->id;
+        $this->checkExistingRequest();
         $this->loadFormFields();
+    }
+
+    public function checkExistingRequest()
+    {
+        $this->existingRequest = RequestSurat::where('user_id', auth()->id())
+            ->where('jenis_surat_id', $this->selectedLetterId)
+            ->where('status', '!=', 'tolak')
+            ->where(function ($query) {
+                $query->where('expired_at', '>', now())
+                      ->orWhereNull('expired_at');
+            })
+            ->first();
+
+        if ($this->existingRequest) {
+            $this->statusPermohonan = $this->existingRequest->status;
+        } else {
+            $this->statusPermohonan = null;
+        }
     }
 
     public function submit()
     {
         $this->validate();
-
-        $jenisSurat = JenisSurat::find($this->selectedLetterId);
-        $existingRequest = RequestSurat::where('user_id', auth()->id())
-            ->where('jenis_surat_id', $this->selectedLetterId)
-            ->first();
-
-        if ($existingRequest) {
-            session()->flash('error', 'Anda sudah mengajukan surat ini.');
-        }
 
         foreach ($this->formData as $key => $value) {
             if ($value instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile) {
@@ -50,15 +62,17 @@ class CreateRequestSurat extends Component
             }
         }
 
-        $surat = RequestSurat::create([
+        RequestSurat::create([
             'jenis_surat_id' => $this->selectedLetterId,
             'user_id' => auth()->id(),
             'form_data' => json_encode($this->formData),
+            'status' => 'tunggu', // Set default status to 'menunggu'
         ]);
 
-        $this->reset();
+        $this->reset(['formData', 'file']);
+        $this->checkExistingRequest(); // Re-check existing requests after submission
 
-        session()->flash('message', $jenisSurat->nama_surat . ' berhasil diajukan.');
+        session()->flash('message', $this->jenisSurat->nama_surat . ' berhasil diajukan.');
     }
 
     protected function loadFormFields()
@@ -78,9 +92,9 @@ class CreateRequestSurat extends Component
             $fieldLabel = $field->field_label;
             if (!array_key_exists($fieldLabel, $this->formData)) {
                 $this->formData[$fieldLabel] = '';
-                $this->rules['formData.' .$fieldLabel] = 'required';
+                $this->rules['formData.' . $fieldLabel] = 'required';
                 if ($field['field_type'] === 'file') {
-                    $this->rules['formData.' .$fieldLabel] .= '|file';
+                    $this->rules['formData.' . $fieldLabel] .= '|file';
                 }
             }
         }
@@ -88,10 +102,17 @@ class CreateRequestSurat extends Component
 
     public function render()
     {
+        $request_surat = RequestSurat::where('user_id', auth()->id())
+            ->latest()
+            ->first();
+        $jenisSurat = JenisSurat::all();
+
         return view('livewire.layanan.create-request-surat', [
-            'surat' => JenisSurat::findOrFail($this->selectedLetterId),
-            'jenisSurat' => $this->jenisSurat,
+            'surat' => $this->jenisSurat,
+            'jenisSurat' => $jenisSurat,
             'formData' => $this->formData,
+            'request_surat' => $request_surat,
+            'statusPermohonan' => $this->statusPermohonan,
         ]);
     }
 }

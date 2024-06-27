@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
+use App\Jobs\ConvertWordToPDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\User;
@@ -58,87 +59,7 @@ class Show extends Component
             ->where('id', $this->pengajuan->user_id)
             ->firstOrFail();
 
-        $formField = FormField::where('jenis_surat_id', $this->pengajuan->jenisSurat->id)->first();
-
-        // Ambil file template yang terkait dengan jenis surat
-        $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
-
-        // Pastikan file template ditemukan
-        if (!$fileSurat) {
-            session()->flash('error', 'template gak ada');
-            return;
-        }
-
-        // Ambil jalur file template
-        $filePath = storage_path('app/public/' . $fileSurat->file_path);
-
-        if (!file_exists($filePath)) {
-            session()->flash('error', 'File template surat tidak ditemukan');
-            return redirect()->back();
-        }
-
-        $templateProcessor = new TemplateProcessor($filePath);
-
-        // Set the user-related values in the template
-        $templateProcessor->setValues([
-            'nama' => $user->warga->nama,
-            'nik' => $user->warga->nik,
-            'ttl' => $user->warga->ttl,
-            'jk' => $user->warga->jk,
-            'alamat' => $user->warga->alamat,
-            'rt' => $user->warga->rt,
-            'rw' => $user->warga->rw,
-            'desa' => $user->warga->desa,
-            'kec' => $user->warga->kec,
-            'kab' => $user->warga->kab,
-            'agama' => $user->warga->agama,
-            'status' => $user->warga->status,
-            'pekerjaan' => $user->warga->pekerjaan,
-            'nomor_surat' => $this->pengajuan->nomor_surat,
-            'tanggal_surat' => $this->pengajuan->tanggal_surat,
-        ]);
-
-        // Decode form data and set in template
-        $formData = json_decode($this->pengajuan->form_data, true);
-
-        if (!$formData) {
-            session()->flash('error', 'Data form tidak ditemukan');
-            return redirect()->back();
-        }
-
-        foreach ($formData as $key => $value) {
-            $templateProcessor->setValue($key, "$value");
-        }
-
-        // Menyimpan dokumen sementara sebagai file .docx
-        $filename = $this->pengajuan->jenisSurat->singkatan . '-' . $user->warga->nama . '.docx';
-        $pathToSave = storage_path('app/public/templates/' . $filename);
-        $templateProcessor->saveAs($pathToSave);
-
-        // Konversi file Word menjadi PDF menggunakan ilovepdf 
-        $ilovepdf = new Ilovepdf('project_public_2c27f90aa7df4963be8367251286fcc9_iSDLs2358d70cf1369adc7cb11b17b825d72a', 'secret_key_25fb2fe0707d23ecdbb7f13175eaa085_dW6SFd6d17c31c0e94c5aab7ee03b8fd5c981');
-        $myTaskConvertOffice = $ilovepdf->newTask('officepdf');
-        $file = $myTaskConvertOffice->addFile($pathToSave);
-        $myTaskConvertOffice->execute();
-
-        // Buat atau gunakan folder sementara untuk mengunduh file PDF
-        $tempFolder = storage_path('app/public/temp');
-        if (!File::isDirectory($tempFolder)) {
-            File::makeDirectory($tempFolder, 0755, true);
-        }
-
-        $pdfFilename = $this->pengajuan->jenisSurat->singkatan . '-' . $user->warga->nama . '.pdf';
-        $myTaskConvertOffice->download($tempFolder);
-
-        $pdfPathToSave = storage_path('app/public/templates/' . $pdfFilename);
-        File::move($tempFolder . '/' . $pdfFilename, $pdfPathToSave);
-
-        // Hapus folder sementara
-        File::deleteDirectory($tempFolder);
-
-        $this->pengajuan->update([
-            'file_surat' => 'templates/' . $pdfFilename,
-        ]);
+        ConvertWordToPDF::dispatch($this->pengajuan, $user);
 
         session()->flash('success', 'Permohonan surat berhasil diterima.');
     }
