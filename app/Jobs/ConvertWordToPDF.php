@@ -33,24 +33,13 @@ class ConvertWordToPDF implements ShouldQueue
      */
     public function handle(): void
     {
-        $formField = FormField::where('jenis_surat_id', $this->pengajuan->jenisSurat->id)->first();
+        FormField::where('jenis_surat_id', $this->pengajuan->jenisSurat->id)->first();
 
         // Ambil file template yang terkait dengan jenis surat
         $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
 
-        // Pastikan file template ditemukan
-        if (!$fileSurat) {
-            session()->flash('error', 'template gak ada');
-            return;
-        }
-
         // Ambil jalur file template
         $filePath = storage_path('app/public/' . $fileSurat->file_path);
-
-        if (!file_exists($filePath)) {
-            session()->flash('error', 'File template surat tidak ditemukan');
-            // return redirect()->back();
-        }
 
         $templateProcessor = new TemplateProcessor($filePath);
 
@@ -107,6 +96,9 @@ class ConvertWordToPDF implements ShouldQueue
 
         $pdfPathToSave = storage_path('app/public/templates/' . $pdfFilename);
         File::move($tempFolder . '/' . $pdfFilename, $pdfPathToSave);
+
+        // Hapus file .docx setelah konversi selesai
+        File::delete($pathToSave);
 
         // Hapus folder sementara
         File::deleteDirectory($tempFolder);

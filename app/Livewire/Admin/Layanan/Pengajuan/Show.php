@@ -3,21 +3,11 @@
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
 use App\Jobs\ConvertWordToPDF;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use App\Models\User;
-use Ilovepdf\Ilovepdf;
 use Livewire\Component;
-use App\Models\FormField;
 use App\Models\RequestSurat;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
-use PhpOffice\PhpWord\Settings;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Writer\HTML;
-use Illuminate\Support\Facades\File;
-use PhpOffice\PhpWord\Shared\XMLWriter;
-use PhpOffice\PhpWord\TemplateProcessor;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Permohonan')]
@@ -46,6 +36,23 @@ class Show extends Component
 
     public function terimaPermohonan()
     {
+        // Ambil file template yang terkait dengan jenis surat
+        $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
+
+        // Pastikan file template ditemukan
+        if (!$fileSurat) {
+            session()->flash('error', 'Template surat tidak ada');
+            return;
+        }
+
+        // Ambil jalur file template
+        $filePath = storage_path('app/public/' . $fileSurat->file_path);
+
+        if (!file_exists($filePath)) {
+            session()->flash('error', 'File template surat tidak ditemukan');
+            return;
+        }
+
         $this->validate();
 
         $this->pengajuan->update([
