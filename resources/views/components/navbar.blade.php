@@ -44,7 +44,8 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <x-nav-link :active="request()->routeIs('home')" href="/">Beranda</x-nav-link>
                 <x-nav-link :active="request()->routeIs('berita')" href="{{ route('berita') }}">Kabar Desa</x-nav-link>
-                <li class="nav-item dropdown">
+                <x-nav-link :active="request()->routeIs('dana-desa')" href="{{ route('dana-desa') }}">Transparansi</x-nav-link>
+                {{-- Pembangunan <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Pembangunan
@@ -53,7 +54,7 @@
                         <li><a class="dropdown-item" href="{{ route('layanan') }}">Perencanaan</a></li>
                         <li><a class="dropdown-item" href="{{ route('dana-desa') }}">Transparansi</a></li>
                     </ul>
-                </li>
+                </li>--}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
