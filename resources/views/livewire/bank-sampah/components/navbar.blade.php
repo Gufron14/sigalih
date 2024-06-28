@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto gap-2 mb-2 mb-lg-0">
                     <x-nav-link :active="request()->routeIs('bankSampah')" href="{{ route('bankSampah') }}">Beranda</x-nav-link>
-                    <x-nav-link :active="request()->routeIs('tukarSaldo')" href="{{ route('tukarSaldo') }}" >Tukar Saldo</x-nav-link>
+                    {{-- Tukar Saldo <x-nav-link :active="request()->routeIs('tukarSaldo')" href="{{ route('tukarSaldo') }}" >Tukar Saldo</x-nav-link> --}}
                     <x-nav-link :active="request()->routeIs('pendapatan')" href="{{ route('pendapatan') }}" >Pendapatan</x-nav-link>
                     <x-nav-link :active="request()->routeIs('riwayat')" href="{{ route('riwayat') }}" >Riwayat</x-nav-link>
                     <x-nav-link :active="request()->routeIs('panduan')" href="{{ route('panduan') }}" >Panduan</x-nav-link>

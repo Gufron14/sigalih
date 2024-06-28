@@ -27,7 +27,7 @@
                         $grandTotalPendapatan += $riwayatSetoran->total_pendapatan;
                         $grandTotalBerat += $riwayatSetoran->total_berat_sampah;
                     @endphp
-                    @foreach ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
+                    @forelse ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
                         <tr>
                             <td class="text-start">{{ $detail->jenisSampah->jenis_sampah }}</td>
                             <td>{{ (float) $detail->berat_sampah }} Kg</td>
@@ -49,7 +49,9 @@
                                 <td rowspan="{{ $rowCount }}">{{ $riwayatSetoran->created_at->format('d/m/Y') }}</td>
                             @endif
                         </tr>
-                    @endforeach
+                    @empty
+                        <td colspan="7" class="text-center p-5">Belum ada Riwayat.</td>
+                    @endforelse
                 @endforeach
             </tbody>
         </table>
