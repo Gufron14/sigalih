@@ -87,11 +87,17 @@
                 {{-- <i class="fas fa-bell fs-4 text-danger"></i> --}}
                     <div class="dropdown">
                         <div data-bs-toggle="dropdown" aria-expanded="false">
-                            <a href=""><i class="fas fa-user-circle fs-3 text-secondary"></a></i>
+                            @if (Auth::user()->avatar)
+                                <img src="{{ Storage::url(Auth::user()->avatar) }}" alt="tst" class="object-fit-cover rounded-circle"
+                                width="36px" height="36px">
+                            @else
+                            <img src="https://ui-avatars.com/api/?name={{ auth()->user()->warga->nama }}" class="img-thumbnail rounded-circle" alt="" width="40px">
+
+                            @endif
                         </div>
                         <ul class="dropdown-menu shadow dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item fw-bold" href="#">
+                                <a class="dropdown-item fw-bold" href="{{ route('profil') }}">
                                     Edit Profil
                                 </a>
                             </li>

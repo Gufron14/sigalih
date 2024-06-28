@@ -18,6 +18,7 @@ use App\Livewire\Admin\Layanan\JenisSurat\UpdateJenisSurat;
 use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
+use App\Livewire\Auth\Profil;
 use App\Livewire\BankSampah\Backend\Nasabah;
 use App\Livewire\BankSampah\Backend\Sampah\Transaksi;
 use App\Livewire\BankSampah\Index as BankSampahIndex;
@@ -27,8 +28,6 @@ use App\Livewire\Pembangunan\DanaDesa;
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/laravel/myproject/vendor/livewire/livewire.js', $handle);
 });
-
-Route::get('surat-form', SuratForm::class)->name('JenisSurat');
 
 /** FRONT END
  * Beranda
@@ -57,10 +56,12 @@ Route::middleware('guest')->group(function () {
     Route::get('register', \App\Livewire\Auth\Register::class)->name('register');
 });
 
-Route::get('logout', \App\Livewire\Auth\Logout::class)
-    ->name('logout')
-    ->middleware('auth'); // Logout
 
+Route::middleware('auth')->group(function () {
+    Route::get('logout', \App\Livewire\Auth\Logout::class)->name('logout');
+    Route::get('user-profil', Profil::class)->name('profil');
+});
+    
 // Layanan
 
 Route::get('layanan', \App\Livewire\Layanan\Index::class)->name('layanan');
