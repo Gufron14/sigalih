@@ -2,12 +2,12 @@
     <h3 class="fw-bold mb-5">Transparansi APB Desa</h3>
 
     <div class="row gap-5">
-        <div class="col border rounded" height="600px">
+        <div class="col" height="600px">
             <div id="carouselDanaDesa" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @forelse ($transparansis as $item)
                         <div class="carousel-item @if ($loop->first) active @endif">
-                                <img src="{{ Storage::url($item->infografik) }}" height="360px" class="d-block object-fit-cover" alt="{{ $item->keterangan }}">
+                                <img src="{{ Storage::url($item->infografik) }}" height="360px" class="w-100" alt="{{ $item->keterangan }}">
                                 {{-- <div class="carousel-caption d-none d-md-block">
                                     <h5 class="fw-bold">{{ $item->keterangan }}</h5>
                                     <p>Tahun : {{ $item->tahun }}</p>

@@ -103,7 +103,7 @@
                         <div class="carousel-inner">
                             @forelse ($transparansis as $item)
                                 <div class="carousel-item @if ($loop->first) active @endif">
-                                        <img src="{{ Storage::url($item->infografik) }}" height="360px" class="d-block object-fit-cover" alt="{{ $item->keterangan }}">
+                                        <img src="{{ Storage::url($item->infografik) }}" class="object-fit-cover w-100" alt="{{ $item->keterangan }}">
                                         {{-- <div class="carousel-caption d-none d-md-block">
                                             <h5 class="fw-bold">{{ $item->keterangan }}</h5>
                                             <p>Tahun : {{ $item->tahun }}</p>
