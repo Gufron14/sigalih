@@ -18,8 +18,8 @@
                     <x-nav-link :active="request()->routeIs('panduan')" href="{{ route('panduan') }}" >Panduan</x-nav-link>
                 </ul>
                 <div class="navbar-nav d-flex gap-3 align-items-center text-white">
-                    <i class="fas fa-bell fs-5"></i>
-                    <i class="fas fa-sign-out-alt fs-5"></i> |
+                    {{-- <i class="fas fa-bell fs-5"></i>
+                    <i class="fas fa-sign-out-alt fs-5"></i> | --}}
                     <a href="/" class="btn btn-light fw-bold rounded-4 text-success">Website<i class="bi bi-arrow-right-circle-fill ms-2"></i></a>
                 </div>
             </div>

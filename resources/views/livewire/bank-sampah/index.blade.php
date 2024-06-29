@@ -26,7 +26,7 @@
                 </div>
             @endif
             {{-- TOTAL SALDO --}}
-            <div class="card card-grow card-bg2 mb-3 shadow-sm">
+            <div class="card rounded-4 card-grow card-bg2 mb-3 shadow-sm">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col ms-3">
@@ -92,7 +92,7 @@
             </div>
 
             {{-- Income Outcom --}}
-            <div class="card card-grow shadow-sm mb-3">
+            <div class="card rounded-4 card-grow shadow-sm mb-3">
                 <div class="card-body">
                     <div class="row">
                         <div class="col d-flex justify-content-center">
@@ -113,7 +113,7 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <div class="card card-grow border-success shadow-sm">
+                    <div class="card rounded-4 card-grow border-success shadow-sm">
                         <div class="card-body text-success text-center">
                             <h6>Hebat👏 <span class="fw-bold h5 text-success">{{ (float) $totalBeratSampah }} Kg</span>
                                 Sampah, sudah kamu bersihkan.</h6>
@@ -123,7 +123,7 @@
             </div>
 
             {{-- Jadwal --}}
-            <div class="row align-items-center justify-content-center p-3">
+            {{-- <div class="row align-items-center justify-content-center p-3">
                 <div class="col-6 text-center">
                     <small>Pengambilan sampah berikutnya:</small>
                     <div class="card-title fw-bold">
@@ -134,7 +134,7 @@
                     <button class="btn btn-outline-success fw-bold rounded-5" onclick="showSweetAlert()">Ajukan
                         Pengambilan</button>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

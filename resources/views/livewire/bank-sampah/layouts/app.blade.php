@@ -18,9 +18,9 @@
                 <div class="col text-secondary">
                     &copy; <small>2024. Bank Sampah Sirnagalih.</small> 
                 </div>
-                <div class="col text-end">
-                    <a href="">
-                        <i class="fas fa-globe me-2"></i><small>sirnagalih.go.org</small>
+                <div class="col text-end me-5">
+                    <a href="/" class="text-muted">
+                        <p><i class="fas fa-globe-asia me-2"></i>Sirnagalih.go.org</p>
                     </a>
                 </div>
             </div>
