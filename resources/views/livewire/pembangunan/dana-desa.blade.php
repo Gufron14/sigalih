@@ -7,8 +7,9 @@
                 <div class="carousel-inner">
                     @forelse ($transparansis as $item)
                         <div class="carousel-item @if ($loop->first) active @endif">
-                                <img src="{{ Storage::url($item->infografik) }}" height="360px" class="w-100" alt="{{ $item->keterangan }}">
-                                {{-- <div class="carousel-caption d-none d-md-block">
+                            <img src="{{ Storage::url($item->infografik) }}" height="360px" class="w-100"
+                                alt="{{ $item->keterangan }}">
+                            {{-- <div class="carousel-caption d-none d-md-block">
                                     <h5 class="fw-bold">{{ $item->keterangan }}</h5>
                                     <p>Tahun : {{ $item->tahun }}</p>
                                 </div> --}}
@@ -22,30 +23,35 @@
                         </div>
                     @endforelse
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDanaDesa" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDanaDesa"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselDanaDesa" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDanaDesa"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            
+
         </div>
         <div class="col-4">
             <h5 class="mb-3">Download Laporan APB Desa</h5>
             @forelse ($transparansis as $item)
-                <a href="{{ Storage::url($item->dokumen) }}" target="_blank" download>
-                    <div class="card mb-3 shadow-sm card-grow">
-                        <div class="card-body p-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="fw-bold">{{ $item->keterangan }}</h5>
-                                <small>Tahun : {{ $item->tahun }}</small>
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body p-3">
+                            <h5 class="fw-bold">{{ $item->keterangan }}</h5>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small>Tahun : {{ $item->tahun }}</small>
+                                </div>
+                                <a href="{{ Storage::url($item->dokumen) }}" class="me-5" target="_blank" download>
+                                    <small>Download Laporan</small>
+                                </a>
                             </div>
-                        </div>
                     </div>
-                </a>
+                </div>
             @empty
                 <p>Data belm tersedia</p>
             @endforelse
