@@ -27,7 +27,7 @@
 
                     <!-- Dashboard Menu Section-->
                     <li class="menu-item">
-                        <a class="d-flex align-items-center" href="{{ route('dashboard') }}">
+                        <a class="d-flex align-items-center" href="{{ route('bs.dashboard') }}">
                             <span class="menu-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     class="w-100">
@@ -87,9 +87,18 @@
                                 <i class="fas fa-hand-holding-usd"></i>
                             </span>
                             <span class="menu-link">Transaksi</span>
+                            @php
+                                    use App\Models\BankSampah\PenarikanSaldo;
+                                    $pengajuan = PenarikanSaldo::where('status', 'pending')->count();
+                                @endphp
+                            <span
+                                    class="badge bg-primary-faded text-danger pb-1 ms-2 align-middle rounded-pill"> {{ $pengajuan  }}
+                                </span>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    {{-- Jadwal --}}
+                    {{-- <li class="menu-item">
                         <a class="d-flex align-items-center" href="{{ route('jenisSampah') }}"
                             data-bs-target="#collapseMenuItemUsers" aria-expanded="false"
                             aria-controls="collapseMenuItemUsers">
@@ -98,10 +107,10 @@
                             </span>
                             <span class="menu-link">Jadwal</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     {{-- Produk --}}
-                    <li class="menu-section mt-4">kelola produk</li>
+                    {{-- <li class="menu-section mt-4">kelola produk</li>
                     <li class="menu-item">
                         <a class="d-flex align-items-center" href="{{ route('dashboard') }}">
                             <span class="menu-icon">
@@ -111,7 +120,7 @@
                                 Produk
                             </span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     {{-- Nasabah --}}
                     <li class="menu-section mt-4">kelola nasabah</li>

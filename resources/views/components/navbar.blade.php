@@ -55,7 +55,8 @@
                         <li><a class="dropdown-item" href="{{ route('dana-desa') }}">Transparansi</a></li>
                     </ul>
                 </li>--}}
-                <li class="nav-item dropdown">
+                {{-- Tentang --}}
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Tentang
@@ -69,8 +70,8 @@
                         <li><a class="dropdown-item" href="">Budaya</a></li>
                         <li><a class="dropdown-item" href="">Kemasyarakatan</a></li>
                     </ul>
-                </li>
-                <li class="nav-item dropdown">
+                </li> --}}
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Aplikasi
@@ -79,7 +80,9 @@
                         <li><a class="dropdown-item" href="{{ route('layanan') }}">Layanan Surat</a></li>
                         <li><a class="dropdown-item" href="{{ route('bankSampah') }}">Bank Sampah</a></li>
                     </ul>
-                </li>
+                </li> --}}
+                <x-nav-link :active="request()->routeIs('layanan')" href="{{ route('layanan') }}">Layanan</x-nav-link>
+                <x-nav-link :active="request()->routeIs('bankSampah')" href="{{ route('bankSampah') }}">Bank Sampah</x-nav-link>
             </ul>
             <!-- Left links -->
             <!-- Right elements -->
@@ -98,14 +101,12 @@
                         </div>
                         <ul class="dropdown-menu shadow dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item fw-bold" href="{{ route('profil') }}">
+                                <a class="dropdown-item text-dark" href="{{ route('profil') }}">
                                     Edit Profil
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item fw-bold" href="{{ route('logout') }}">
-                                    Logout
-                                </a>
+                                @livewire('auth.logout')
                             </li>
                         </ul>
                     </div>

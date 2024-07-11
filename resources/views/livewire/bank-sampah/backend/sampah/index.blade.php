@@ -154,7 +154,7 @@
                                 </td>
 
                             @empty
-                                <td colspan="5">Kosong</td>
+                                <td colspan="5" class="text-center text-muted p-5">Belum ada Jenis Sampah</td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -3,7 +3,7 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted mt-5">
         <!-- Section: Social media -->
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+        {{-- <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
             <!-- Left -->
             <div class="me-5 d-none d-lg-block">
                 <span>Tetap terhubung bersama kami di Sosial Media:</span>
@@ -32,11 +32,11 @@
                 </a>
             </div>
             <!-- Right -->
-        </section>
+        </section> --}}
         <!-- Section: Social media -->
 
         <!-- Section: Links  -->
-        <section class="">
+        <section class="p-3">
             <div class="container text-center text-md-start mt-5">
                 <!-- Grid row -->
                 <div class="row mt-3">

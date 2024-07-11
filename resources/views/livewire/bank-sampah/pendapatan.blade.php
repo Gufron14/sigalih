@@ -50,7 +50,6 @@
                             @endif
                         </tr>
                     @empty
-                        <td colspan="7" class="text-center p-5">Belum ada Riwayat.</td>
                     @endforelse
                 @endforeach
             </tbody>

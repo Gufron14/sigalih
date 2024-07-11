@@ -1,4 +1,13 @@
 <div>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (session('error'))
+        <div class="alert alert-error">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-header">
             <h5 class="card-title fw-bold">Daftar Permohonan Surat</h5>
@@ -18,26 +27,33 @@
                     @forelse ($pengajuans as $pengajuan)
                         <tr>
                             <td>{{ $pengajuan->created_at->format('d/m/Y - H:i') }} WIB</td>
-                            <td>{{ $pengajuan->user->warga->nama }}</td>
+                            <td>
+                                {{ $pengajuan->user?->warga?->nama ?? $pengajuan->warga?->nama ?? 'Tidak diketahui' }}
+                            </td>
                             <td>{{ $pengajuan->jenisSurat->nama_surat }}</td>
                             <td>
                                 @if ($pengajuan->status == 'tunggu')
-                                    <span class="badge bg-warning text-dark"><i class="fas fa-hourglass-half me-1"></i>Menunggu</span>
+                                    <span class="badge bg-warning text-dark"><i
+                                            class="fas fa-hourglass-half me-1"></i>Menunggu</span>
                                 @elseif ($pengajuan->status == 'terima')
-                                    <span class="badge bg-success text-white"><i class="fas fa-check me-1"></i>Selesai</span>
+                                    <span class="badge bg-success text-white"><i
+                                            class="fas fa-check me-1"></i>Selesai</span>
                                 @else
-                                    <span class="badge bg-danger text-white"><i class="fas fa-times me-1"></i>Ditolak</span>
+                                    <span class="badge bg-danger text-white"><i
+                                            class="fas fa-times me-1"></i>Ditolak</span>
                                 @endif
                             </td>
 
                             <td class="">
                                 @if ($pengajuan->status == 'tunggu')
                                     <a href="{{ route('view-pengajuan', ['id' => $pengajuan->id]) }}"
-                                        class="btn btn-secondary-faded btn-sm text-primary"> <i class="fas fa-edit me-1 text-primary"></i>Proses
+                                        class="btn btn-secondary-faded btn-sm text-primary"> <i
+                                            class="fas fa-edit me-1 text-primary"></i>Proses
                                     </a>
                                 @elseif ($pengajuan->status == 'terima')
                                     <a href="{{ Storage::url($pengajuan->file_surat) }}" target="_blank" download=""
-                                        class="btn btn-secondary-faded btn-sm text-primary"> <i class="fas fa-eye me-1 text-primary"></i>Lihat Surat
+                                        class="btn btn-secondary-faded btn-sm text-primary"> <i
+                                            class="fas fa-eye me-1 text-primary"></i>Lihat Surat
                                     </a>
                                 @endif
                             </td>

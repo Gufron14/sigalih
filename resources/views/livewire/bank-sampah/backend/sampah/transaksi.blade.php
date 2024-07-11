@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4">
     <div class="card">
         <div class="card-header">
             <h4 class="card-title fw-bold">Riwayat Transaksi</h4>
@@ -43,17 +43,18 @@
                                             <button wire:click="updateStatus({{ $penarikan->id }}, 'rejected')" class="btn btn-sm btn-danger">Tolak</button>
                                         @elseif ($penarikan->status === 'approved')
                                             <button wire:click="updateStatus({{ $penarikan->id }}, 'rejected')" class="btn btn-sm btn-danger">Tolak</button>
-                                            <button wire:click="updateStatus({{ $penarikan->id }}, 'completed')" class="btn btn-sm btn-success">Selesai</button>
+                                            <button wire:click="updateStatus({{ $penarikan->id }}, 'selesai')" class="btn btn-sm btn-success">Selesai</button>
                                         @elseif ($penarikan->status === 'rejected')
                                             <button wire:click="updateStatus({{ $penarikan->id }}, 'approved')" class="btn btn-sm btn-primary">Setujui</button>
                                         @elseif ($penarikan->status === 'selesai')
+                                            {{-- Ganti dengan Lihat Invoice --}}
                                             <button class="btn btn-sm btn-success" disabled>Selesai</button>
                                         @endif
                                     </div>
                                 </td>                                
                             </tr>
                         @empty
-                            <td colspan="5" class="text-center">Belum ada Transaksi.</td>
+                            <td colspan="5" class="text-center text-muted p-5">Belum ada Transaksi.</td>
                         @endforelse
                     </tbody>
                 </table>

@@ -28,6 +28,14 @@ class RedirectIfAuthenticated
             }
         }
 
+        // if (Auth::guard('admin')->check()) {
+        //     return redirect()->route('dashboard');
+        // } 
+
+        // if (Auth::guard('users')->check()) {
+        //     return redirect('/');
+        // }
+
         return $next($request);
     }
 }

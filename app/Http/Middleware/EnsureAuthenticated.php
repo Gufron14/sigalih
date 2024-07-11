@@ -19,12 +19,12 @@ class EnsureAuthenticated
         if (!Auth::check()) {
             return redirect('/login');
         }
+        return $next($request);
     
         // Cegah akses langsung ke URL logout
         if ($request->is('logout')) {
             return redirect('home');
         }
     
-        return $next($request);
     }
 }

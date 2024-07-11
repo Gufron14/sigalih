@@ -27,7 +27,6 @@ return new class extends Migration {
             $table->string('agama');
             $table->string('status');
             $table->string('pekerjaan');
-            $table->enum('user_status', ['verified', 'unverified'])->default('unverified');
             $table->timestamps();
         });
     }

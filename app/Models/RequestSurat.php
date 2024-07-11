@@ -9,7 +9,7 @@ class RequestSurat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['jenis_surat_id', 'user_id', 'status', 'catatan_admin', 'form_data', 'nomor_surat', 'tanggal_surat', 'file_surat'];
+    protected $fillable = ['jenis_surat_id', 'user_id', 'status', 'catatan_admin', 'form_data', 'nomor_surat', 'tanggal_surat', 'file_surat', 'warga_id'];
 
     protected static function booted()
     {
@@ -24,6 +24,12 @@ class RequestSurat extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class);
+    }
+
     public function jenisSurat()
     {
         return $this->belongsTo(JenisSurat::class);

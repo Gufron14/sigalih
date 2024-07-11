@@ -65,10 +65,13 @@
                             </div>
                             <div class="col">
                                 <select class="form-control" wire:model="form_fields.{{ $index }}.type">
-                                    <option value="">Pilih Tipe Field</option>
+                                    <option value="" class="text-muted">-- Pilih Tipe Field --</option>
                                     <option value="text">Teks</option>
-                                    <option value="number">Nomor</option>
+                                    <option value="textarea">Teks Panjang</option>
                                     <option value="file">File</option>
+                                    <option value="number">Angka</option>
+                                    <option value="date">Tanggal</option>
+                                    <option value="time">Waktu</option>
                                 </select>
                                 @error('form_fields.' . $index . '.type')
                                     <span class="text-danger">{{ $message }}</span>
@@ -79,7 +82,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <button type="button" class="btn btn-info-faded text-dark    btn-sm" wire:click="addFormField"><i class="fas fa-plus me-2"></i>Tambah Field</button>
+                    <button type="button" class="btn btn-info-faded text-dark btn-sm" wire:click="addFormField"><i class="fas fa-plus me-2"></i>Tambah Field</button>
                 </div>
                 <button type="submit" class="btn btn-primary fw-bold">
                     <i class="fas fa-save me-2"></i>Simpan</button>

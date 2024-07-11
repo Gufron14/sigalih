@@ -10,14 +10,17 @@
         "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "ilovepdf/ilovepdf-php": "^1.2",
+        "laravel/fortify": "^1.21",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^3.4",
+        "maatwebsite/excel": "^3.1",
         "masmerise/livewire-toaster": "^2.1",
         "php-open-source-saver/jwt-auth": "^2.2",
         "phpoffice/phpword": "^1.2",
-        "snapappointments/bootstrap-select": "^1.13"
+        "snapappointments/bootstrap-select": "^1.13",
+        "yajra/laravel-datatables-oracle": "10.3.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

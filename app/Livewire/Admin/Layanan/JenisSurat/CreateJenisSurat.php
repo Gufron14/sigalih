@@ -29,7 +29,7 @@ class CreateJenisSurat extends Component
         'form_fields' => 'nullable|array',
         'form_fields.*' => 'nullable|array',
         'form_fields.*.name' => 'required|string',
-        'form_fields.*.type' => 'required|string|in:text,number,file',
+        'form_fields.*.type' => 'required|string',
     ];
 
     public function store()
@@ -71,7 +71,7 @@ class CreateJenisSurat extends Component
 
         session()->flash('success', 'Berhasil membuat Jenis Surat');
 
-        return redirect()->back();
+        return redirect()->route('surat');
     }
 
     public function addFormField()

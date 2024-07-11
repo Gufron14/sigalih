@@ -2,21 +2,21 @@
     {{-- KABAR DESA --}}
     <div class="row justify-content-between mb-5">
         <div class="col">
-            <h1 class="fw-bold">Kabar Desa</h1>
+            <h2 class="fw-bold">Kabar Desa</h2>
         </div>
-        <div class="col d-flex align-items-center justify-content-end">
+        {{-- <div class="col d-flex align-items-center justify-content-end">
             <form class="d-flex w-100" role="search">
                 <input class="form-control me-2" type="search" placeholder="Cari berita" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Cari</button>
             </form>
-        </div>
+        </div> --}}
     </div>
 
     {{-- BERITA --}}
     <div class="row justify-content-between">
         {{-- Berita Terbaru --}}
         <div class="col-5">
-            <h4 class="fw-bold mb-3">Berita Terbaru</h4>
+            <h5 class="mb-3">Berita Terbaru</h5>
             @foreach ($post as $item)
                 <a href="{{ route('show', $item->slug) }}">
                     <div class="card">
@@ -36,9 +36,9 @@
             @endforeach
         </div>
 
-        {{-- Berita Populer --}}
+        {{-- Berita Lainnya --}}
         <div class="col-6">
-            <h5 class="mb-3">Berita Populer</h5>
+            <h5 class="mb-3">Berita Lainnya</h5>
             <div class="row gap-3">
                 @foreach ($posts as $post)
                     <div class="row align-items-center">
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <hr class="mt-5 mb-5">
+    {{-- <hr class="mt-5 mb-5"> --}}
 
     {{-- VIDEO --}}
     {{-- <div class="row gap-5">

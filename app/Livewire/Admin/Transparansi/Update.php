@@ -51,6 +51,7 @@ class Update extends Component
             $dokumenName = $this->dokumen->getClientOriginalName();
             $docPath = $this->dokumen->storeAs('transparansi/dokumen' ,$dokumenName, 'public' );
             $transparansi->dokumen = $docPath;
+            $transparansi->save();
         } else {
             $transparansi->dokumen = $this->dokumen;
         }
@@ -62,6 +63,7 @@ class Update extends Component
 
             $infografikPath = $this->infografik->store('public/transparansi/infografik');
             $transparansi->infografik = $infografikPath;
+            $transparansi->save();
         } else {
             $transparansi->infografik = $this->infografik;
         }

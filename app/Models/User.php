@@ -22,6 +22,11 @@ class User extends Authenticatable
         'avatar',
     ];
 
+    public function getMaskedNikAttribute()
+    {
+        return substr($this->nik, 0, 6) . str_repeat('*', strlen($this->nik) - 6);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

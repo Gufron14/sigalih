@@ -33,45 +33,34 @@
                         <tbody>
                             <tr>
                                 <td>Nama</td>
-                                <td>: {{ $pengajuan->user->warga->nama }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->nama ?? $pengajuan->warga?->nama ?? 'Tidak diketahui' }} </td>
                                 <td rowspan="7">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        @if ($pengajuan->user->warga->foto)
-                                            <img src="{{ asset('storage/' . $pengajuan->user->warga->foto) }}"
-                                                alt="" style="width: 4cm; height:6cm"
-                                                class="border border-danger">
-                                        @else
-                                            <img src="https://via.placeholder.com/150" alt=""
-                                                style="width: 4cm; height:6cm" class="border border-danger">
-                                        @endif
+                                        <img src="@isset($pengajuan->user->avatar) {{ asset('storage/' . $pengajuan->user->avatar) }} @else https://via.placeholder.com/150 @endisset" alt="" style="width: 4cm; height:6cm" class="border border-danger">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Tempat, tanggal lahir</td>
-                                <td>: {{ $pengajuan->user->warga->ttl }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->ttl ?? $pengajuan->warga?->ttl ?? 'Tidak diketahui' }} </td>
                             </tr>
                             <tr>
                                 <td>Status</td>
-                                <td>: {{ $pengajuan->user->warga->status }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->status ?? $pengajuan->warga?->status ?? 'Tidak diketahui' }} </td>
                             </tr>
                             <tr>
                                 <td>Jenis Kelamin</td>
-                                <td>: {{ $pengajuan->user->warga->jk }}</td>
-                            </tr>
-                            <tr>
-                                <td>Agama</td>
-                                <td>: {{ $pengajuan->user->warga->agama }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->jk ?? $pengajuan->warga?->jk ?? 'Tidak diketahui' }} </td>
                             </tr>
                             <tr>
                                 <td>Pekerjaan</td>
-                                <td>: {{ $pengajuan->user->warga->pekerjaan }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->pekerjaan ?? $pengajuan->warga?->pekerjaan ?? 'Tidak diketahui' }} </td>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td>: {{ $pengajuan->user->warga->alamat }}, RT. {{ $pengajuan->user->warga->rt }} ,
-                                    RW.
-                                    {{ $pengajuan->user->warga->rw }}, Ds. {{ $pengajuan->user->warga->desa }}</td>
+                                <td>: {{ $pengajuan->user?->warga?->alamat ?? $pengajuan->warga?->alamat ?? 'Tidak diketahui' }},
+                                    RT. {{ $pengajuan->user?->warga?->rt ?? $pengajuan->warga?->rt ?? 'Tidak diketahui' }} ,
+                                    RW. {{ $pengajuan->user?->warga?->rw ?? $pengajuan->warga?->rw ?? 'Tidak diketahui' }} </td>
                             </tr>
                         </tbody>
                     </table>

@@ -1,3 +1,23 @@
 * {
     font-family: "Inter", sans-serif;
 }
+
+.table-bordered {
+    border: 1px solid #000; /* border dengan ketebalan 1px dan warna hitam (#000) */
+    border-collapse: collapse; /* menggabungkan garis batas antar sel */
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #000; /* border untuk sel dan header */
+    padding: 8px; /* jarak antara teks dan border */
+}
+
+.table-bordered th {
+    background-color: #f2f2f2; /* warna latar belakang untuk header */
+}
+
+.table-bordered th:not(:last-child),
+.table-bordered td:not(:last-child) {
+    border-right: none; /* menghapus border kanan untuk semua kolom kecuali yang terakhir */
+}
+

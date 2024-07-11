@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('penarikan_saldos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nasabah_id')->constrained('users', 'id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('nasabah_id')->constrained('users', 'id')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->decimal('nominal', 10, 2);
-            $table->enum('status', ['pending', 'approved','rejected', 'selesai'])->default('pending');
+            $table->enum('status', ['pending', 'approved','rejected', 'selesai'])
+                ->default('pending');
             $table->timestamps();
         });
     }

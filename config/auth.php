@@ -44,6 +44,14 @@ return [
             'driver' => 'jwt',  
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'bs-admin' => [
+            'driver' => 'session',
+            'provider' => 'bs-admins',
+        ],
         'api' => [                  
             'driver' => 'sanctum',  
             'provider' => 'users',
@@ -72,6 +80,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'bs-admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\BSAdmin::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

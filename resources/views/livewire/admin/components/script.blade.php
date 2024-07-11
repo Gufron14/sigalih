@@ -9,15 +9,18 @@
 <!-- Theme JS -->
 <script src="{{ asset('admin/dist/assets/js/theme.bundle.js') }}"></script>
 
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
-<script>
+{{-- Editor --}}
+{{-- <script>
     ClassicEditor
         .create(document.querySelector('#editor'))
         .catch(error => {
             console.error(error);
         });
-</script>
+</script> --}}
 
+{{-- CK Editor --}}
 <script>
     // This sample still does not showcase all CKEditor&nbsp;5 features (!)
     // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.

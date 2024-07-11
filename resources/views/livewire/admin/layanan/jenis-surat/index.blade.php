@@ -1,22 +1,23 @@
-@if (session()->has('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+<div>
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-{{-- BODY --}}
-<div class="card">
+    {{-- BODY --}}
+    <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title fw-bold">
                 Daftar Surat
             </h5>
-            <a href="{{ route('createSurat') }}" class="btn btn-primary btn-sm fw-bold">
+            <a href="{{ route('createJenisSurat') }}" class="btn btn-primary btn-sm fw-bold">
                 <i class="fas fa-plus-circle me-2"></i> Tambah Jenis Surat
             </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm">
+                <table class="table table-sm table-bordered table-striped">
                     <thead>
                         <th class="text-center">No</th>
                         <th>Nama Surat</th>
@@ -34,14 +35,13 @@
                                         {{ $jenis_surat->singkatan }}
                                 </td>
                                 </span>
-                                <td>{{ $jenis_surat->desc }}</td>
+                                <td>{!! Str::limit($jenis_surat->desc, 50) !!}</td>
                                 <td class="text-center">
                                     <a href="{{ route('updateSurat', $jenis_surat->id) }}"
                                         class="btn btn-secondary-faded btn-sm">
                                         <i class="fas fa-edit text-primary fs-6"></i>
                                     </a>
-                                    <button type="submit" 
-                                    wire:confirm="Are you sure you want to delete this item?"
+                                    <button type="submit" wire:confirm="Are you sure you want to delete this item?"
                                         wire:click="destroy({{ $jenis_surat->id }})"
                                         class="btn btn-secondary-faded btn-sm">
                                         <i class="bi bi-trash-fill text-danger fs-6"></i>

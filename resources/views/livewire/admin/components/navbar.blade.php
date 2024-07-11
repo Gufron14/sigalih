@@ -328,12 +328,21 @@
                     </div>
                 </div>  --}}
                 <!-- / Apps-->
+                <button class="btn btn">
+                    @livewire('admin.auth.logout')
+                </button>
 
                 <!-- Profile Menu-->
                 <div class="dropdown ms-1">
                     <button class="btn btn-link p-0 position-relative" type="button" id="profileDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <picture>
+                        <!-- Avatar-->
+                        @if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->avatar)
+                            <img src="{{ Auth::guard('admin')->user()->avatar }}" alt="Admin Avatar">
+                        @else
+                            <img src="https://ui-avatars.com/api/?name={{ Auth::guard('admin')->user()->username }}" class="img-thumbnail rounded-circle" alt="" width="40px">
+                        @endif
+                        {{-- <picture>
                             <img class="f-w-10 rounded-circle"
                                 src="{{ asset('admin/src/assets/images/profile-small.jpeg') }}"
                                 alt="HTML Bootstrap Admin Template by Pixel Rocket">
@@ -341,7 +350,7 @@
                         <span
                             class="position-absolute bottom-0 start-75 p-1 bg-success border border-3 border-white rounded-circle">
                             <span class="visually-hidden">New alerts</span>
-                        </span>
+                        </span> --}}
                     </button>
                     <ul class="dropdown-menu dropdown-md dropdown-menu-end" aria-labelledby="profileDropdown">
                         <li><a class="dropdown-item d-flex align-items-center" href="#">Set Visibility</a>

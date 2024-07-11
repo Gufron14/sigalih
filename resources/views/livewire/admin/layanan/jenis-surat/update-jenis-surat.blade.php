@@ -65,10 +65,13 @@
                             </div>
                             <div class="col">
                                 <select class="form-control" wire:model="form_fields.{{ $index }}.type">
-                                    <option value="">Pilih Tipe Field</option>
+                                    <option value="" class="text-muted">-- Pilih Tipe Field --</option>
                                     <option value="text">Teks</option>
-                                    <option value="number">Nomor</option>
+                                    <option value="textarea">Teks Panjang</option>
                                     <option value="file">File</option>
+                                    <option value="number">Angka</option>
+                                    <option value="date">Tanggal</option>
+                                    <option value="time">Waktu</option>
                                 </select>
                                 @error('form_fields.' . $index . '.type')
                                     <span class="text-danger">{{ $message }}</span>

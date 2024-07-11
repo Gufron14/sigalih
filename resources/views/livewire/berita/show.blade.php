@@ -3,7 +3,7 @@
         aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/berita">Kabar Sirnagalih</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Kategori Berita</li>
+            <li class="breadcrumb-item active" aria-current="page">Baca Berita</li>
         </ol>
     </nav>
 
@@ -11,7 +11,7 @@
     <div class="row mt-3 gap-5">
         <div class="col-8">
                 <h2 class="fw-bold">{{ $post->title }}</h2>
-            <p class="text-secondary"><i class="fas fa-calendar-alt text-secondary"></i>&nbsp;&nbsp;&nbsp;{{ $post->created_at->format('l, M Y') }} &nbsp;&nbsp; <i class="fas fa-user text-secondary"></i>&nbsp;&nbsp;&nbsp;Admin</p>
+            <p class="text-secondary"><i class="fas fa-calendar-alt text-secondary"></i>&nbsp;&nbsp;&nbsp;{{ $post->created_at->translatedFormat('l, d M Y') }} &nbsp;&nbsp; <i class="fas fa-user text-secondary"></i>&nbsp;&nbsp;&nbsp;Admin</p>
             <img src="{{ Storage::url($post->image)}}"
                 alt="{{ $post->image }}" class="rounded" style="width: 800px"> 
             <div class="col-10 mt-5 lh-lg">{{ $post->content }}</div>

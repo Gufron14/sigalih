@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CombinedAuth;
+use App\Http\Middleware\RedirectAdminAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,5 +67,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth.ensure' => \App\Http\Middleware\EnsureAuthenticated::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'isAdmin' => RedirectAdminAuth::class,
+        'bs-admin' => \App\Http\Middleware\BSAdminMiddleware::class,
+        'verifyAdminPassword' => \App\Http\Middleware\VerifyAdminPassword::class,
     ];
 }

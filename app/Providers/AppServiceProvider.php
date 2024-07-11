@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\LoginViewResponse::class,
+            \App\Actions\Fortify\CustomLoginViewResponse::class
+        );
     }
 
     /**

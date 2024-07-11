@@ -7,9 +7,7 @@ use App\Models\Warga;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 
 
 #[Title('Register - Desa Sirnagalih')]

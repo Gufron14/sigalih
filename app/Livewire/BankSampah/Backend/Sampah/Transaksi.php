@@ -25,7 +25,7 @@ class Transaksi extends Component
         session()->flash('success', 'Status penarikan berhasil diperbarui.');
 
         // Jika penarikan disetujui oleh admin
-        if ($penarikan->status === 'approved') {
+        if ($penarikan->status === 'selesai') {
             // Dapatkan tabungan pengguna
             $tabungan = Tabungan::where('nasabah_id', auth()->user()->id)->firstOrFail();
 

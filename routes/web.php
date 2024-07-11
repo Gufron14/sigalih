@@ -1,14 +1,13 @@
 <?php
 
+use App\Livewire\Admin\Auth\Login;
 use Livewire\Livewire;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Layanan\Progres;
 use App\Livewire\Tentang\Sejarah;
-use App\Livewire\Layanan\SuratForm;
 use App\Livewire\Admin\Berita\Index;
 use App\Livewire\Admin\Berita\Create;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Pembangunan\Transparansi;
 use App\Livewire\Admin\Layanan\Pengajuan\Show;
 use App\Livewire\BankSampah\Backend\Sampah\SetorSampah;
 use App\Livewire\BankSampah\Backend\Sampah\UpdateSampah;
@@ -18,7 +17,11 @@ use App\Livewire\Admin\Layanan\JenisSurat\UpdateJenisSurat;
 use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
+use App\Livewire\Admin\Layanan\Pengajuan\Create as PengajuanCreate;
+use App\Livewire\Admin\User\AddWarga;
+use App\Livewire\Admin\User\UpdateWarga;
 use App\Livewire\Auth\Profil;
+use App\Livewire\BankSampah\Backend\Auth\Login as AuthLogin;
 use App\Livewire\BankSampah\Backend\Nasabah;
 use App\Livewire\BankSampah\Backend\Sampah\Transaksi;
 use App\Livewire\BankSampah\Index as BankSampahIndex;
@@ -63,7 +66,6 @@ Route::middleware('auth')->group(function () {
 });
     
 // Layanan
-
 Route::get('layanan', \App\Livewire\Layanan\Index::class)->name('layanan');
 Route::prefix('layanan')->group(function () {
     Route::get('{nama_surat}', \App\Livewire\Layanan\CreateRequestSurat::class)
@@ -73,14 +75,16 @@ Route::prefix('layanan')->group(function () {
 }); 
 
 // Bank Sampah
-Route::get('bank-sampah', BankSampahIndex::class)->name('bankSampah')->middleware('auth');
-Route::prefix('bank-sampah')->group(function () {
-    Route::get('syarat&ketentuan', SyaratKetentuan::class)->name('syaratKetentuan');
-    Route::get('riwayat', \App\Livewire\BankSampah\Riwayat::class)->name('riwayat');
-    Route::get('tukar-saldo', \App\Livewire\BankSampah\TukarSaldo::class)->name('tukarSaldo');
-    Route::get('pendapatan', \App\Livewire\BankSampah\Pendapatan::class)->name('pendapatan');
-    Route::get('riwayat-penukaran', \App\Livewire\BankSampah\RiwayatPenukaran::class)->name('riwayatPenukaran');
-    Route::get('panduan', \App\Livewire\BankSampah\Panduan::class)->name('panduan');
+Route::middleware('auth')->group(function () {
+    Route::get('banksampah', BankSampahIndex::class)->name('bankSampah');
+    Route::prefix('banksampah')->group(function () {
+        Route::get('syarat&ketentuan', SyaratKetentuan::class)->name('syaratKetentuan');
+        Route::get('transaksi', \App\Livewire\BankSampah\Riwayat::class)->name('riwayat');
+        Route::get('tukar-saldo', \App\Livewire\BankSampah\TukarSaldo::class)->name('tukarSaldo');
+        Route::get('riwayat', \App\Livewire\BankSampah\Pendapatan::class)->name('pendapatan');
+        Route::get('riwayat-penukaran', \App\Livewire\BankSampah\RiwayatPenukaran::class)->name('riwayatPenukaran');
+        Route::get('panduan', \App\Livewire\BankSampah\Panduan::class)->name('panduan');
+    });
 });
 
 
@@ -91,37 +95,54 @@ Route::prefix('bank-sampah')->group(function () {
  */
 
 //  Admin
-Route::prefix('admin')->group(function () {
-    Route::get('dashboard', Dashboard::class)->name('dashboard');
+Route::get('admin/auth/login', Login::class)->name('admin.login')->middleware('isAdmin:admin');
+// Auth
+Route::middleware('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('auth/logout', \App\Livewire\Admin\Auth\Logout::class)->name('admin.logout');
 
-    // BERITA
-    Route::get('berita', Index::class)->name('admin.berita');
-    Route::get('berita/create', Create::class)->name('createBerita');
-    Route::get('berita/update/{id}', \App\Livewire\Admin\Berita\Update::class)->name('updateBerita');
-
-    // LAYANAN SURAT
-    // Surat
-    Route::get('surat', JenisSuratIndex::class)->name('surat');
-    Route::get('surat/create-jenis-surat', CreateJenisSurat::class)->name('createSurat');
-    Route::get('surat/update-jenis-surat/{id}', UpdateJenisSurat::class)->name('updateSurat');
-
-    // Pengajuan
-    Route::get('pengajuan', \App\Livewire\Admin\Layanan\Pengajuan\Index::class)->name('pengajuan');
-    Route::get('pengajuan/{id}', Show::class)->name('view-pengajuan');
-
-    // TRANSPARANSI
-    Route::get('transparansi', \App\Livewire\Admin\Transparansi\Index::class)->name('transparan');
-    Route::get('transparansi/create', \App\Livewire\Admin\Transparansi\Create::class)->name('createTransparan');
-    Route::get('transparansi/update/{id}', \App\Livewire\Admin\Transparansi\Update::class)->name('updateTransparan');
+        Route::get('dashboard', Dashboard::class)->name('dashboard')->middleware('admin');
+    
+        // BERITA
+        Route::get('berita', Index::class)->name('admin.berita');
+        Route::get('berita/create', Create::class)->name('createBerita');
+        Route::get('berita/update/{id}', \App\Livewire\Admin\Berita\Update::class)->name('updateBerita');
+    
+        // LAYANAN SURAT
+        // Surat
+        Route::get('surat', JenisSuratIndex::class)->name('surat');
+        Route::get('surat/create-jenis-surat', CreateJenisSurat::class)->name('createJenisSurat');
+        Route::get('surat/update-jenis-surat/{id}', UpdateJenisSurat::class)->name('updateSurat');
+        Route::get('surat/create-surat', PengajuanCreate::class)->name('createSurat');
+    
+        // Pengajuan
+        Route::get('pengajuan', \App\Livewire\Admin\Layanan\Pengajuan\Index::class)->name('pengajuan');
+        Route::get('pengajuan/{id}', Show::class)->name('view-pengajuan');
+    
+        // TRANSPARANSI
+        Route::get('transparansi', \App\Livewire\Admin\Transparansi\Index::class)->name('transparan');
+        Route::get('transparansi/create', \App\Livewire\Admin\Transparansi\Create::class)->name('createTransparan');
+        Route::get('transparansi/update/{id}', \App\Livewire\Admin\Transparansi\Update::class)->name('updateTransparan');
+    
+        // USER
+        Route::get('user', \App\Livewire\Admin\User\ListUser::class)->name('user');
+        Route::get('warga', \App\Livewire\Admin\User\Index::class)->name('warga');
+        Route::get('warga/create', AddWarga::class)->name('addWarga');
+        Route::get('warga/update/{id}', UpdateWarga::class)->name('updateWarga');
+    });
 });
 
 // Bank Sampah Admin
-Route::prefix('bs-admin')->group(function () {
-    Route::get('dashboard', BackendDashboard::class);
-    Route::get('sampah', SampahIndex::class)->name('jenisSampah');
-    Route::get('sampah/{id}', UpdateSampah::class)->name('editSampah');
-    Route::get('setor-sampah', SetorSampah::class)->name('setorSampah');
-    Route::get('riwayat-setoran', RiwayatSetoran::class)->name('riwayatSetoran');
-    Route::get('transaksi', Transaksi::class)->name('transaksi');
-    Route::get('nasabah', Nasabah::class)->name('nasabah');
+Route::get('bs-admin/auth/login', AuthLogin::class)->name('bs.login');
+
+Route::middleware('bs-admin')->group(function () {
+    Route::prefix('bs-admin')->group(function () {
+        Route::get('dashboard', BackendDashboard::class)->name('bs.dashboard');
+        Route::get('sampah', SampahIndex::class)->name('jenisSampah');
+        Route::get('sampah/{id}', UpdateSampah::class)->name('editSampah');
+        Route::get('setor-sampah', SetorSampah::class)->name('setorSampah');
+        Route::get('riwayat-setoran', RiwayatSetoran::class)->name('riwayatSetoran');
+        Route::get('transaksi', Transaksi::class)->name('transaksi');
+        Route::get('nasabah', Nasabah::class)->name('nasabah');
+    });
 });

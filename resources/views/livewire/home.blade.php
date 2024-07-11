@@ -1,17 +1,15 @@
 <div>
     <!-- Hero -->
-    <div class="text-center bg-image"
-        style="
-    background-image: url('https://statik.unesa.ac.id/profileunesa_konten_statik/uploads/pusdippket/thumbnail/a6bf8cce-e619-46de-9715-d3b2b90e6512.jpg');height: 400px;">
+    <div class="text-center bg-image" style=" background-image: url('https://statik.unesa.ac.id/profileunesa_konten_statik/uploads/pusdippket/thumbnail/a6bf8cce-e619-46de-9715-d3b2b90e6512.jpg');height: 400px;">
         <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">
                     <div class="h4">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</div>
                     <h1 class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</h1>
-                    <h5 class="fst-italic mb-4s h5 px-3">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
-                        lungguh, diasah ku kanyaah, disipuh ku karipuh."</h5>
-                    <a data-mdb-ripple-init class="btn btn-outline-light mt-3 rounded-5" href="#!"
-                        role="button">Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a>
+                    <p class="fst-italic h6 mb-4s px-3">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
+                        lungguh, <br> diasah ku kanyaah, disipuh ku karipuh."</p>
+                    {{-- <a data-mdb-ripple-init class="btn btn-outline-light mt-3 rounded-5 fw-bold" href="#!"
+                        role="button">Selengkapnya<i class="fas fa-paper-plane ms-2"></i></a> --}}
                 </div>
             </div>
         </div>
@@ -135,13 +133,10 @@
     {{-- Berita & Galeri --}}
     <div class="container-fluid">
         <div class="container p-5">
-            <div class="row justify-content-between">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="fw-bold">Kabar Desa Terbaru</h2>
-                    <a href="{{ route('berita') }}" class="fw-bold">Lihat semua <i
-                            class="fas fa-arrow-right ms-2"></i></a>
+                    <a href="{{ route('berita') }}" class="fw-bold">Lihat semua <i class="fas fa-arrow-right ms-2"></i></a>
                 </div>
-            </div>
             <div class="row gap-5">
                 <div class="col-5">
                     @foreach ($post as $item)
@@ -150,7 +145,7 @@
                             <h4 class="fw-bold">{{ $item->title }}</h4>
                             <p class="card-text">
                                 <small class="text-secondary">
-                                    <i class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->diffForHumans() }}
+                                    <i class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->translatedFormat('d F Y') }}
                                 </small>
                             </p>
                             <p class="card-text">{!! Str::limit($item->content, 200) !!}
@@ -198,7 +193,7 @@
                             <img src="{{ asset('assets/img/undraw_people_re_8spw.svg') }}" alt=""
                                 class="w-50">
                         </div>
-                        <h4 class="fw-bold">1.000.000 Jiwa</h4>
+                        <h4 class="fw-bold">7.096 Jiwa</h4>
                     </div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center card-grow">
@@ -208,7 +203,7 @@
                                 class="w-75">
                         </div>
                         <div class="mt-auto">
-                            <h4 class="fw-bold">20 Dusun</h4>
+                            <h4 class="fw-bold">3 Dusun</h4>
                         </div>
                     </div>
                 </div>
@@ -219,7 +214,7 @@
                                 class="w-50">
                         </div>
                         <div class="mt-auto">
-                            <h4 class="fw-bold">16 Rukun Warga (RW)</h4>
+                            <h4 class="fw-bold">8 Rukun Warga (RW)</h4>
                         </div>
                     </div>
                 </div>
@@ -230,7 +225,7 @@
                                 class="w-50">
                         </div>
                         <div class="mt-auto">
-                            <h4 class="fw-bold">31 Rukun Tangga (RT)</h4>
+                            <h4 class="fw-bold">49 Rukun Tangga (RT)</h4>
                         </div>
                     </div>
                 </div>

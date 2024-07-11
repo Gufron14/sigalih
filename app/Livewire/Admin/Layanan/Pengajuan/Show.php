@@ -2,18 +2,22 @@
 
 namespace App\Livewire\Admin\Layanan\Pengajuan;
 
-use App\Jobs\ConvertWordToPDF;
-use App\Jobs\CreateWordDocument;
 use App\Models\User;
+use App\Models\Warga;
 use Livewire\Component;
 use App\Models\RequestSurat;
+use App\Jobs\ConvertWordToPDF;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Queue\InteractsWithQueue;
 
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Permohonan')]
 class Show extends Component
 {
+    use InteractsWithQueue;
+
     public $jenisSurat;
     public $pengajuan;
     public $nomor_surat;
@@ -27,8 +31,9 @@ class Show extends Component
     ];
 
     public function mount($id)
-    {
-        $this->pengajuan = RequestSurat::with('user', 'jenisSurat')->findOrFail($id);
+    {   
+
+        $this->pengajuan = RequestSurat::with('user', 'warga', 'jenisSurat')->findOrFail($id);
 
         $this->nomor_surat = $this->pengajuan->nomor_surat;
         $this->tanggal_surat = $this->pengajuan->tanggal_surat;
@@ -37,39 +42,54 @@ class Show extends Component
 
     public function terimaPermohonan()
     {
-        // Ambil file template yang terkait dengan jenis surat
-        $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
+        // try {
+            // Ambil file template yang terkait dengan jenis surat
+            $fileSurat = $this->pengajuan->jenisSurat->fileSurat;
+    
+            // Pastikan file template ditemukan
+            if (!$fileSurat) {
+                Log::error('Template surat tidak ada untuk pengajuan ID: ' . $this->pengajuan->id);
+                session()->flash('error', 'Template surat tidak ada');
+                return;
+            }
+    
+            // Ambil jalur file template
+            $filePath = storage_path('app/public/' . $fileSurat->file_path);
+    
+            if (!file_exists($filePath)) {
+                Log::error('File template surat tidak ditemukan untuk pengajuan ID: ' . $this->pengajuan->id . ', Jalur: ' . $filePath);
+                session()->flash('error', 'File template surat tidak ditemukan');
+                return;
+            }
+    
+            $this->validate();
+    
+            $this->pengajuan->update([
+                'nomor_surat' => $this->nomor_surat,
+                'tanggal_surat' => $this->tanggal_surat,
+                'catatan_admin' => $this->catatan_admin,
+                'status' => 'terima',
+            ]);
 
-        // Pastikan file template ditemukan
-        if (!$fileSurat) {
-            session()->flash('error', 'Template surat tidak ada');
-            return;
-        }
+            
+    
+            $user = User::with('warga')
+                ->where('id', $this->pengajuan->user_id)
+                ->firstOrFail();
 
-        // Ambil jalur file template
-        $filePath = storage_path('app/public/' . $fileSurat->file_path);
-
-        if (!file_exists($filePath)) {
-            session()->flash('error', 'File template surat tidak ditemukan');
-            return;
-        }
-
-        $this->validate();
-
-        $this->pengajuan->update([
-            'nomor_surat' => $this->nomor_surat,
-            'tanggal_surat' => $this->tanggal_surat,
-            'catatan_admin' => $this->catatan_admin,
-            'status' => 'terima',
-        ]);
-
-        $user = User::with('warga')
-            ->where('id', $this->pengajuan->user_id)
-            ->firstOrFail();
-
-        ConvertWordToPDF::dispatch($this->pengajuan, $user);
-
-        session()->flash('success', 'Permohonan surat berhasil diterima.');
+            // if (!$user){
+            //     $warga = Warga::where('id', $this->pengajuan->warga_id)
+            //     ->firstOrFail();
+            // }
+    
+            ConvertWordToPDF::dispatch($this->pengajuan, $user);
+    
+            session()->flash('success', 'Permohonan surat berhasil diterima.');
+            return redirect()->route('pengajuan');
+        // } catch (\Exception $e) {
+        //     Log::error('Terjadi kesalahan saat memproses permohonan surat: ' . $e->getMessage());
+        //     session()->flash('error', 'Terjadi kesalahan saat memproses permohonan surat. Silakan coba lagi nanti.');
+        // }
     }
 
     public function tolakPermohonan()

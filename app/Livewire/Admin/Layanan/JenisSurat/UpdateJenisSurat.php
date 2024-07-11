@@ -28,11 +28,10 @@ class UpdateJenisSurat extends Component
         'nama_surat' => 'required|max:100',
         'desc' => 'required',
         'singkatan' => 'required|max:10',
-        // 'file_path' => 'nullable|sometimes|max:1000|mimes:doc,docx',
         'form_fields' => 'nullable|array',
         'form_fields.*' => 'nullable|array',
         'form_fields.*.name' => 'required|string',
-        'form_fields.*.type' => 'required|string|in:text,number,file',
+        'form_fields.*.type' => 'required|string',
     ];
 
     public function mount($id)
@@ -76,14 +75,15 @@ class UpdateJenisSurat extends Component
             ]);
         }
 
-        // Hapus file surat sebelumnya jika ada
-        if ($jenisSurat->fileSurat) {
-            Storage::disk('public')->delete($jenisSurat->fileSurat->file_path);
-            $jenisSurat->fileSurat()->delete();
-        }
+        // Check if there is a new file upload
+        if ($this->file_path instanceof \Illuminate\Http\UploadedFile) {
+            // Hapus file surat sebelumnya jika ada
+            if ($jenisSurat->fileSurat) {
+                Storage::disk('public')->delete($jenisSurat->fileSurat->file_path);
+                $jenisSurat->fileSurat()->delete();
+            }
 
-        // Simpan file surat baru jika ada
-        if ($this->file_path) {
+            // Validate the new file
             $validatedFileData = $this->validate([
                 'file_path' => 'nullable|max:1000|mimes:doc,docx',
             ]);
@@ -100,10 +100,9 @@ class UpdateJenisSurat extends Component
             $jenisSurat->fileSurat()->save($fileSurat);
         }
 
-        $this->reset();
         session()->flash('success', 'Berhasil memperbarui Jenis Surat');
 
-        return redirect()->back();
+        return redirect()->route('surat');
     }
 
     public function addFormField()

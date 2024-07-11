@@ -8,6 +8,7 @@ use App\Models\JenisSurat;
 use App\Models\RequestSurat;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Auth;
 
 #[Title('Buat Permohonan')]
 class CreateRequestSurat extends Component
@@ -37,7 +38,7 @@ class CreateRequestSurat extends Component
     {
         $this->existingRequest = RequestSurat::where('user_id', auth()->id())
             ->where('jenis_surat_id', $this->selectedLetterId)
-            ->where('status', '!=', 'tolak')
+            // ->where('status', '!=', 'tolak')
             ->where(function ($query) {
                 $query->where('expired_at', '>', now())
                       ->orWhereNull('expired_at');
@@ -62,11 +63,15 @@ class CreateRequestSurat extends Component
             }
         }
 
+        RequestSurat::where('jenis_surat_id', $this->selectedLetterId)
+                    ->where('user_id', Auth::id())
+                    ->delete();
+
         RequestSurat::create([
             'jenis_surat_id' => $this->selectedLetterId,
             'user_id' => auth()->id(),
             'form_data' => json_encode($this->formData),
-            'status' => 'tunggu', // Set default status to 'menunggu'
+            'status' => 'tunggu',
         ]);
 
         $this->reset(['formData', 'file']);
@@ -80,7 +85,7 @@ class CreateRequestSurat extends Component
         $jenisSurat = JenisSurat::with('formFields')->find($this->selectedLetterId);
 
         if ($jenisSurat->formFields->isEmpty()) {
-            $this->dispatchBrowserEvent('error', ['message' => 'Tidak ada field yang ditemukan untuk jenis surat ini.']);
+            session()->flash('message', 'Formulir surat kosong.');
             return;
         }
 

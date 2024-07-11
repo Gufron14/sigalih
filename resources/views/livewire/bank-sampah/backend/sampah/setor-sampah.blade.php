@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4">
     @section('breadcrumbs')
         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
         <li class="breadcrumb-item active">Setor Sampah</li>

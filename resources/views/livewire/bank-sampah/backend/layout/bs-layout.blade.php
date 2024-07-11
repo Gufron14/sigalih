@@ -19,7 +19,7 @@
     <main id="main">
 
         <!-- Breadcrumbs-->
-        <div class="bg-white border-bottom py-3 mb-3">
+        {{-- <div class="bg-white border-bottom py-3 mb-3">
             <div
                 class="container-fluid d-flex justify-content-between align-items-start align-items-md-center flex-column flex-md-row">
                 <nav class="mb-0" aria-label="breadcrumb">
@@ -31,7 +31,8 @@
                     @yield('button')
                 </div>
             </div>
-        </div> <!-- / Breadcrumbs-->
+        </div> --}}
+        <!-- / Breadcrumbs-->
 
         <!-- Content-->
         <section class="container-fluid">

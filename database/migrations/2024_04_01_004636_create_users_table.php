@@ -24,7 +24,10 @@ return new class extends Migration
         // });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nik')->unique()->constrained('wargas', 'nik');
+            $table->unsignedBigInteger('nik')->unique()
+                ->constrained('wargas', 'nik')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('password');

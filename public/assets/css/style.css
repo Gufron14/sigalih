@@ -1,5 +1,5 @@
 body {
-    font-family: "Inter", sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -121,4 +121,24 @@ a {
 .transparent-background {
     background-color: url('https://www.toptal.com/designers/subtlepatterns/uploads/leaves.png');
     opacity: 50%;
+}
+
+.bg-image {
+    
+    background-image: url('https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/desa.jpg');
+    height: 400px;
+    object-fit: cover;
+        
+}
+
+.number {
+        /* Hide the arrows in number input */
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type=number] {
+          appearance: textfield;
+        }
 }

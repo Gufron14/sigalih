@@ -2,7 +2,6 @@
 
 namespace App\Livewire\BankSampah;
 
-use App\Models\Warga;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
@@ -22,6 +21,7 @@ class Index extends Component
     public $nominal;
     public $saldo;
     public $pengeluaran;
+    public $penarikanSaldo;
     protected $rules = [
         'nominal' => 'required|numeric|min:10000',
     ];
@@ -29,12 +29,14 @@ class Index extends Component
     public function mount()
     {
         $this->warga = Auth::user()->warga;
-
-        $this->tabungan = Tabungan::where('nasabah_id', Auth::user()->id)->firstOrFail();
-
-        $this->totalBeratSampah = RiwayatSetoran::where('nasabah_id', Auth::user()->id)
-            ->sum('total_berat_sampah');
-
+        $this->penarikanSaldo = PenarikanSaldo::where('nasabah_id', Auth::user()->id)->first();
+    
+        $this->tabungan = Tabungan::where('nasabah_id', Auth::user()->id)->first();
+        $this->tabungan = $this->tabungan ?? new Tabungan(['saldo' => 0, 'pemasukan' => 0, 'pengeluaran' => 0]);
+    
+        $this->totalBeratSampah = RiwayatSetoran::where('nasabah_id', Auth::user()->id)->sum('total_berat_sampah');
+        $this->totalBeratSampah = $this->totalBeratSampah ?? 0;
+    
         $this->nominal = 0;
     }
 
@@ -52,6 +54,12 @@ class Index extends Component
             session()->flash('error', 'Saldo tidak mencukupi.');
             return;
         }
+
+        // if ($this->penarikanSaldo->status == 'pending')
+        // {
+        //     session()->flash('error', 'Anda masih memiliki penarikan saldo yang belum dikonfirmasi.');
+        //     return redirect()->route('bankSampah');
+        // }
     
         $penarikan = PenarikanSaldo::create([
             'nasabah_id' => auth()->user()->id,
@@ -60,14 +68,18 @@ class Index extends Component
         ]);
     
         session()->flash('success', 'Penarikan saldo berhasil diajukan. Mohon tunggu konfirmasi admin.');
+
+        return redirect()->route('riwayat');
     }
 
     public function render()
     {
+        $penarikanSaldo = PenarikanSaldo::where('nasabah_id', auth()->user()->id)->where('status', 'pending')->first();
         return view('livewire.bank-sampah.index', [
             'warga' => $this->warga,
             'tabungan' => $this->tabungan,
             'totalBeratSampah' => $this->totalBeratSampah,
+            'penarikanSaldo' => $penarikanSaldo,
         ]);
     }
 }

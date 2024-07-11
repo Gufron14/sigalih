@@ -13,8 +13,8 @@
                 <ul class="navbar-nav me-auto gap-2 mb-2 mb-lg-0">
                     <x-nav-link :active="request()->routeIs('bankSampah')" href="{{ route('bankSampah') }}">Beranda</x-nav-link>
                     {{-- Tukar Saldo <x-nav-link :active="request()->routeIs('tukarSaldo')" href="{{ route('tukarSaldo') }}" >Tukar Saldo</x-nav-link> --}}
-                    <x-nav-link :active="request()->routeIs('pendapatan')" href="{{ route('pendapatan') }}" >Pendapatan</x-nav-link>
-                    <x-nav-link :active="request()->routeIs('riwayat')" href="{{ route('riwayat') }}" >Riwayat</x-nav-link>
+                    <x-nav-link :active="request()->routeIs('pendapatan')" href="{{ route('pendapatan') }}" >Riwayat</x-nav-link>
+                    <x-nav-link :active="request()->routeIs('riwayat')" href="{{ route('riwayat') }}" >Transaksi</x-nav-link>
                     <x-nav-link :active="request()->routeIs('panduan')" href="{{ route('panduan') }}" >Panduan</x-nav-link>
                 </ul>
                 <div class="navbar-nav d-flex gap-3 align-items-center text-white">

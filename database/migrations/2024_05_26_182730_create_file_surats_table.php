@@ -18,8 +18,6 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();  
             $table->string('file_path');
-            // $table->enum('status', ['Dikirim','Diunduh']);
-            // $table->date('tgl_persetujuan');
             $table->timestamps();
         });
     }

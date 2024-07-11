@@ -8,7 +8,17 @@
 </head>
 
 <body>
-    @if (Request::is('login') || Request::is('register') || Request::is('logout') || Request::is('syaratKetentuan'))
+    @if (
+        // User
+        Request::is('login') ||
+        Request::is('register') ||
+        Request::is('logout') || 
+        Request::is('syaratKetentuan') ||
+        
+        // Admin
+        Request::is('admin/auth/login') ||
+        Request::is('bs-admin/auth/login')
+        )
     @else
         <x-navbar />
     @endif
@@ -19,7 +29,14 @@
         </div>
     </main>
 
-    @if (Request::is('login') || Request::is('register') || Request::is('logout') || Request::is('syaratKetentuan'))
+    @if (
+        Request::is('login') || 
+        Request::is('register') || 
+        Request::is('logout') || 
+        Request::is('syaratKetentuan') ||
+        Request::is('admin/auth/login') ||
+        Request::is('bs-admin/auth/login')
+    )
     @else
         <x-footer />
     @endif

@@ -40,7 +40,11 @@
                         <div class="col d-flex justify-content-center">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-warning fw-bold rounded-5" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
+                                data-bs-target="#staticBackdrop"
+                                @if(($tabungan->saldo ?? 0) < 10000)
+                                    disabled
+                                @endif
+                                >
                                 Tarik Saldo
                             </button>
                         </div>
@@ -73,7 +77,7 @@
                                     <small>Syarat & Ketentuan Penarikan Saldo</small>
                                     <small>
                                         <ol>
-                                            <li>Tarik saldo minimal @currency(10000) & maksimal @currency(1000000).
+                                            <li>Tarik saldo minimal @currency(10000) & maksimal @currency(100000).
                                             </li>
                                             <li>Uang akan diberikan setelah disetujui oleh Admin dan diserahkan pada
                                                 pengambilan sampah berikutnya.</li>

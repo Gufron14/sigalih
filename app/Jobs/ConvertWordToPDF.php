@@ -5,7 +5,6 @@ namespace App\Jobs;
 use Ilovepdf\Ilovepdf;
 use App\Models\FormField;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\File;
 use Illuminate\Queue\SerializesModels;
@@ -46,23 +45,45 @@ class ConvertWordToPDF implements ShouldQueue
         $templateProcessor = new TemplateProcessor($filePath);
 
         // Set the this$this->user-related values in the template
-        $templateProcessor->setValues([
-            'nama' => $this->user->warga->nama,
-            'nik' => $this->user->warga->nik,
-            'ttl' => $this->user->warga->ttl,
-            'jk' => $this->user->warga->jk,
-            'alamat' => $this->user->warga->alamat,
-            'rt' => $this->user->warga->rt,
-            'rw' => $this->user->warga->rw,
-            'desa' => $this->user->warga->desa,
-            'kec' => $this->user->warga->kec,
-            'kab' => $this->user->warga->kab,
-            'agama' => $this->user->warga->agama,
-            'status' => $this->user->warga->status,
-            'pekerjaan' => $this->user->warga->pekerjaan,
-            'nomor_surat' => $this->pengajuan->nomor_surat,
-            'tanggal_surat' => Carbon::parse($this->pengajuan->tanggal_surat)->translatedFormat('d F Y'),
-        ]);
+        // if ($this->user->warga) {
+            $templateProcessor->setValues([
+                'nama' => $this->user->warga->nama,
+                'nik' => $this->user->warga->nik,
+                'ttl' => $this->user->warga->ttl,
+                'jk' => $this->user->warga->jk,
+                'alamat' => $this->user->warga->alamat,
+                'rt' => $this->user->warga->rt,
+                'rw' => $this->user->warga->rw,
+                'desa' => $this->user->warga->desa,
+                'kec' => $this->user->warga->kec,
+                'kab' => $this->user->warga->kab,
+                'agama' => $this->user->warga->agama,
+                'status' => $this->user->warga->status,
+                'pekerjaan' => $this->user->warga->pekerjaan,
+                'nomor_surat' => $this->pengajuan->nomor_surat,
+                'tanggal_surat' => Carbon::parse($this->pengajuan->tanggal_surat)->translatedFormat('d F Y'),
+            ]);
+        // }
+
+        // if ($this->warga) {
+        //     $templateProcessor->setValues([
+        //         'nama' => $this->warga->nama,
+        //         'nik' => $this->warga->nik,
+        //         'ttl' => $this->warga->ttl,
+        //         'jk' => $this->warga->jk,
+        //         'alamat' => $this->warga->alamat,
+        //         'rt' => $this->warga->rt,
+        //         'rw' => $this->warga->rw,
+        //         'desa' => $this->warga->desa,
+        //         'kec' => $this->warga->kec,
+        //         'kab' => $this->warga->kab,
+        //         'agama' => $this->warga->agama,
+        //         'status' => $this->warga->status,
+        //         'pekerjaan' => $this->warga->pekerjaan,
+        //         'nomor_surat' => $this->pengajuan->nomor_surat,
+        //         'tanggal_surat' => Carbon::parse($this->pengajuan->tanggal_surat)->translatedFormat('d F Y'),
+        //     ]);
+        // }
 
         // Decode form data and set in template
         $formData = json_decode($this->pengajuan->form_data, true);
@@ -81,32 +102,36 @@ class ConvertWordToPDF implements ShouldQueue
         $pathToSave = storage_path('app/public/templates/' . $filename);
         $templateProcessor->saveAs($pathToSave);
 
-        // Konversi file Word menjadi PDF menggunakan ilovepdf 
-        $ilovepdf = new Ilovepdf('project_public_2c27f90aa7df4963be8367251286fcc9_iSDLs2358d70cf1369adc7cb11b17b825d72a', 'secret_key_25fb2fe0707d23ecdbb7f13175eaa085_dW6SFd6d17c31c0e94c5aab7ee03b8fd5c981');
-        $myTaskConvertOffice = $ilovepdf->newTask('officepdf');
-        $file = $myTaskConvertOffice->addFile($pathToSave);
-        $myTaskConvertOffice->execute();
+        try {
+            // Konversi file Word menjadi PDF menggunakan ilovepdf
+            $ilovepdf = new Ilovepdf('project_public_2c27f90aa7df4963be8367251286fcc9_iSDLs2358d70cf1369adc7cb11b17b825d72a', 'secret_key_25fb2fe0707d23ecdbb7f13175eaa085_dW6SFd6d17c31c0e94c5aab7ee03b8fd5c981');
+            $myTaskConvertOffice = $ilovepdf->newTask('officepdf');
+            $file = $myTaskConvertOffice->addFile($pathToSave);
+            $myTaskConvertOffice->execute();
 
-        // Buat atau gunakan folder sementara untuk mengunduh file PDF
-        $tempFolder = storage_path('app/public/temp');
-        if (!File::isDirectory($tempFolder)) {
-            File::makeDirectory($tempFolder, 0755, true);
+            // Buat atau gunakan folder sementara untuk mengunduh file PDF
+            $tempFolder = storage_path('app/public/temp');
+            if (!File::isDirectory($tempFolder)) {
+                File::makeDirectory($tempFolder, 0755, true);
+            }
+
+            $pdfFilename = $this->pengajuan->jenisSurat->singkatan . '-' . $this->user->warga->nama . '.pdf';
+            $myTaskConvertOffice->download($tempFolder);
+
+            $pdfPathToSave = storage_path('app/public/templates/' . $pdfFilename);
+            File::move($tempFolder . '/' . $pdfFilename, $pdfPathToSave);
+
+            // Hapus file .docx setelah konversi selesai
+            File::delete($pathToSave);
+
+            // Hapus folder sementara
+            File::deleteDirectory($tempFolder);
+
+            $this->pengajuan->update([
+                'file_surat' => 'templates/' . $pdfFilename,
+            ]);
+        } catch (\Exception $e) {
+            echo 'error' . $e->getMessage();
         }
-
-        $pdfFilename = $this->pengajuan->jenisSurat->singkatan . '-' . $this->user->warga->nama . '.pdf';
-        $myTaskConvertOffice->download($tempFolder);
-
-        $pdfPathToSave = storage_path('app/public/templates/' . $pdfFilename);
-        File::move($tempFolder . '/' . $pdfFilename, $pdfPathToSave);
-
-        // Hapus file .docx setelah konversi selesai
-        File::delete($pathToSave);
-
-        // Hapus folder sementara
-        File::deleteDirectory($tempFolder);
-
-        $this->pengajuan->update([
-            'file_surat' => 'templates/' . $pdfFilename,
-        ]);
     }
 }
