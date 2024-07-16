@@ -29,7 +29,7 @@ class Index extends Component
     public $search = '';
     public $sortBy = 'id';
     public $orderBy = 'asc';
-    public $perPage = 10;
+    public $perPage = 50;
 
     protected $rules = [
         'adminPassword' => 'required',

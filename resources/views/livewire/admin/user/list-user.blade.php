@@ -15,10 +15,17 @@
                 @forelse ($users as $user)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->masked_nik }}</td>
+                        <td>{{ $user->nik }}</td>
                         <td>{{ $user->warga->nama }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->phone }}</td>
+                        <td>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $user->email }}" target="_blank" rel="noopener noreferrer">
+                                {{ $user->email }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://wa.me/{{ $user->phone }}" target="_blank" rel="noopener noreferrer">{{ $user->phone }}
+                            </a>
+                        </td>
                         <td>
                             <a href="" class="btn btn-sm btn-warning">Detail</a>
                         </td>

@@ -39,4 +39,9 @@ class RiwayatSetoran extends Model
         return $this->belongsTo(Tabungan::class, 'nasabah_id', 'nasabah_id');
     }
 
+    public function penarikanSaldo()
+    {
+        return $this->hasOne(PenarikanSaldo::class, 'nasabah_id', 'nasabah_id');
+    }
+
 }

@@ -7,7 +7,6 @@
             <div class="table-responsive">
                 <table class="table-sm table-bordered table striped">
                     <thead>
-                        <th>Jenis Transaksi</th>
                         <th>Tanggal</th>
                         <th>Nama Nasabah</th>
                         <th>Nominal</th>
@@ -17,11 +16,6 @@
                     <tbody>
                         @forelse ($penarikans as $penarikan)
                             <tr>
-                                <td>
-                                    <span class="badge text-bg-primary">
-                                        Penarikan Saldo
-                                    </span>
-                                </td>
                                 <td>{{ $penarikan->created_at->format('d/m/Y - H:i:s') }}</td>
                                 <td>{{ $penarikan->nama_warga }}</td>
                                 <td>@currency($penarikan->nominal)</td>

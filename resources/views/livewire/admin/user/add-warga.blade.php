@@ -159,8 +159,8 @@
                             <label for="status" class="form-label">Status Perkawinan*</label>
                             <select class="form-select @error('status') is-invalid @enderror""  wire:model="status">
                                 <option value="">Pilih Status Perkawinan</option>
-                                <option value="ya">Kawin</option>
-                                <option value="tidak">Belum Kawin</option>
+                                <option value="Kawin">Kawin</option>
+                                <option value="Belum Kawin">Belum Kawin</option>
                             </select>
                             @error('status')
                                 <span class="invalid-feedback" role="alert">

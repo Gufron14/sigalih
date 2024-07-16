@@ -20,4 +20,9 @@ class PenarikanSaldo extends Model
     {
         return $this->belongsTo(User::class, 'id', 'id');
     }
+
+    public function riwayatSetoran()
+    {
+        return $this->belongsTo(RiwayatSetoran::class, 'nasabah_id', 'nasabah_id');
+    }
 }

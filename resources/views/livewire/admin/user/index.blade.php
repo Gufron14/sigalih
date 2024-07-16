@@ -3,11 +3,17 @@
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
-    @elseif (session()->has('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
     @endif
+
+    {{-- @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -88,8 +94,8 @@
                                                 <i class="fas fa-edit text-primary"></i>
                                             </a>
                                         </td>
-                                        <td><small>{{ $warga->masked_nik }}</small></td>
-                                        <td><small>{{ $warga->nama }}</small></td>
+                                        <td><small>{{ $warga->nik }}</small></td>
+                                        <td class="text-uppercase"><small>{{ $warga->nama }}</small></td>
                                         <td><small>{{ $warga->ttl }}</small></td>
                                         <td><small>{{ $warga->jk }}</small></td>
                                         <td><small>{{ $warga->alamat }}</small></td>
@@ -98,7 +104,7 @@
                                         <td><small>{{ $warga->desa }}</small></td>
                                         <td><small>{{ $warga->kec }}</small></td>
                                         <td><small>{{ $warga->kab }}</small></td>
-                                        <td><small>{{ $warga->agama }}</small></td>
+                                        <td class="text-capitalize"><small>{{ $warga->agama }}</small></td>
                                         <td><small>{{ $warga->status }}</small></td>
                                         <td><small>{{ $warga->pekerjaan }}</small></td>
                                     </tr>

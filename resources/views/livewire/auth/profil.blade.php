@@ -59,7 +59,45 @@
                     </div>
                     <button type="submit" class="btn btn-primary fw-bold float-end">Simpan Perubahan</button>
                 </form>
-
+            </div>
+            <div class="form-group mt-3">
+                <label for="" class="form-label text-uppercase fw-bold text-muted">Identitas Lengkap</label>
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <tr>
+                            <td>NIK</td>
+                            <td>{{ auth()->user()->warga->nik }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nama Lengkap</td>
+                            <td class="text-uppercase">{{ auth()->user()->warga->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td>Kp. {{ auth()->user()->warga->alamat }}, 
+                                RT. {{ auth()->user()->warga->rt }},
+                                RW. {{ auth()->user()->warga->rw}},
+                                Ds. {{ auth()->user()->warga->desa }},
+                                Kec. {{ auth()->user()->warga->kec }},
+                                Kab. {{ auth()->user()->warga->kab }}</td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>
+                                @if (auth()->user()->warga->jk == 'L')
+                                    Laki - laki
+                                @elseif (auth()->user()->warga->jk == 'P')
+                                    Perempuan
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Status Perkawinan</td>
+                            <td>{{ auth()->user()->warga->status }}</td>
+                        </tr>
+                    </table>
+                    <p>Identitas salah? <a href="https://wa.me/6283116613308">Hubungi Admin.</a></p>
+                </div>
             </div>
         </div>
 

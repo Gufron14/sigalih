@@ -45,17 +45,27 @@
                             </span>
                         </a>
                     </li>
-                    <!-- / Dashboard Menu Section-->
+                    {{-- <li class="menu-item">
+                        <a class="d-flex align-items-center" href="{{ route('jualSampah') }}">
+                            <span class="menu-icon">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <span class="menu-link">
+                                Jual Sampah
+                            </span>
+                        </a>
+                    </li> --}}
                     <li class="menu-item">
                         <a class="d-flex align-items-center" href="{{ route('setorSampah') }}">
                             <span class="menu-icon">
                                 <i class="fas fa-plus"></i>
                             </span>
                             <span class="menu-link">
-                                Setor Sampah
+                                Setoran Nasabah
                             </span>
                         </a>
                     </li>
+                    <!-- / Dashboard Menu Section-->
 
                     {{--  --}}
                     <li class="menu-section mt-4">kelola sampah</li>
@@ -86,7 +96,7 @@
                             <span class="menu-icon">
                                 <i class="fas fa-hand-holding-usd"></i>
                             </span>
-                            <span class="menu-link">Transaksi</span>
+                            <span class="menu-link">Transaksi Saldo</span>
                             @php
                                     use App\Models\BankSampah\PenarikanSaldo;
                                     $pengajuan = PenarikanSaldo::where('status', 'pending')->count();
@@ -94,6 +104,18 @@
                             <span
                                     class="badge bg-primary-faded text-danger pb-1 ms-2 align-middle rounded-pill"> {{ $pengajuan  }}
                                 </span>
+                        </a>
+                    </li>
+
+                    <li class="menu-section mt-4">Laporan</li>
+                    <li class="menu-item">
+                        <a class="d-flex align-items-center" href="{{ route('laporan') }}">
+                            <span class="menu-icon">
+                                <i class="fas fa-receipt"></i>
+                            </span>
+                            <span class="menu-link">
+                                Laporan
+                            </span>
                         </a>
                     </li>
 

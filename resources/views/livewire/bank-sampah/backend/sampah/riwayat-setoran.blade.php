@@ -45,11 +45,11 @@
                             @foreach ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
                                 <tr>
                                     <td class="text-start">{{ $detail->jenisSampah->jenis_sampah }}</td>
-                                    <td>{{ (int) $detail->berat_sampah }} Kg</td>
+                                    <td>{{ (float) $detail->berat_sampah }} Kg</td>
                                     <td>@currency($detail->pendapatan)</td>
                                     @if ($index === 0)
                                         <td rowspan="{{ $rowCount }}" class="text-start">{{ $riwayatSetoran->nama_warga }}</td>
-                                        <td rowspan="{{ $rowCount }}">{{ (int) $riwayatSetoran->total_berat_sampah }} Kg</td>
+                                        <td rowspan="{{ $rowCount }}">{{ (float) $riwayatSetoran->total_berat_sampah }} Kg</td>
                                         <td rowspan="{{ $rowCount }}">@currency($riwayatSetoran->total_pendapatan)</td>
                                         <td rowspan="{{ $rowCount }}">
                                             @if ($riwayatSetoran->jenis_transaksi == 'tabung')

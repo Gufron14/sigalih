@@ -40,13 +40,13 @@
                         <div class="col d-flex justify-content-center">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-warning fw-bold rounded-5" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                @if(($tabungan->saldo ?? 0) < 10000)
-                                    disabled
-                                @endif
-                                >
-                                Tarik Saldo
-                            </button>
+                            data-bs-target="#staticBackdrop"
+                            @if(($tabungan->saldo ?? 0) < 10000 || $pendingOrApprovedWithdrawals)
+                                disabled
+                            @endif
+                        >
+                            Tarik Saldo
+                        </button>
                         </div>
                     </div>
                 </div>

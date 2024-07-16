@@ -1,32 +1,34 @@
 <?php
 
-use App\Livewire\Admin\Auth\Login;
 use Livewire\Livewire;
+use App\Livewire\Auth\Profil;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Layanan\Progres;
 use App\Livewire\Tentang\Sejarah;
+use App\Livewire\Admin\Auth\Login;
 use App\Livewire\Admin\Berita\Index;
 use App\Livewire\Admin\Berita\Create;
+use App\Livewire\Admin\User\AddWarga;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Pembangunan\DanaDesa;
+use App\Livewire\Admin\User\UpdateWarga;
+use App\Livewire\BankSampah\Backend\Laporan;
+use App\Livewire\BankSampah\Backend\Nasabah;
+use App\Livewire\BankSampah\SyaratKetentuan;
 use App\Livewire\Admin\Layanan\Pengajuan\Show;
+use App\Livewire\BankSampah\Backend\JualSampah;
+use App\Livewire\BankSampah\Backend\Sampah\Transaksi;
+use App\Livewire\BankSampah\Index as BankSampahIndex;
 use App\Livewire\BankSampah\Backend\Sampah\SetorSampah;
 use App\Livewire\BankSampah\Backend\Sampah\UpdateSampah;
 use App\Livewire\BankSampah\Backend\Sampah\RiwayatSetoran;
 use App\Livewire\Admin\Layanan\JenisSurat\CreateJenisSurat;
 use App\Livewire\Admin\Layanan\JenisSurat\UpdateJenisSurat;
+use App\Livewire\BankSampah\Backend\Auth\Login as AuthLogin;
 use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
 use App\Livewire\Admin\Layanan\Pengajuan\Create as PengajuanCreate;
-use App\Livewire\Admin\User\AddWarga;
-use App\Livewire\Admin\User\UpdateWarga;
-use App\Livewire\Auth\Profil;
-use App\Livewire\BankSampah\Backend\Auth\Login as AuthLogin;
-use App\Livewire\BankSampah\Backend\Nasabah;
-use App\Livewire\BankSampah\Backend\Sampah\Transaksi;
-use App\Livewire\BankSampah\Index as BankSampahIndex;
-use App\Livewire\BankSampah\SyaratKetentuan;
-use App\Livewire\Pembangunan\DanaDesa;
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/laravel/myproject/vendor/livewire/livewire.js', $handle);
@@ -141,8 +143,10 @@ Route::middleware('bs-admin')->group(function () {
         Route::get('sampah', SampahIndex::class)->name('jenisSampah');
         Route::get('sampah/{id}', UpdateSampah::class)->name('editSampah');
         Route::get('setor-sampah', SetorSampah::class)->name('setorSampah');
+        Route::get('jual-sampah', JualSampah::class)->name('jualSampah');
         Route::get('riwayat-setoran', RiwayatSetoran::class)->name('riwayatSetoran');
         Route::get('transaksi', Transaksi::class)->name('transaksi');
+        Route::get('laporan', Laporan::class)->name('laporan');
         Route::get('nasabah', Nasabah::class)->name('nasabah');
     });
 });
