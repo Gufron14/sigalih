@@ -62,7 +62,7 @@ class Index extends Component
         $saldo = $this->tabungan->saldo;
         if ($this->nominal > $saldo) {
             session()->flash('error', 'Saldo tidak mencukupi.');
-            return;
+            return redirect()->route('bankSampah');
         }
 
         $penarikan = PenarikanSaldo::create([

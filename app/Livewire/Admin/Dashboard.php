@@ -10,7 +10,6 @@ use App\Models\Warga;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
-
 #[Layout('livewire.admin.layouts.app')]
 #[Title('Dashboard')]
 class Dashboard extends Component

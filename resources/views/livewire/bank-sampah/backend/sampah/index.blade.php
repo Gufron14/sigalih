@@ -1,13 +1,5 @@
-<div>
-    @section('breadcrumbs')
-        <li class="breadcrumb-item"><a href="{{ route('jenisSampah') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Sampah</li>
-    @endsection
+<div class="mt-4">
 
-    @section('button')
-        <a href="{{ route('riwayatSetoran') }}" class="btn btn-success-faded btn-sm text-dark">Riwayat Setor</a>
-        <a href="{{ route('setorSampah') }}" class="btn btn-success-faded btn-sm text-dark">Setor Sampah</a>
-    @endsection
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

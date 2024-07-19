@@ -96,7 +96,7 @@
                             <span class="menu-icon">
                                 <i class="fas fa-hand-holding-usd"></i>
                             </span>
-                            <span class="menu-link">Transaksi Saldo</span>
+                            <span class="menu-link">Pengajuan Penarikan</span>
                             @php
                                     use App\Models\BankSampah\PenarikanSaldo;
                                     $pengajuan = PenarikanSaldo::where('status', 'pending')->count();

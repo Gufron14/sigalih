@@ -1,7 +1,7 @@
 <div class="mt-4">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title fw-bold">Riwayat Transaksi</h4>
+            <h5 class="card-title fw-bold">Pengajuan Penarikan Saldo</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -16,7 +16,7 @@
                     <tbody>
                         @forelse ($penarikans as $penarikan)
                             <tr>
-                                <td>{{ $penarikan->created_at->format('d/m/Y - H:i:s') }}</td>
+                                <td>{{ $penarikan->created_at->translatedFormat('d/m/Y - H:i') }}</td>
                                 <td>{{ $penarikan->nama_warga }}</td>
                                 <td>@currency($penarikan->nominal)</td>
                                 <td>

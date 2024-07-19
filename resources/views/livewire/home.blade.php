@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">
                     <div class="h4">ᮝᮤᮜᮥᮏᮩᮀ ᮞᮥᮙ᮪ᮕᮤᮀ ᮓᮤ ᮞᮤᮁᮔᮌᮜᮤᮂ</div>
-                    <h1 class="mb-3 fw-bold h1">Wilujeung Sumping di Sirnagalih</h1>
+                    <h1 class="mb-3 fw-bold h1">Wilujeng Sumping di Sirnagalih</h1>
                     <p class="fst-italic h6 mb-4s px-3">"Dituntun ku santun, dipiara ku rasa, dilatih peurih, diasuh
                         lungguh, <br> diasah ku kanyaah, disipuh ku karipuh."</p>
                     {{-- <a data-mdb-ripple-init class="btn btn-outline-light mt-3 rounded-5 fw-bold" href="#!"

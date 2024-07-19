@@ -1,4 +1,9 @@
 <div class="mt-4">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <!-- Page Title-->
     <div class="row justify-content-between">
         <div class="col">
@@ -21,22 +26,27 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form action="">
+                        <form wire:submit.prevent="store">
+                            <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Pemasukan dari</label>
-                                    <input type="text" class="form-control">
+                                    <label for="" class="form-label">Pemasukan dari*</label>
+                                    <input type="text" wire:model="ket" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Nominal*</label>
+                                    <input type="number" class="form-control" placeholder="@currency(0)"
+                                        wire:model="nominal" required>
                                 </div>
                                 <div>
-                                    <label for="" class="form-label">Nominal</label>
-                                    inp
+                                    <label for="" class="form-label">Catatan*</label>
+                                    <textarea wire:model="desc" cols="30" rows="2" class="form-control"></textarea>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -74,7 +84,6 @@
                 </div>
             </div>
         </div>
-
         {{-- Pengeluaran --}}
         <div class="col">
             <div class="card">
@@ -83,12 +92,13 @@
                         <i class="fas fa-money-bill-wave text-secondary fs-1 me-3"></i>
                         <div>
                             <label class="form-label">Pengeluaran</label>
-                            <h2 class="fw-bold text-danger">@currency($totalPengeluaran)</h2>
+                            <h2 class="fw-bold text-danger">@currency($grandTotalPengeluaran)</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         {{-- Sampah Terkumpul --}}
         <div class="col">
             <div class="card">

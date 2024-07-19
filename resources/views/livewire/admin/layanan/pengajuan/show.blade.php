@@ -150,11 +150,11 @@
                                                 <img src="{{ asset('storage/' . $value) }}" class="img-fluid rounded"
                                                     alt="Image" width="200px">
                                                 <input type="file" class="form-control"
-                                                    wire:model="updateFormData.{{ $key }}">
+                                                    wire:model="updateFormData.{{ $key }}" readonly>
                                             @elseif (is_string($value))
                                                 <input type="text" class="form-control"
                                                     wire:model="updateFormData.{{ $key }}"
-                                                    value="{{ $value }}">
+                                                    value="{{ $value }}" readonly>
                                                 @error('updatedFormData.' . $key)
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -162,7 +162,7 @@
                                                 @foreach ($value as $index => $item)
                                                     <input type="text" class="form-control"
                                                         wire:model="updateFormData.{{ $key }}.{{ $index }}"
-                                                        value="{{ $item }}">
+                                                        value="{{ $item }}" readonly>
                                                 @endforeach
                                             @endif
                                         </td>
@@ -170,7 +170,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-sm btn-warning">Update</button>
+                        {{-- <button type="submit" class="btn btn-sm btn-warning">Update</button> --}}
+                        {{-- <div wire:loading>
+                            Mengubah.....
+                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -181,12 +184,12 @@
                 @if ($pengajuan->status == 'tunggu')
                     <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
-                        <i class="fas fa-thumbs-up me-2"></i>Terima Pengajuan
+                        <i class="fas fa-check-circle me-2"></i>Terima Pengajuan
                     </button>
 
                     <button type="button" class="btn btn-danger text-white fw-bold" data-bs-toggle="modal"
                         data-bs-target="#tolakModal">
-                        <i class="fas fa-thumbs-down me-2"></i>Tolak Pengajuan
+                        <i class="fas fa-times-circle me-2"></i>Tolak Pengajuan
                     </button>
                 @endif
 

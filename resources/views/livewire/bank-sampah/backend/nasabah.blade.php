@@ -1,7 +1,7 @@
-<div>
+<div class="mt-4">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title fw-bold">Data Nasabah</h4>
+            <h5 class="card-title fw-bold">Data Nasabah</h5>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -21,7 +21,7 @@
                             <td>
                                 <span class="badge text-bg-primary">Aktif</span>
                             </td>
-                            <td class="text-center">Lihat</td>
+                            <td class="text-center"><a href="{{ route('detailNasabah', $nasabah->id) }}">Detail</a></td>
                         </tr>
                         @endforeach
                     </tbody>

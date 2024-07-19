@@ -20,6 +20,8 @@ class RequestSurat extends Model
         });
     }
 
+    protected $dates = ['tanggal_surat', 'expired_at'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

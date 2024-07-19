@@ -2,6 +2,7 @@
 
 namespace App\Livewire\BankSampah\Backend;
 
+use App\Models\BankSampah\Backend\Pemasukan;
 use App\Models\BankSampah\PenarikanSaldo;
 use App\Models\BankSampah\RiwayatSetoran;
 use App\Models\BankSampah\Tabungan;
@@ -10,7 +11,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
-
+use Livewire\Attributes\Validate;
 
 #[Layout('livewire.bank-sampah.backend.layout.bs-layout')]
 #[Title('Dashboard Bank Sampah')]
@@ -19,27 +20,46 @@ class Dashboard extends Component
     public $totalBeratSampah;
     public $totalPengeluaran;
     public $totalPendapatan;
+    public $grandTotalPengeluaran;
     public $nasabah;
     public $totalSaldo = 0;
-    public $totalPemasukan = 0;
+    public $totalPemasukan;
+    public $ket, $nominal, $desc;
+
+    public function store()
+    {
+        $this->validate([
+            'ket' => 'required',
+            'nominal' => 'required|numeric',
+            'desc' => 'nullable'
+        ]);
+
+        Pemasukan::create([
+            'ket' => $this->ket,
+            'nominal' => $this->nominal,
+            'desc' => $this->desc
+        ]);
+
+        session()->flash('success', 'Berhasil Menambahkan Pemasukan');
+        return redirect()->route('bs.dashboard');
+    }
 
     public function mount()
     {
-       $this->totalBeratSampah = RiwayatSetoran::sum('total_berat_sampah');
+        $this->totalBeratSampah = RiwayatSetoran::sum('total_berat_sampah');
 
-       $this->totalPendapatan = RiwayatSetoran::where('jenis_transaksi', 'tunai')
-        ->sum('total_pendapatan');
+        // Pemasukan
+        $this->totalPemasukan = Pemasukan::sum('nominal');
 
-        $pengeluaran = PenarikanSaldo::where('status', 'selesai')
-        ->sum('nominal');
+        // Pengeluaran
+        $this->totalPendapatan = RiwayatSetoran::where('jenis_transaksi', 'tunai')->sum('total_pendapatan');
+        $this->totalPengeluaran = PenarikanSaldo::where('status', 'selesai')->sum('nominal');
+        $this->grandTotalPengeluaran = $this->totalPendapatan + $this->totalPengeluaran;
 
-        $this->totalPengeluaran = $this->totalPendapatan + $pengeluaran;
+        // Total Saldo
+        $this->totalSaldo = $this->totalPemasukan - $this->grandTotalPengeluaran;
 
-       $this->totalSaldo = $this->totalSaldo - $this->totalPengeluaran; 
-       $this->totalPemasukan;
-       $this->totalSaldo = $this->totalPemasukan + $this->totalSaldo;
-
-       $this->nasabah = User::count();
+        $this->nasabah = User::count();
     }
 
     public function render()

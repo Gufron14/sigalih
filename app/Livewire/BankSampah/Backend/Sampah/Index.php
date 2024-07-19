@@ -32,10 +32,9 @@ class Index extends Component
         ]);
 
         $this->reset();
-        Toaster::success('Berhasil menambahkan jenis sampah baru');
+        session()->flash('success', 'berhasil membuat jenis sampah');
         return redirect()->to('bs-admin/sampah');
     }
-
 
     public function destroy($id)
     {

@@ -29,6 +29,7 @@ use App\Livewire\BankSampah\Backend\Sampah\Index as SampahIndex;
 use App\Livewire\BankSampah\Backend\Dashboard as BackendDashboard;
 use App\Livewire\Admin\Layanan\JenisSurat\Index as JenisSuratIndex;
 use App\Livewire\Admin\Layanan\Pengajuan\Create as PengajuanCreate;
+use App\Livewire\BankSampah\Backend\DetailNasabah;
 
 Livewire::setScriptRoute(function ($handle) {
     return Route::get('/laravel/myproject/vendor/livewire/livewire.js', $handle);
@@ -120,6 +121,9 @@ Route::middleware('admin')->group(function () {
         // Pengajuan
         Route::get('pengajuan', \App\Livewire\Admin\Layanan\Pengajuan\Index::class)->name('pengajuan');
         Route::get('pengajuan/{id}', Show::class)->name('view-pengajuan');
+
+        // Pembukuan
+        Route::get('buku-register', \App\Livewire\Admin\Layanan\BukuRegister\Index::class)->name('bukuRegister');
     
         // TRANSPARANSI
         Route::get('transparansi', \App\Livewire\Admin\Transparansi\Index::class)->name('transparan');
@@ -148,5 +152,6 @@ Route::middleware('bs-admin')->group(function () {
         Route::get('transaksi', Transaksi::class)->name('transaksi');
         Route::get('laporan', Laporan::class)->name('laporan');
         Route::get('nasabah', Nasabah::class)->name('nasabah');
+        Route::get('nasabah/{id}', DetailNasabah::class)->name('detailNasabah');
     });
 });

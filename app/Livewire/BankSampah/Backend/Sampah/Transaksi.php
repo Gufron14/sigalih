@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use App\Models\BankSampah\Tabungan;
 use App\Models\BankSampah\PenarikanSaldo;
 
-#[Title('Transaksi - Sampah Sigalih')]
+#[Title('Pengajuan Penarikan Saldo - Sampah Sigalih')]
 #[Layout('livewire.bank-sampah.backend.layout.bs-layout')]
 class Transaksi extends Component
 {

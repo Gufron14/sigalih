@@ -8,7 +8,7 @@
                     <th>Nama</th>
                     <th>Email</th>
                     <th>No HP</th>
-                    <th>Aksi</th>
+                    {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -26,9 +26,9 @@
                             <a href="https://wa.me/{{ $user->phone }}" target="_blank" rel="noopener noreferrer">{{ $user->phone }}
                             </a>
                         </td>
-                        <td>
+                        {{-- <td>
                             <a href="" class="btn btn-sm btn-warning">Detail</a>
-                        </td>
+                        </td> --}}
                     </tr>
                 @empty
                     <tr>

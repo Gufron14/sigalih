@@ -80,7 +80,16 @@
                                 <span
                                     class="badge bg-primary-faded text-danger pb-1 ms-2 align-middle rounded-pill"> {{ $pengajuan  }}
                                 </span>
-                            </span></a></li>
+                            </span></a>
+                        </li>
+                    <li class="menu-item"><a class="d-flex align-items-center" href="{{ route('bukuRegister') }}">
+                            <span class="menu-icon">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </span>
+                            <span class="menu-link">
+                                Buku Register
+                            </span></a>
+                        </li>
                     <!-- / Dashboard Menu Section-->
 
                     <li class="menu-section mt-4">kelola transparansi</li>
