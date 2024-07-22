@@ -1,6 +1,6 @@
 <div>
     <!-- Hero -->
-    <div class="text-center bg-image" style=" background-image: url('https://statik.unesa.ac.id/profileunesa_konten_statik/uploads/pusdippket/thumbnail/a6bf8cce-e619-46de-9715-d3b2b90e6512.jpg');height: 400px;">
+    <div class="text-center bg-image" style=" background-image: url('{{ asset('assets/img/desa Sirnagalih.jpg') }}');">
         <div class="mask h-100" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">

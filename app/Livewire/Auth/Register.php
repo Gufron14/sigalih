@@ -9,7 +9,6 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Hash;
 
-
 #[Title('Register - Desa Sirnagalih')]
 class Register extends Component
 {   

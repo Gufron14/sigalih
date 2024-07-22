@@ -5,11 +5,16 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="row justify-content-between mb-3">
+    <div class="row justify-content-between align-items-center mb-3">
         <div class="col">
             <h3 class="fw-bold">Layanan Surat</h3>
+
         </div>
         <div class="col d-flex align-items-center justify-content-end">
+            @auth                
+            <a href="{{ route('riwayatPengajuan') }}" class="fw-bold">Riwayat Pengajuan<i
+                class="fas fa-arrow-right ms-2"></i></a>
+            @endauth
             {{-- <form class="d-flex w-100" role="search">
                 <input class="form-control me-2" type="search" placeholder="Cari layanan" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Cari</button>

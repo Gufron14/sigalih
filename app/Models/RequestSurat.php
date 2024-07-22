@@ -34,6 +34,6 @@ class RequestSurat extends Model
 
     public function jenisSurat()
     {
-        return $this->belongsTo(JenisSurat::class);
+        return $this->belongsTo(JenisSurat::class, 'jenis_surat_id', 'id');
     }
 }

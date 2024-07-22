@@ -77,7 +77,7 @@ class CreateRequestSurat extends Component
         $this->reset(['formData', 'file']);
         $this->checkExistingRequest(); // Re-check existing requests after submission
 
-        session()->flash('message', $this->jenisSurat->nama_surat . ' berhasil diajukan.');
+        session()->flash('success', $this->jenisSurat->nama_surat . ' berhasil diajukan.');
     }
 
     protected function loadFormFields()

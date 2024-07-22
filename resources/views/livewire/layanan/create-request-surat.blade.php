@@ -1,6 +1,6 @@
 <div class="container mx-auto">
 
-    <div class="row align-items-center">
+    <div class="row justify-content-between align-items-center">
         <div class="col mt-5 mb-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -35,8 +35,8 @@
                                 <p class="card-text">Permohonan {{ $jenisSurat->nama_surat }} Anda sedang dalam proses.
                                     Mohon tunggu informasi lebih lanjut.</p>
                                 <small class="text-muted">
-                                    {{ $request_surat->created_at->format('d/m/Y') }} -
-                                    {{ $request_surat->created_at->diffForHumans() }}
+                                    {{ $request_surat->updated_at->format('d/m/Y') }} -
+                                    {{ $request_surat->updated_at->diffForHumans() }}
                                 </small>
                             </div>
                         </div>
@@ -59,8 +59,8 @@
                                     <a href="{{ Storage::url($request_surat->file_surat) }}" target="_blank"
                                         download="" class="btn btn-sm btn-primary fw-bold rounded-3"><i
                                             class="bi bi-download me-2"></i>Download Surat</a>
-                                    <small class="text-muted">{{ $request_surat->created_at->format('d/m/Y') }} -
-                                        {{ $request_surat->created_at->diffForHumans() }} </small>
+                                    <small class="text-muted">{{ $request_surat->updated_at->format('d/m/Y') }} -
+                                        {{ $request_surat->updated_at->diffForHumans() }} </small>
 
                                 </div>
                             </div>

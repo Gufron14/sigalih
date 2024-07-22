@@ -5,7 +5,7 @@
         <div class="card shadow-sm" style="max-width: 75%;">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="https://i.pinimg.com/564x/6d/70/a2/6d70a2988d68c1e798b1fe649b7df3c2.jpg" alt=""
+                    <img src="{{ asset('assets/img/Sirnagalih.jpg') }}" alt=""
                         class="img-fluid rounded-start" style="">
                 </div>
                 <div class="col-md-5 ms-4 d-flex align-items-center justify-content-center">
