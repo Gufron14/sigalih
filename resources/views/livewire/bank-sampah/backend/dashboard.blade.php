@@ -63,7 +63,7 @@
                     <div class="d-flex align-items-center">
                         <i class="fas fa-money-bill-wave text-secondary fs-1 me-3"></i>
                         <div>
-                            <label class="form-label">Saldo</label>
+                            <label class="form-label">Sisa Saldo</label>
                             <h2 class="fw-bold text-primary">@currency($totalSaldo)</h2>
                         </div>
                     </div>

@@ -15,6 +15,7 @@ class CreateRequestSurat extends Component
 {
     use WithFileUploads;
 
+    protected $listeners = ['requestSubmitted' => '$refresh'];
     public $jenisSurat;
     public $selectedLetterId;
     public $formFields;
@@ -78,6 +79,11 @@ class CreateRequestSurat extends Component
         $this->checkExistingRequest(); // Re-check existing requests after submission
 
         session()->flash('success', $this->jenisSurat->nama_surat . ' berhasil diajukan.');
+
+        $this->dispatch('requestSubmitted')->to(\App\Livewire\Admin\Layanan\Pengajuan\Index::class);
+        // $this->emitTo('admin.layanan.pengajuan.index', 'requestSubmitted');
+
+        logger('Permohonan berhasil diajukan.');
     }
 
     protected function loadFormFields()

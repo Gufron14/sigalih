@@ -147,9 +147,25 @@
                                         <td>{{ $key }}</td>
                                         <td>
                                             @if (is_string($value) && str_starts_with($value, 'uploads/'))
-                                                <img src="{{ asset('storage/' . $value) }}" class="img-fluid rounded"
-                                                    alt="Image" width="200px">
-                                                <input type="file" class="form-control"
+                                                @php
+                                                    $extension = pathinfo($value, PATHINFO_EXTENSION);
+                                                    $isImage = in_array(strtolower($extension), [
+                                                        'jpg',
+                                                        'jpeg',
+                                                        'png',
+                                                        'gif',
+                                                    ]);
+                                                @endphp
+                                                @if ($isImage)
+                                                    <img src="{{ asset('storage/' . $value) }}"
+                                                        class="img-fluid rounded" alt="Image" width="200px">
+                                                @else
+                                                    <a href="{{ asset('storage/' . $value) }}" download
+                                                        class="btn btn-primary btn-sm">
+                                                        Download {{ strtoupper($extension) }} File
+                                                    </a>
+                                                @endif
+                                                <input type="file" class="form-control mt-2"
                                                     wire:model="updateFormData.{{ $key }}" readonly>
                                             @elseif (is_string($value))
                                                 <input type="text" class="form-control"
@@ -170,6 +186,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                         {{-- <button type="submit" class="btn btn-sm btn-warning">Update</button> --}}
                         {{-- <div wire:loading>
                             Mengubah.....

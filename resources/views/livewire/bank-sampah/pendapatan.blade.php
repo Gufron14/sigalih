@@ -16,7 +16,7 @@
                     <th>Tanggal</th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody>
                 @php
                     $grandTotalPendapatan = 0;
                     $grandTotalBerat = 0;
@@ -30,12 +30,12 @@
                     @forelse ($riwayatSetoran->riwayatSetoranDetails as $index => $detail)
                         <tr>
                             <td class="text-start">{{ $detail->jenisSampah->jenis_sampah }}</td>
-                            <td>{{ (float) $detail->berat_sampah }} Kg</td>
-                            <td>@currency($detail->pendapatan)</td>
+                            <td class="text-center">{{ (float) $detail->berat_sampah }} Kg</td>
+                            <td class="text-end">@currency($detail->pendapatan)</td>
                             @if ($index === 0)
-                                <td rowspan="{{ $rowCount }}">{{ (float) $riwayatSetoran->total_berat_sampah }} Kg</td>
-                                <td rowspan="{{ $rowCount }}">@currency($riwayatSetoran->total_pendapatan)</td>
-                                <td rowspan="{{ $rowCount }}">
+                                <td rowspan="{{ $rowCount }}" class="text-center">{{ (float) $riwayatSetoran->total_berat_sampah }} Kg</td>
+                                <td rowspan="{{ $rowCount }}" class="text-center">@currency($riwayatSetoran->total_pendapatan)</td>
+                                <td rowspan="{{ $rowCount }}" class="text-center">
                                     @if ($riwayatSetoran->jenis_transaksi == 'tabung')
                                         <span class="badge text-bg-primary text-capitalize">
                                             {{ $riwayatSetoran->jenis_transaksi }}
@@ -46,7 +46,7 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td rowspan="{{ $rowCount }}">{{ $riwayatSetoran->created_at->format('d/m/Y') }}</td>
+                                <td rowspan="{{ $rowCount }}" class="text-center">{{ $riwayatSetoran->created_at->format('d/m/Y') }}</td>
                             @endif
                         </tr>
                     @empty

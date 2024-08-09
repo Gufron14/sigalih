@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto" wire:poll>
 
     <div class="row justify-content-between align-items-center">
         <div class="col mt-5 mb-3">
@@ -199,7 +199,7 @@
                                         @elseif ($field->field_type === 'number')
                                             <label for="{{ $field->field_label }}"
                                                 class="form-label text-capitalize">{{ $field->field_label }}</label>
-                                            <input type="number" wire:model="formData.{{ $field->field_label }}"
+                                            <input type="text" inputmode="numeric" wire:model="formData.{{ $field->field_label }}"
                                                 class="form-control number @error('formData.{{ $field->field_label }}') is-invalid @enderror"
                                                 id="numberInput">
                                             @error('formData.{{ $field->field_label }}')

@@ -105,7 +105,7 @@ class Index extends Component
         $wargas = Warga::query()
             ->where('nama', 'like', '%' . $this->search . '%')
             ->orderBy($this->sortBy, $this->orderBy)
-            ->paginate($this->perPage);
+            ->paginate(50);
 
         return view('livewire.admin.user.index', compact('wargas'));
     }

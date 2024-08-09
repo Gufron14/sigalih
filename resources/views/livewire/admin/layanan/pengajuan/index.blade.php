@@ -12,7 +12,7 @@
         <div class="card-header">
             <h5 class="card-title fw-bold">Daftar Permohonan Surat</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" wire:poll>
             <table class="table table-sm">
                 <thead>
                     <tr>
@@ -68,3 +68,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        window.livewire.on('play-notification', () => {
+            let audio = new Audio('{{ asset('assets/audio/mixkit-software-interface-start-2574.wav') }}');
+            audio.play();
+        });
+
+        window.livewire.on('new-request-alert', () => {
+            alert('Pengajuan baru telah diterima!');
+        });
+    });
+</script>

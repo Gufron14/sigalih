@@ -51,24 +51,17 @@
 
                                 <button type="submit" class="btn btn-sm btn-warning"><i
                                         class="bi bi-table me-1"></i>Import</button>
-                                <button class="btn btn-sm btn-success text-white" wire:click="export"><i
-                                        class="bi bi-download me-1"></i>Export</button>
-                            </div>
-                        </div>
-                    </form>
+                                    </div>
+                                </div>
+                            </form>
+                            <button class="btn btn-sm btn-success text-white" wire:click="export"><i
+                                    class="bi bi-download me-1"></i>Export</button>
                     <div class="table-responsive mt-4">
                         <table class="table table-bordered table-sm table-striped">
                             <thead>
                                 <th class="text-center">#</th>
                                 <th>NIK</th>
-                                <th wire:click="sortBy(''nama)">Nama @if ($sortBy === 'nama')
-                                        @if ($orderBy === 'asc')
-                                            &uarr;
-                                        @else
-                                            &darr;
-                                        @endif
-                                    @endif
-                                </th>
+                                <th>Nama</th>
                                 <th>TTL</th>
                                 <th>JK</th>
                                 <th>Dusun</th>
@@ -125,7 +118,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form wire:submit.prevent="verifyPassword({{ $warga->id }})">
+                                            {{-- <form wire:submit.prevent="verifyPassword({{ $warga->id }})">
                                                 <div class="modal-body">
                                                     <label for="password" class="form-label">Password Admin</label>
                                                     <input type="password"
@@ -143,12 +136,15 @@
                                                     <button type="submit" class="btn btn-primary">Edit
                                                         Sekarang</button>
                                                 </div>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                     </div>
                                 </div>
                             </tbody>
                         </table>
+                        <div>
+                            {{ $wargas->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

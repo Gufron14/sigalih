@@ -31,7 +31,7 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody>
                         @php
                             $grandTotalPendapatan = 0;
                             $grandTotalBerat = 0;

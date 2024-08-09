@@ -108,6 +108,8 @@ class Show extends Component
         ConvertWordToPDF::dispatch($this->pengajuan, $user);
 
         session()->flash('success', 'Permohonan surat berhasil diterima.');
+        $this->dispatch('requestSubmitted');
+
         return redirect()->route('pengajuan');
         // } catch (\Exception $e) {
         //     Log::error('Terjadi kesalahan saat memproses permohonan surat: ' . $e->getMessage());
@@ -125,6 +127,7 @@ class Show extends Component
         ]);
 
         session()->flash('success', 'Permohonan surat berhasil ditolak.');
+        $this->dispatch('requestSubmitted');
         return redirect()->route('pengajuan');
     }
 

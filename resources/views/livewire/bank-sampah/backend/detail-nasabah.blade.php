@@ -21,11 +21,11 @@
                     </tr>
                     <tr>
                         <td>Tempat, tanggal lahir</td>
-                        <td>: {{ $nasabah->warga->nama }}</td>
+                        <td>: {{ $nasabah->warga->ttl }}</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
-                        <td>: {{ $nasabah->warga->nama }}</td>
+                        <td>: {{ $nasabah->warga->jk }}</td>
                     </tr>
                     {{-- <tr>
                         <td>Grand Total Pendapatan</td>

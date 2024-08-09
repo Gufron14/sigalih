@@ -7,7 +7,7 @@
                 <div class="carousel-inner">
                     @forelse ($transparansis as $item)
                         <div class="carousel-item @if ($loop->first) active @endif">
-                            <img src="{{ Storage::url($item->infografik) }}" height="360px" class="w-100"
+                            <img src="{{ Storage::url($item->infografik) }}" class="w-100"
                                 alt="{{ $item->keterangan }}">
                             {{-- <div class="carousel-caption d-none d-md-block">
                                     <h5 class="fw-bold">{{ $item->keterangan }}</h5>

@@ -66,9 +66,10 @@
                             <form wire:submit.prevent="tarikSaldo">
                                 <div class="mb-3">
                                     <label for="nominal" class="form-label">Nominal Penarikan</label>
-                                    <input type="text"
+                                    <input type="number" inputmode="numeric"
                                         class="form-control form-control-lg @error('nominal') is-invalid @enderror"
-                                        wire:model.defer="nominal" id="nominal">
+                                        wire:model.defer="nominal" id="nominal"
+                                        oninput="sanitizeInput(this)">
                                     @error('nominal')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -144,3 +145,23 @@
     </div>
 
 </div>
+
+<script>
+    function sanitizeInput(input) {
+        // Save the cursor position
+        let cursorPosition = input.selectionStart;
+        let sanitizedValue = input.value.replace(/[^\d]/g, '');
+
+        // If characters were removed, adjust the cursor position
+        if (input.value !== sanitizedValue) {
+            let difference = input.value.length - sanitizedValue.length;
+            cursorPosition -= difference;
+        }
+
+        // Set the sanitized value back to the input
+        input.value = sanitizedValue;
+
+        // Restore the cursor position
+        input.setSelectionRange(cursorPosition, cursorPosition);
+    }
+</script>
