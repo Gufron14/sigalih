@@ -2,6 +2,15 @@
 SIGALIH merupakan kepanjangan dari **Sistem Informasi Desa Sirnagalih** (Website Desa) yang saya buat sebagai tugas akhir/skripsi saya di Informatika untuk menempuh gelar S1.
 Fitur dalam Website ini yaitu Pembuatan Surat yang bisa sampai puluhan jenis surat yang disediakan. Selain pembuatan surat secara otomatis, terdapat juga fitur bank sampah.
 
+## Stack yang dipakai
+- PHP 8.3
+- Laravel 10
+- Livewire 3
+- Bootstrap 5
+- ilovepdf/ilovepdf-php
+- maatwebsite/excel
+- phpoffice/phpword
+
 # Screenshoot
 ## Home
 ![website utama](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20011004.png)
