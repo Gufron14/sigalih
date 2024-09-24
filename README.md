@@ -11,6 +11,17 @@ Fitur dalam Website ini yaitu Pembuatan Surat yang bisa sampai puluhan jenis sur
 - maatwebsite/excel
 - phpoffice/phpword
 
+## Cara menjalankan Program
+1. Clone Repository
+2. ```cd sigalih```
+3. ```composer install```
+4. ```cp .env.example .env```
+5. ```php artisan key:generate```
+6. Konfigurasi Database
+7. ```php artisan migrate```
+8. ```php artisan serve```
+9. Buka ```http://127.0.0.1:8000``` di Browser
+    
 # Screenshoot
 ## Home
 ![website utama](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20011004.png)
