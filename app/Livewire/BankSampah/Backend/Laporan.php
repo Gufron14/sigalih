@@ -45,8 +45,7 @@ class Laporan extends Component
     public function loadTransactions()
     {
         $query = DB::table(function ($query) {
-            $query
-                ->from('riwayat_setorans')
+            $query->from('riwayat_setorans')
                 ->where('jenis_transaksi', 'tunai')
                 ->select('created_at', 'total_pendapatan as nominal', DB::raw("'Setoran Tunai' as ket"))
                 ->selectRaw('total_pendapatan as dana_keluar')
