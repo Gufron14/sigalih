@@ -15,6 +15,9 @@ Fitur dalam Website ini yaitu Pembuatan Surat yang bisa sampai puluhan jenis sur
 ## Fitur Bank Sampah
 ![bank sampah](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20013056.png)
 
+## Riwayat Setor Sampah
+![riwayat setor sampah](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20014337.png)
+
 ## Halaman Admin Pelayanan Surat
 ![admin surat](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20013458.png)
 
