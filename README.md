@@ -4,4 +4,4 @@ Fitur dalam Website ini yaitu Pembuatan Surat yang bisa sampai puluhan jenis sur
 
 # screenshoot
 # website utama
-![website utama](screenshoot/Screenshot 2024-09-25 011004.png)
+![website utama](https://github.com/Gufron14/sigalih/blob/main/screenshoot/Screenshot%202024-09-25%20011004.png)
